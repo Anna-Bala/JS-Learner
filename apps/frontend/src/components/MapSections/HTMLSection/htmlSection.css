@@ -1,0 +1,9 @@
+.htmlSection {
+  align-items: start;
+  display: flex;
+  justify-content: start;
+}
+
+.htmlSection button {
+  margin: 24px 0;
+}
