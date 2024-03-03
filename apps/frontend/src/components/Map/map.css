@@ -1,0 +1,6 @@
+.map {
+  background-color: antiquewhite;
+  border: 10px solid black;
+  display: flex;
+  height: 100vh;
+}
