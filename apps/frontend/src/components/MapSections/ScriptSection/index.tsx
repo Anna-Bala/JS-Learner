@@ -1,5 +1,5 @@
-import './scriptSection.css';
+import './index.css';
 
-const ScriptSection = () => <div className="scriptSection">ScriptSection</div>;
+const ScriptSection = () => <div className="script-section">ScriptSection</div>;
 
 export default ScriptSection;

@@ -1,5 +1,5 @@
-import './taskSection.css';
+import './index.css';
 
-const TaskSection = () => <div className="taskSection">TaskSection</div>;
+const TaskSection = () => <div className="task-sectio">TaskSection</div>;
 
 export default TaskSection;

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import './map.css';
+import './index.css';
 
 type TProps = {
   children: ReactNode;

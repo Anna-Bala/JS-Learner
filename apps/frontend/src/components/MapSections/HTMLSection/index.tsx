@@ -1,7 +1,7 @@
-import './htmlSection.css';
+import './index.css';
 
 const HTMLSection = () => (
-  <div className="htmlSection">
+  <div className="html-section">
     <button>Show HTML code</button>
   </div>
 );
