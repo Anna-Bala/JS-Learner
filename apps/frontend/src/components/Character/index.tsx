@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import './character_script';
-import './character.css';
+import './index.css';
 import { step } from './character_script';
 
 const Character = () => {

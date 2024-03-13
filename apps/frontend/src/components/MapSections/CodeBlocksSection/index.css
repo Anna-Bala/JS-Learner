@@ -1,0 +1,17 @@
+.code-blocks-section {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 16px;
+}
+
+.code-block {
+  background-color: white;
+  height: 20px;
+  width: 100px;
+}
+
+.collision {
+  background-color: gray;
+}
