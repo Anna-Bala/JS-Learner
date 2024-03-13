@@ -1,5 +1,13 @@
+.block-slot {
+  border: 1px solid gray;
+  height: 20px;
+  width: 100px;
+}
+
 .script-section {
   border: 1px solid aquamarine;
   display: flex;
+  flex-direction: column;
   flex: 1;
+  gap: 16px;
 }
