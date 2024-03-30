@@ -17,9 +17,11 @@
     "apps/*"
   ],
   "devDependencies": {
+    "@types/prismjs": "^1.26.3",
     "turbo": "^1.12.4"
   },
   "dependencies": {
+    "prismjs": "^1.29.0",
     "watch": "^1.0.2"
   }
 }

@@ -1,5 +1,11 @@
 import './index.css';
 
-const ResultSection = () => <div className="result-section">ResultSection</div>;
+type TProps = {
+  resultIFrameSrcDoc: string;
+};
+
+const ResultSection = ({ resultIFrameSrcDoc }: TProps) => (
+  <iframe className="result-section" id="resultIframe" srcDoc={resultIFrameSrcDoc}></iframe>
+);
 
 export default ResultSection;
