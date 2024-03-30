@@ -1,7 +1,7 @@
 [
   {
     "description": "Lorem ipsum",
-    "htmlSourceCode": "<!DOCTYPE html><html><body><p id='demo'>JavaScript can change HTML content.</p></body></html>",
+    "htmlSourceCode": "<!doctype html>\n<html>\n <body>\n   <p id='demo'>JavaScript can change HTML content.</p>\n </body>\n</html>",
     "resultIFrameSrcDoc": "<p id='demo'>JavaScript can change HTML content.</p>"
   }
 ]

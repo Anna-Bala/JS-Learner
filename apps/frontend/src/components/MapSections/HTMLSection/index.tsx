@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css';
 
 import './index.css';
 
@@ -11,6 +13,10 @@ const HTMLSection = ({ htmlSourceCode }: TProps) => {
 
   const toggleModal = () => setIsModalOpen(prevState => !prevState);
 
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [isModalOpen]);
+
   return (
     <>
       <div className="html-section">
@@ -22,10 +28,10 @@ const HTMLSection = ({ htmlSourceCode }: TProps) => {
         style={{ visibility: 'hidden', width: 0, height: 0 }}
       ></iframe>
       {isModalOpen && (
-        <div style={{ marginBottom: '8px' }}>
-          <textarea cols={60} disabled rows={10}>
-            {htmlSourceCode}
-          </textarea>
+        <div className="Code" style={{ marginBottom: '8px' }}>
+          <pre>
+            <code className="language-html">{htmlSourceCode}</code>
+          </pre>
         </div>
       )}
     </>
