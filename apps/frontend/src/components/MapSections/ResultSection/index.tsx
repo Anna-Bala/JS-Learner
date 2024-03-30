@@ -1,5 +1,11 @@
 import './index.css';
 
-const ResultSection = () => <div className="result-section">ResultSection</div>;
+const ResultSection = () => (
+  <iframe
+    className="result-section"
+    id="resultIframe"
+    srcDoc='<p id="demo">JavaScript can change HTML content.</p>'
+  ></iframe>
+);
 
 export default ResultSection;
