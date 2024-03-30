@@ -1,5 +1,9 @@
 import './index.css';
 
-const TaskSection = () => <div className="task-section">TaskSection</div>;
+type TProps = {
+  description: string;
+};
+
+const TaskSection = ({ description }: TProps) => <div className="task-section">{description}</div>;
 
 export default TaskSection;

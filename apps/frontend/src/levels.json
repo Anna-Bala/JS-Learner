@@ -1,0 +1,7 @@
+[
+  {
+    "description": "Lorem ipsum",
+    "htmlSourceCode": "<!DOCTYPE html><html><body><p id='demo'>JavaScript can change HTML content.</p></body></html>",
+    "resultIFrameSrcDoc": "<p id='demo'>JavaScript can change HTML content.</p>"
+  }
+]

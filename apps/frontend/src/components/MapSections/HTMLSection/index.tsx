@@ -2,7 +2,11 @@ import { useState } from 'react';
 
 import './index.css';
 
-const HTMLSection = () => {
+type TProps = {
+  htmlSourceCode: string;
+};
+
+const HTMLSection = ({ htmlSourceCode }: TProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => setIsModalOpen(prevState => !prevState);
@@ -19,14 +23,9 @@ const HTMLSection = () => {
       ></iframe>
       {isModalOpen && (
         <div style={{ marginBottom: '8px' }}>
-          <textarea cols={60} disabled rows={10}>{`
-          <!DOCTYPE html>
-          <html>
-            <body>
-              <p id="demo">JavaScript can change HTML content.</p>
-            </body>
-          </html>
-          `}</textarea>
+          <textarea cols={60} disabled rows={10}>
+            {htmlSourceCode}
+          </textarea>
         </div>
       )}
     </>
