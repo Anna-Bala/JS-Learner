@@ -2,10 +2,14 @@ import './index.css';
 
 import CodeBlock from './CodeBlock';
 
-const CodeBlocksSection = () => (
+type TProps = {
+  codeBlocks: string[];
+};
+
+const CodeBlocksSection = ({ codeBlocks }: TProps) => (
   <div className="code-blocks-section">
-    {[1, 2, 3, 4, 5].map(id => (
-      <CodeBlock key={id} info={{ id }} />
+    {codeBlocks.map((content, index) => (
+      <CodeBlock key={index} info={{ id: index, content }} />
     ))}
   </div>
 );

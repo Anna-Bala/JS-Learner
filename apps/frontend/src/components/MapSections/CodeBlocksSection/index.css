@@ -9,7 +9,8 @@
 .code-block {
   background-color: white;
   height: 20px;
-  width: 100px;
+  padding: 0px 4px;
+  width: fit-content;
 }
 
 .collision {

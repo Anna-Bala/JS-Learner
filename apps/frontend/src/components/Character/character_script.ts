@@ -10,7 +10,7 @@ const inputDirections: DIRECTIONS[] = [];
 const checkCollision = (character: HTMLDivElement) => {
   const allCodeBlocksAndSlots = [
     ...document.querySelectorAll('.code-block'),
-    ...document.querySelectorAll('.block-slot'),
+    ...document.querySelectorAll('.script-block'),
   ];
 
   if (character instanceof HTMLElement) {
@@ -18,6 +18,7 @@ const checkCollision = (character: HTMLDivElement) => {
 
     for (const codeBlock of allCodeBlocksAndSlots) {
       const codeBlockRect = codeBlock.getBoundingClientRect();
+      const isCodeBlockASlot = codeBlock.classList.contains('script-block');
 
       if (
         characterRect.right >= codeBlockRect.left &&
@@ -26,7 +27,12 @@ const checkCollision = (character: HTMLDivElement) => {
         characterRect.top <= codeBlockRect.bottom
       ) {
         allCodeBlocksAndSlots.forEach(codeBlock => codeBlock.classList.remove('collision'));
-        codeBlock.classList.add('collision');
+        if (
+          !isCodeBlockASlot ||
+          (character.dataset.carriedCodeBlock !== undefined && isCodeBlockASlot && codeBlock.innerHTML === '')
+        ) {
+          codeBlock.classList.add('collision');
+        }
         return codeBlock;
       }
       codeBlock.classList.remove('collision');
@@ -38,10 +44,17 @@ const checkCollision = (character: HTMLDivElement) => {
 
 const pickUpCodeBlock = (character: HTMLDivElement) => {
   const collidedElement = checkCollision(character) as HTMLElement;
+  const isCollidedElementCodeBlock = collidedElement && collidedElement?.classList?.contains('code-block');
+  const allScriptSlots = document.querySelectorAll('.script-block');
 
-  if (collidedElement && collidedElement.classList.contains('code-block')) {
+  if (isCollidedElementCodeBlock) {
     character.dataset.carriedCodeBlock = collidedElement.id;
     collidedElement.style.visibility = 'hidden';
+    allScriptSlots.forEach(scriptSlot => {
+      if (!scriptSlot.classList.contains('-static') && scriptSlot.innerHTML === collidedElement.innerHTML) {
+        scriptSlot.innerHTML = '';
+      }
+    });
   }
 };
 
@@ -52,8 +65,8 @@ const dropCodeBlock = (character: HTMLDivElement) => {
   delete character.dataset.carriedCodeBlock;
 
   if (carriedCodeBlock) {
-    const offsetFromElement =
-      collidedElement && collidedElement?.classList?.contains('block-slot') ? collidedElement : character;
+    const isCollidedElementScriptBlock = collidedElement && collidedElement?.classList?.contains('script-block');
+    const offsetFromElement = isCollidedElementScriptBlock ? collidedElement : character;
 
     const offsetFromElementRec = offsetFromElement.getBoundingClientRect();
     const offsetFromElementOffsetX = (offsetFromElementRec.left / window.innerWidth) * 100;
@@ -64,6 +77,10 @@ const dropCodeBlock = (character: HTMLDivElement) => {
 
     carriedCodeBlock.style.position = 'absolute';
     carriedCodeBlock.style.visibility = 'visible';
+
+    if (isCollidedElementScriptBlock && collidedElement.innerHTML === '') {
+      collidedElement.innerHTML = carriedCodeBlock.innerHTML;
+    }
   }
 };
 
