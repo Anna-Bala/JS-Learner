@@ -12,7 +12,7 @@ const App = () => (
     <HTMLSection htmlSourceCode={level.htmlSourceCode} />
     <div style={{ flex: 1, display: 'flex', flexDirection: 'row', gap: '16px' }}>
       <CodeBlocksSection codeBlocks={level.codeBlocks} />
-      <ScriptSection scriptSlots={level.scriptSlots} />
+      <ScriptSection evaluateChallange={level.evaluateChallange} scriptSlots={level.scriptSlots} />
       <ResultSection resultIFrameSrcDoc={level.resultIFrameSrcDoc} />
     </div>
   </Map>

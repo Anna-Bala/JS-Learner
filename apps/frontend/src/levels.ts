@@ -1,5 +1,21 @@
 export default [
   {
+    evaluateChallange: () => {
+      const iFrameDocument = (document.getElementById('resultIframe') as HTMLIFrameElement)?.contentWindow?.document;
+      if (iFrameDocument === undefined) return false;
+
+      const paragraphElement = iFrameDocument.getElementById('paragraph-element');
+      const spanElement = iFrameDocument.getElementById('span-element');
+      const imageElement = iFrameDocument.getElementById('image-element') as HTMLImageElement;
+
+      const conditions = [
+        spanElement?.innerHTML === 'JS is awesome!',
+        paragraphElement?.style.fontSize === '24px',
+        imageElement?.alt === 'Missing image',
+      ];
+
+      return conditions.every(condition => condition === true);
+    },
     challanges: [
       'Change text inside <span> element from "Change my text" to "JS is awesome!"',
       'Change the font size of the <p> element from "16px" to "24px"',

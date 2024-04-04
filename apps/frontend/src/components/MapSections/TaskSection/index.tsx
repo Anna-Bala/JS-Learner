@@ -10,7 +10,7 @@ const TaskSection = ({ challanges, description }: TProps) => (
     <p>{description}</p>
     <ul>
       {challanges.map(challange => (
-        <li>{challange}</li>
+        <li key={challange}>{challange}</li>
       ))}
     </ul>
   </div>
