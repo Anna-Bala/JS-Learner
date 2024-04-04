@@ -1,6 +1,13 @@
-const CodeBlock = ({ info }) => (
-  <div className="code-block" id={info.id}>
-    Code block {info.id}
+type TProps = {
+  info: {
+    content: string;
+    id: number;
+  };
+};
+
+const CodeBlock = ({ info }: TProps) => (
+  <div className="code-block" id={info.id.toString()}>
+    {info.content}
   </div>
 );
 
