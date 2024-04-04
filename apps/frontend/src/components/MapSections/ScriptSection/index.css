@@ -1,13 +1,25 @@
-.block-slot {
+.row-wrapper {
+  display: flex;
+  margin-top: 16px;
+}
+
+.script-block {
   border: 1px solid gray;
   height: 20px;
-  width: 100px;
+  min-width: 100px;
+  width: fit-content;
+  padding: 0px 4px;
 }
 
 .script-section {
   border: 1px solid aquamarine;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 2.5;
   gap: 16px;
+}
+
+.slots-wrapper {
+  display: flex;
+  flex-direction: column;
 }

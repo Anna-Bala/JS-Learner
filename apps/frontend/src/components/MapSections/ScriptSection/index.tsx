@@ -2,20 +2,26 @@ import { useEffect } from 'react';
 
 import './index.css';
 
-const ScriptSection = () => {
+type TProps = {
+  scriptSlots: string[][];
+};
+
+const ScriptSection = ({ scriptSlots }: TProps) => {
   useEffect(() => {
-    const codeEditor = document.getElementById('codeEditor') as HTMLTextAreaElement;
     const runJSCodeButton = document.getElementById('runJSCodeButton') as HTMLButtonElement;
-    const output = document.getElementById('output') as HTMLIFrameElement;
 
     runJSCodeButton?.addEventListener('click', () => {
-      const inputValue = codeEditor?.value?.replace(
+      const allCodeBlocks = document.getElementsByClassName('script-block');
+      const jsCode = Array.from(allCodeBlocks)
+        .map(codeBlock => codeBlock.innerHTML)
+        .join('');
+
+      const jsCodeFormatted = jsCode.replaceAll(
         'document',
         "document.getElementById('resultIframe').contentWindow.document",
       );
 
-      const result = eval(inputValue);
-      output.textContent = result;
+      eval(jsCodeFormatted);
     });
   }, []);
 
@@ -24,10 +30,15 @@ const ScriptSection = () => {
       <button style={{ marginTop: '8px', width: 'fit-content' }} id="runJSCodeButton">
         Run JS code
       </button>
-      {[1, 2, 3, 4, 5].map(() => (
-        <div className="block-slot"></div>
-      ))}
-      <textarea id="codeEditor"></textarea>
+      <div className="slots-wrapper">
+        {scriptSlots.map(codeLine => (
+          <div className="row-wrapper">
+            {codeLine.map(slotContent => (
+              <div className={slotContent !== '' ? 'script-block -static' : 'script-block'}>{slotContent}</div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

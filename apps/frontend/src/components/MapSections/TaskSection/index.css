@@ -1,5 +1,7 @@
 .task-section {
   border: 1px solid aquamarine;
   display: flex;
+  flex-direction: column;
   height: 200px;
+  white-space: break-spaces;
 }
