@@ -4,7 +4,7 @@ import { AI_SYSTEM_MESSAGE, AI_USER_MESSAGE, DEFAULT_FIRST_MESSAGE, OPEN_AI_MODE
 import openai from './openai';
 import './index.css';
 
-import type { TQuestion } from './types';
+import type { TQuestion } from '../../levels';
 
 type TProps = {
   challangeQuestions: TQuestion[];
