@@ -41,5 +41,19 @@ export default [
       ['document.', '', '', '', '=', '', ';'],
       ['', '', '', '=', '', ';'],
     ],
+    challangeQuestions: [
+      {
+        chat: 'Tell me more about "getElementById(id)" method',
+        prompt: "Explain the functionality and usage of the 'getElementById(id)' method in HTML and JavaScript.",
+      },
+      {
+        chat: 'What is an attribute in HTML?',
+        prompt: "Define the concept of an 'attribute' in HTML and its significance.",
+      },
+      {
+        chat: 'What does ".document" refers to?',
+        prompt: "Explain the significance and purpose of the '.document' property in JavaScript.",
+      },
+    ],
   },
 ];

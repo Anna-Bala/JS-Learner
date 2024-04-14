@@ -1,0 +1,70 @@
+.chatAI {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  right: 16px;
+  width: 25%;
+}
+
+.chatAI-button {
+  align-self: flex-end;
+  width: fit-content;
+}
+
+.chatAI-wrapper {
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid burlywood;
+  max-height: 60vh;
+  overflow: scroll;
+  padding-bottom: 0px;
+  padding: 16px;
+  position: relative;
+}
+
+.chatAI-message {
+  border-radius: 10px;
+  padding: 4px 8px;
+  width: 80%;
+}
+
+.-recived {
+  background-color: lightgray;
+}
+
+.-send {
+  background-color: aquamarine;
+  margin-left: auto;
+  margin: 8px 0;
+}
+
+.chatAI-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.chatAI-send-section {
+  background-color: white;
+  bottom: 0;
+  margin-top: 32px;
+  padding: 16px 0px;
+  position: sticky;
+}
+
+.chatAI-textbox {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.chatAI-textbox button {
+  height: fit-content;
+}
+
+.chatAI-textbox textarea {
+  width: 80%;
+}
