@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 
-import './index.css';
+import './index.scss';
 
 type TProps = {
   htmlSourceCode: string;

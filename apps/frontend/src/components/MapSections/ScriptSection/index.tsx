@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import './index.css';
+import './index.scss';
 
 type TProps = {
   evaluateChallange: () => boolean;

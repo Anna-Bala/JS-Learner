@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import './index.css';
+import './index.scss';
 
 import type { TLevel } from '../../levels';
 
