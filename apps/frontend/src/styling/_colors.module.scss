@@ -56,3 +56,7 @@ $color-red-400: #e94f5a;
 $color-red-300: #ef8189;
 $color-red-200: #f5b4b8;
 $color-red-100: #fce6e7;
+
+:export {
+  color-neutral-900: $color-neutral-900;
+}

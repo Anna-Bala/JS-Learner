@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use 'src/styling/colors' as *;
+@use 'src/styling/_colors.module' as *;
 @use 'src/styling/spacing' as *;
 
 $colors: 'green', 'neutral', 'orange', 'primary', 'red';
@@ -152,5 +152,14 @@ $mappedPanelButtonDecorationBackgroundPressColorsList: (
         background-color: map.get($mappedPanelButtonDecorationBackgroundPressColorsList, $color);
       }
     }
+  }
+}
+
+.icon-button {
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
   }
 }
