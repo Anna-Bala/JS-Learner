@@ -1,0 +1,68 @@
+@use 'sass:map';
+@use 'src/styling/colors' as *;
+@use 'src/styling/spacing' as *;
+
+$colors: 'green', 'neutral', 'orange', 'primary', 'red';
+
+$mappedBackgroundColorsList: (
+  'green': $color-green-500,
+  'neutral': $color-neutral-500,
+  'orange': $color-orange-500,
+  'primary': $color-primary-500,
+  'red': $color-red-500,
+);
+
+$mappedBackgroundHoverColorsList: (
+  'green': $color-green-700,
+  'neutral': $color-neutral-700,
+  'orange': $color-orange-700,
+  'primary': $color-primary-700,
+  'red': $color-red-700,
+);
+
+$mappedBackgroundPressColorsList: (
+  'green': $color-green-800,
+  'neutral': $color-neutral-800,
+  'orange': $color-orange-800,
+  'primary': $color-primary-800,
+  'red': $color-red-800,
+);
+
+.button {
+  border-color: transparent;
+  border-radius: 10px 10px 0 0;
+  color: $color-neutral-white;
+
+  &__small {
+    min-width: 92px;
+    height: 36px;
+    padding: $xs $md;
+  }
+
+  &__medium {
+    min-width: 108px;
+    height: 40px;
+    padding: $sm $xxl;
+  }
+
+  &__large {
+    min-width: 116px;
+    height: 48px;
+    padding: $md $xxxl;
+  }
+}
+
+@each $color in $colors {
+  .button-color__#{$color} {
+    background-color: map.get($mappedBackgroundColorsList, $color);
+
+    &:hover {
+      background-color: map.get($mappedBackgroundHoverColorsList, $color);
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: map.get($mappedBackgroundPressColorsList, $color);
+    }
+  }
+}

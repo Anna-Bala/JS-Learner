@@ -72,7 +72,7 @@ const Typography = ({ children, className, color, variant, ...props }: TProps) =
   return (
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
-    <Component className={`color__${color} typography__${variant} ${className}`} {...props}>
+    <Component className={`typography-color__${color} typography__${variant} ${className}`} {...props}>
       {children}
     </Component>
   );

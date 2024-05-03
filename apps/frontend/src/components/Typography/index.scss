@@ -1,7 +1,7 @@
 @use 'src/styling/colors' as *;
 @use 'src/styling/typography' as *;
 
-.color {
+.typography-color {
   &__neutral-black {
     color: $color-neutral-black;
   }
