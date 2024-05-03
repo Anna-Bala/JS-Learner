@@ -66,3 +66,91 @@ $mappedBackgroundPressColorsList: (
     }
   }
 }
+
+$mappedPanelButtonBackgroundColorsList: (
+  'green': $color-green-300,
+  'neutral': $color-neutral-300,
+  'orange': $color-orange-300,
+  'primary': $color-primary-300,
+  'red': $color-red-300,
+);
+
+$mappedPanelButtonBackgroundHoverColorsList: (
+  'green': $color-green-500,
+  'neutral': $color-neutral-500,
+  'orange': $color-orange-500,
+  'primary': $color-primary-500,
+  'red': $color-red-500,
+);
+
+$mappedPanelButtonBackgroundPressColorsList: (
+  'green': $color-green-600,
+  'neutral': $color-neutral-600,
+  'orange': $color-orange-600,
+  'primary': $color-primary-600,
+  'red': $color-red-600,
+);
+
+$mappedPanelButtonDecorationBackgroundColorsList: (
+  'green': $color-green-400,
+  'neutral': $color-neutral-400,
+  'orange': $color-orange-400,
+  'primary': $color-primary-400,
+  'red': $color-red-400,
+);
+
+$mappedPanelButtoDecorationBackgroundHoverColorsList: (
+  'green': $color-green-600,
+  'neutral': $color-neutral-600,
+  'orange': $color-orange-600,
+  'primary': $color-primary-600,
+  'red': $color-red-600,
+);
+
+$mappedPanelButtonDecorationBackgroundPressColorsList: (
+  'green': $color-green-700,
+  'neutral': $color-neutral-700,
+  'orange': $color-orange-700,
+  'primary': $color-primary-700,
+  'red': $color-red-700,
+);
+
+.panel-button {
+  height: 25px;
+
+  &__decoration {
+    border-color: transparent;
+    border-radius: 2px;
+    height: 8px;
+    margin: 0 auto;
+    width: 80%;
+  }
+}
+
+@each $color in $colors {
+  .panel-button-color__#{$color} {
+    background-color: map.get($mappedPanelButtonBackgroundColorsList, $color);
+
+    .panel-button__decoration {
+      background-color: map.get($mappedPanelButtonDecorationBackgroundColorsList, $color);
+    }
+
+    &:hover {
+      background-color: map.get($mappedPanelButtonBackgroundHoverColorsList, $color);
+      cursor: pointer;
+
+      .panel-button__decoration {
+        cursor: pointer;
+        background-color: map.get($mappedPanelButtoDecorationBackgroundHoverColorsList, $color);
+      }
+    }
+
+    &:active {
+      background-color: map.get($mappedPanelButtonBackgroundPressColorsList, $color);
+
+      .panel-button__decoration {
+        background-color: map.get($mappedPanelButtonDecorationBackgroundPressColorsList, $color);
+      }
+    }
+  }
+}
