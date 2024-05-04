@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+import CodeBlock from '../../CodeBlock';
+
 import './index.scss';
 
 type TProps = {
@@ -44,11 +46,21 @@ const ScriptSection = ({ evaluateChallange, scriptSlots }: TProps) => {
         Run JS code
       </button>
       <div className="slots-wrapper">
-        {scriptSlots.map(codeLine => (
-          <div className="row-wrapper">
-            {codeLine.map(slotContent => (
-              <div className={slotContent !== '' ? 'script-block -static' : 'script-block'}>{slotContent}</div>
-            ))}
+        {scriptSlots.map((codeLine, rowIndex) => (
+          <div className="row-wrapper" key={rowIndex}>
+            {codeLine.map((slotContent, index) => {
+              const isStaticBlock = slotContent !== '';
+
+              return (
+                <CodeBlock
+                  className={isStaticBlock ? 'script-block -static' : 'script-block'}
+                  info={{ content: slotContent, id: index }}
+                  key={`${rowIndex}-${index}-${slotContent}`}
+                  variant={isStaticBlock ? 'static' : 'slot'}
+                />
+                // <div className={slotContent !== '' ? 'script-block -static' : 'script-block'}>{slotContent}</div>
+              );
+            })}
           </div>
         ))}
       </div>

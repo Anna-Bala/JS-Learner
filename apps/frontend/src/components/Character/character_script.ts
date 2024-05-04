@@ -77,6 +77,7 @@ const dropCodeBlock = (character: HTMLDivElement) => {
 
     carriedCodeBlock.style.position = 'absolute';
     carriedCodeBlock.style.visibility = 'visible';
+    carriedCodeBlock.style.boxShadow = 'none';
 
     if (isCollidedElementScriptBlock && collidedElement.innerHTML === '') {
       collidedElement.innerHTML = carriedCodeBlock.innerHTML;

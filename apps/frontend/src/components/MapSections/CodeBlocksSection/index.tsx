@@ -1,6 +1,6 @@
 import './index.scss';
 
-import CodeBlock from './CodeBlock';
+import CodeBlock from '../../CodeBlock';
 
 type TProps = {
   codeBlocks: string[];
