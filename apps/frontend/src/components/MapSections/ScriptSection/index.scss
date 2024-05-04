@@ -1,3 +1,6 @@
+@use 'src/styling/_colors.module' as *;
+@use 'src/styling/spacing' as *;
+
 .row-wrapper {
   display: flex;
   margin-top: 16px;
@@ -7,16 +10,17 @@
   border: 1px solid gray;
   height: 20px;
   min-width: 100px;
-  width: fit-content;
   padding: 0px 4px;
+  width: fit-content;
 }
 
 .script-section {
-  border: 1px solid aquamarine;
-  display: flex;
-  flex-direction: column;
+  background-color: $color-neutral-700;
+  border-radius: 16px 16px 0px 0px;
+  border: 8px solid $color-primary-300;
+  border-bottom: 0px;
   flex: 2.5;
-  gap: 16px;
+  padding: $sm $xl;
 }
 
 .slots-wrapper {
