@@ -1,9 +1,11 @@
+@use 'src/styling/_colors.module' as *;
+@use 'src/styling/spacing' as *;
+
 .map {
-  background-color: antiquewhite;
-  border: 10px solid black;
+  background-color: $color-background;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding: 24px;
+  padding: $xxxl $xxxxl 0 $xxxxl;
   position: relative;
 }
