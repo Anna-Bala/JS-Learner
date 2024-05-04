@@ -8,7 +8,7 @@ type TProps = {
   onClick: () => void;
 };
 
-const IconButton = ({ className, icon, onClick }: TProps) => (
+const IconButton = ({ className = '', icon, onClick }: TProps) => (
   <button className={`icon-button ${className}`} onClick={onClick}>
     {icon}
   </button>

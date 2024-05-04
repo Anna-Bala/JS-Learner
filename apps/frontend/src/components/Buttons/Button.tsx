@@ -10,7 +10,7 @@ type TProps = {
   variant?: 'small' | 'medium' | 'large';
 };
 
-const Button = ({ children, className, color, onClick, variant = 'medium' }: TProps) => (
+const Button = ({ children, className = '', color, onClick, variant = 'medium' }: TProps) => (
   <button className={`button button-color__${color} button__${variant} ${className}`} onClick={onClick}>
     <Typography color="neutral-white" variant="body2">
       {children}

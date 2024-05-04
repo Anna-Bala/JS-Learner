@@ -66,7 +66,7 @@ type TProps = {
   variant: 'heading1' | 'heading2' | 'heading3' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2';
 };
 
-const Typography = ({ children, className, color, variant, ...props }: TProps) => {
+const Typography = ({ children, className = '', color, variant, ...props }: TProps) => {
   const Component = variant ? variantsMapping[variant] : 'p';
 
   return (

@@ -5,7 +5,7 @@ type TProps = {
   color: 'neutral' | 'green' | 'primary' | 'orange' | 'red';
 };
 
-const PanelButton = ({ className, color }: TProps) => (
+const PanelButton = ({ className = '', color }: TProps) => (
   <button className={`button panel-button panel-button-color__${color} ${className}`}>
     <div className="panel-button__decoration"></div>
   </button>

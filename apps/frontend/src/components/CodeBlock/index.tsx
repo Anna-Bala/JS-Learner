@@ -9,7 +9,7 @@ type TProps = {
   };
 };
 
-const CodeBlock = ({ className, info, variant = 'default' }: TProps) => (
+const CodeBlock = ({ className = '', info, variant = 'default' }: TProps) => (
   <div className={`code-block code-block__${variant} ${className}`} id={info?.id.toString()}>
     {info?.content || null}
   </div>
