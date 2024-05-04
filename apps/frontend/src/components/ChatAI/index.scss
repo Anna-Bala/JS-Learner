@@ -1,70 +1,92 @@
+@use 'src/styling/_colors.module' as *;
+@use 'src/styling/shadows' as *;
+@use 'src/styling/spacing' as *;
+@use 'src/styling/typography' as *;
+
 .chatAI {
   position: absolute;
   bottom: 0;
   display: flex;
   flex-direction: column;
-  right: 16px;
-  width: 25%;
+  right: $xxxxl;
+  width: 35%;
+
+  &__send-section {
+    bottom: 0;
+    margin-top: $xxxl;
+    padding-top: $sm;
+    position: sticky;
+  }
+
+  &__send-button {
+    display: block;
+    margin-left: auto;
+  }
+
+  &__text-input {
+    width: 100%;
+    margin: $md 0;
+  }
+
+  &__toggle-button {
+    margin-left: auto;
+    margin-right: $md;
+    width: 25%;
+  }
+
+  &__wrapper {
+    background-color: $color-green-100;
+    border-radius: 16px 16px 0px 0px;
+    border: 4px solid $color-green-300;
+    border-bottom: none;
+    max-height: 60vh;
+    overflow: scroll;
+    padding: 16px;
+    padding-bottom: 0px;
+    position: relative;
+  }
+
+  &__questions {
+    display: flex;
+    flex-direction: column;
+    gap: $sm;
+    margin-top: $md;
+
+    button {
+      @include body-1-regular;
+      background-color: $color-green-500;
+      border-radius: 8px;
+      border: transparent;
+      color: $color-neutral-white;
+      padding: $xs $md;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $color-green-600;
+      }
+    }
+  }
 }
 
-.chatAI-button {
-  align-self: flex-end;
-  width: fit-content;
-}
+.message {
+  border-color: transparent;
+  border-radius: 22px;
+  padding: $sm $xl;
+  text-align: center;
+  width: 65%;
 
-.chatAI-wrapper {
-  background-color: white;
-  border-radius: 4px;
-  border: 1px solid burlywood;
-  max-height: 60vh;
-  overflow: scroll;
-  padding-bottom: 0px;
-  padding: 16px;
-  position: relative;
-}
+  &.-recived {
+    @include chat-shadow;
+    background-color: $color-neutral-100;
+    color: $color-neutral-700;
+    margin-left: $xl;
+  }
 
-.chatAI-message {
-  border-radius: 10px;
-  padding: 4px 8px;
-  width: 80%;
-}
-
-.-recived {
-  background-color: lightgray;
-}
-
-.-send {
-  background-color: aquamarine;
-  margin: 8px 0;
-  margin-left: auto;
-}
-
-.chatAI-questions {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 8px;
-}
-
-.chatAI-send-section {
-  background-color: white;
-  bottom: 0;
-  margin-top: 32px;
-  padding: 16px 0px;
-  position: sticky;
-}
-
-.chatAI-textbox {
-  align-items: center;
-  display: flex;
-  gap: 16px;
-  margin-top: 8px;
-}
-
-.chatAI-textbox button {
-  height: fit-content;
-}
-
-.chatAI-textbox textarea {
-  width: 80%;
+  &.-send {
+    @include chat-shadow-2;
+    background-color: $color-green-200;
+    color: $color-green-700;
+    margin-left: auto;
+    margin-right: $xl;
+  }
 }

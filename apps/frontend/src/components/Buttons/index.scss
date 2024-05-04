@@ -28,6 +28,14 @@ $mappedBackgroundPressColorsList: (
   'red': $color-red-800,
 );
 
+$mappedBackgroundDisabledColorsList: (
+  'green': $color-green-200,
+  'neutral': $color-neutral-200,
+  'orange': $color-orange-200,
+  'primary': $color-primary-200,
+  'red': $color-red-200,
+);
+
 .button {
   border-color: transparent;
   border-radius: 10px 10px 0 0;
@@ -63,6 +71,11 @@ $mappedBackgroundPressColorsList: (
 
     &:active {
       background-color: map.get($mappedBackgroundPressColorsList, $color);
+    }
+
+    &:disabled {
+      background-color: map.get($mappedBackgroundDisabledColorsList, $color);
+      cursor: not-allowed;
     }
   }
 }

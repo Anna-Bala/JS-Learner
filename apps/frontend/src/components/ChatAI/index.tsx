@@ -1,10 +1,15 @@
 import { useState } from 'react';
 
 import { AI_SYSTEM_MESSAGE, AI_USER_MESSAGE, DEFAULT_FIRST_MESSAGE, OPEN_AI_MODEL } from './constants';
+import { Button, PanelButton } from '../Buttons';
+import Divider from '../Divider';
+import Message from './Message';
 import openai from './openai';
-import './index.scss';
+import TextInput from '../Form/TextInput';
 
 import type { TQuestion } from '../../levels';
+
+import './index.scss';
 
 type TProps = {
   challangeQuestions: TQuestion[];
@@ -54,34 +59,39 @@ const ChatAI = ({ challangeQuestions }: TProps) => {
 
   return (
     <div className="chatAI">
-      <button className="chatAI-button" onClick={toggleChatOpen}>
-        {isChatOpen ? 'Close' : 'Open'} AI chat
-      </button>
+      <PanelButton color="green" className="chatAI__toggle-button" onClick={toggleChatOpen} />
 
       {isChatOpen && (
-        <div className="chatAI-wrapper">
+        <div className="chatAI__wrapper">
           {messages.map((message, index) => (
-            <p className={index % 2 === 0 ? 'chatAI-message -recived' : 'chatAI-message -send'}>{message}</p>
+            <Message content={message} variant={index % 2 === 0 ? 'recived' : 'send'} />
           ))}
           {isLoading && <p style={{ marginTop: '16px' }}>Loading...</p>}
           {isError && <p style={{ marginTop: '16px' }}>Something went wrong!</p>}
-          <div className="chatAI-send-section">
-            <hr />
-            <div className="chatAI-questions">
+          <div className="chatAI__send-section">
+            <Divider />
+            <div className="chatAI__questions">
               {challangeQuestions.map(question => (
                 <button onClick={() => askAI(question)}>{question.chat}</button>
               ))}
             </div>
-            <div className="chatAI-textbox">
-              <textarea
-                name="userQuestion"
-                onChange={event => setUserQuestion(event?.target?.value || '')}
-                value={userQuestion}
-              ></textarea>
-              <button disabled={!userQuestion} onClick={handleSendButton}>
-                Send
-              </button>
-            </div>
+            <TextInput
+              className="chatAI__text-input"
+              color="neutral"
+              multiline={2}
+              name="userQuestion"
+              onChange={setUserQuestion}
+              value={userQuestion}
+            />
+            <Button
+              className="chatAI__send-button"
+              color="green"
+              disabled={!userQuestion}
+              onClick={handleSendButton}
+              variant="small"
+            >
+              Send
+            </Button>
           </div>
         </div>
       )}
