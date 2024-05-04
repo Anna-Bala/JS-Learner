@@ -1,5 +1,12 @@
+@use 'src/styling/_colors.module' as *;
+@use 'src/styling/spacing' as *;
+@use 'src/styling/typography' as *;
+
 .result-section {
-  border: 1px solid blue;
+  background-color: $color-neutral-white;
+  border-radius: 16px;
+  border: 8px solid $color-neutral-200;
   display: flex;
   flex: 1;
+  padding: $xxs;
 }
