@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { CodeBlocksSection, MenuSection, ResultSection, ScriptSection, TaskSection } from '../MapSections';
-import { HTMLModal } from '../Modals';
+import { HTMLModal, InstructionsModal } from '../Modals';
 import Character from '../Character';
 import ChatAI from '../ChatAI';
 import DebuggingTools from '../DebuggingTools';
@@ -15,11 +15,14 @@ type TProps = {
 
 const Map = ({ level }: TProps) => {
   const [isHTMLModalOpen, setIsHTMLModalOpen] = useState(false);
+  const [isInstructionsModalOpen, setIsInstructionsModalOpen] = useState(false);
 
   const toggleIsHTMLModalOpen = () => setIsHTMLModalOpen(prevState => !prevState);
+  const toggleIsInstructionsModalOpen = () => setIsInstructionsModalOpen(prevState => !prevState);
 
   const appendKeydownActions = (event: KeyboardEvent) => {
     if (event.code === 'KeyH') toggleIsHTMLModalOpen();
+    if (event.code === 'KeyI' || event.code === 'Tab') toggleIsInstructionsModalOpen();
   };
 
   useEffect(() => {
@@ -52,6 +55,7 @@ const Map = ({ level }: TProps) => {
         isOpen={isHTMLModalOpen}
         onPrimaryAction={toggleIsHTMLModalOpen}
       />
+      <InstructionsModal isOpen={isInstructionsModalOpen} onPrimaryAction={toggleIsInstructionsModalOpen} />
     </div>
   );
 };
