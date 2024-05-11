@@ -32,19 +32,21 @@ const ScriptSection = ({ evaluateChallange, scriptSlots }: TProps) => {
     }
   };
 
-  useEffect(() => {
-    const runJSCodeButton = document.getElementById('runJSCodeButton') as HTMLButtonElement;
+  const appendKeydownActions = (event: KeyboardEvent) => {
+    if (event.code === 'KeyJ') handleJsCodeButtonClick();
+  };
 
-    runJSCodeButton.removeEventListener('click', handleJsCodeButtonClick);
-    runJSCodeButton?.addEventListener('click', handleJsCodeButtonClick);
+  useEffect(() => {
+    document.addEventListener('keydown', appendKeydownActions);
+
+    return () => {
+      document.removeEventListener('keydown', appendKeydownActions);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="script-section">
-      <button style={{ marginTop: '8px', width: 'fit-content' }} id="runJSCodeButton">
-        Run JS code
-      </button>
       <div className="slots-wrapper">
         {scriptSlots.map((codeLine, rowIndex) => (
           <div className="row-wrapper" key={rowIndex}>
