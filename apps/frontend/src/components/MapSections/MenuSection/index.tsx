@@ -8,6 +8,7 @@ import colors from '../../../styling/_colors.module.scss';
 import './index.scss';
 
 type TProps = {
+  handleInfoIconButtonClick: () => void;
   level: TLevel;
 };
 
@@ -25,7 +26,7 @@ const convertLevelScore = (levelScore: number) => {
 
 const iconsColor = colors['color-primary-400'];
 
-const MenuSection = ({ level }: TProps) => (
+const MenuSection = ({ handleInfoIconButtonClick, level }: TProps) => (
   <div className="menu-section">
     <div className="menu-section__level-info">
       <Typography color="primary-700" variant="subtitle2">
@@ -39,7 +40,7 @@ const MenuSection = ({ level }: TProps) => (
     </div>
     <div className="menu-section__actions">
       <IconButton icon={<HomeIcon fill={iconsColor} size={48} />} onClick={() => {}} />
-      <IconButton icon={<InfoIcon fill={iconsColor} size={48} />} onClick={() => {}} />
+      <IconButton icon={<InfoIcon fill={iconsColor} size={48} />} onClick={handleInfoIconButtonClick} />
     </div>
   </div>
 );

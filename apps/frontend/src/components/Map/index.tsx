@@ -40,7 +40,7 @@ const Map = ({ level }: TProps) => {
         <Character />
         <div style={{ display: 'flex', flexDirection: 'row', gap: '24px' }}>
           <TaskSection challanges={level.challanges} description={level.description} />
-          <MenuSection level={level} />
+          <MenuSection handleInfoIconButtonClick={toggleIsInstructionsModalOpen} level={level} />
         </div>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'row', gap: '16px' }}>
           <CodeBlocksSection codeBlocks={level.codeBlocks} />
