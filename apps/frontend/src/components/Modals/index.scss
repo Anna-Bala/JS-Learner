@@ -12,10 +12,24 @@ $mappedBackgroundColorsList: (
   'red': $color-red-100,
 );
 
+.modal-shadow {
+  background-color: rgba(40, 43, 45, 0.5);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
 .modal-wrapper {
   border: 1px solid $color-neutral-300;
   border-radius: 8px;
   padding: $xxxl $xxxl 0 $xxxl;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
 
   &__header {
     display: flex;
