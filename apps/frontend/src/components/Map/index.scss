@@ -1,0 +1,16 @@
+@use 'src/styling/_colors.module' as *;
+@use 'src/styling/spacing' as *;
+
+.map-content {
+  background-color: $color-background;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: $xxxl $xxxxl 0 $xxxxl;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-wrapper {
+  position: relative;
+}

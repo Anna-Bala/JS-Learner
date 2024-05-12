@@ -1,0 +1,6 @@
+@use 'src/styling/_colors.module' as *;
+
+.divider {
+  border-color: $color-neutral-300;
+  border-width: 1px;
+}

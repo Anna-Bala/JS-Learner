@@ -1,13 +1,63 @@
-import { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 
-import './index.css';
+import { CodeBlocksSection, MenuSection, ResultSection, ScriptSection, TaskSection } from '../MapSections';
+import { HTMLModal, InstructionsModal } from '../Modals';
+import Character from '../Character';
+import ChatAI from '../ChatAI';
+import DebuggingTools from '../DebuggingTools';
+import type { TLevel } from '../../levels';
+
+import './index.scss';
 
 type TProps = {
-  children: ReactNode;
+  level: TLevel;
 };
 
-const Map = ({ children }: TProps) => {
-  return <div className="map">{children}</div>;
+const Map = ({ level }: TProps) => {
+  const [isHTMLModalOpen, setIsHTMLModalOpen] = useState(false);
+  const [isInstructionsModalOpen, setIsInstructionsModalOpen] = useState(false);
+
+  const toggleIsHTMLModalOpen = () => setIsHTMLModalOpen(prevState => !prevState);
+  const toggleIsInstructionsModalOpen = () => setIsInstructionsModalOpen(prevState => !prevState);
+
+  const appendKeydownActions = (event: KeyboardEvent) => {
+    if (event.code === 'KeyH') toggleIsHTMLModalOpen();
+    if (event.code === 'KeyI' || event.code === 'Tab') toggleIsInstructionsModalOpen();
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', appendKeydownActions);
+
+    return () => {
+      document.removeEventListener('keydown', appendKeydownActions);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <div className="map-wrapper">
+      <div className="map-content">
+        <Character />
+        <div style={{ display: 'flex', flexDirection: 'row', gap: '24px' }}>
+          <TaskSection challanges={level.challanges} description={level.description} />
+          <MenuSection handleInfoIconButtonClick={toggleIsInstructionsModalOpen} level={level} />
+        </div>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'row', gap: '16px' }}>
+          <CodeBlocksSection codeBlocks={level.codeBlocks} />
+          <ScriptSection evaluateChallange={level.evaluateChallange} scriptSlots={level.scriptSlots} />
+          <ResultSection resultIFrameSrcDoc={level.resultIFrameSrcDoc} />
+        </div>
+        <DebuggingTools level={level} />
+        <ChatAI challangeQuestions={level.challangeQuestions} />
+      </div>
+      <HTMLModal
+        htmlSourceCode={level.htmlSourceCode}
+        isOpen={isHTMLModalOpen}
+        onPrimaryAction={toggleIsHTMLModalOpen}
+      />
+      <InstructionsModal isOpen={isInstructionsModalOpen} onPrimaryAction={toggleIsInstructionsModalOpen} />
+    </div>
+  );
 };
 
 export default Map;

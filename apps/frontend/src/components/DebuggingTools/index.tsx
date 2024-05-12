@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import './index.css';
+import './index.scss';
 
 import type { TLevel } from '../../levels';
 
@@ -19,9 +19,11 @@ const DebuggingTools = ({ level }: TProps) => {
     {
       name: 'Solve challange',
       debbugingFunction: async () => {
-        (Array.from(document.querySelectorAll('.code-block')) as HTMLElement[]).forEach(
-          codeBlock => (codeBlock.style.display = 'none'),
-        );
+        const allCodeBlocks = Array.from(document.querySelectorAll('.code-block')).filter(
+          codeBlock => !codeBlock.classList.contains('script-block'),
+        ) as HTMLElement[];
+
+        allCodeBlocks.forEach(codeBlock => (codeBlock.style.display = 'none'));
 
         const emptyScriptSlots = Array.from(document.querySelectorAll('.script-block')).filter(
           scriptSlot => !scriptSlot.classList.contains('-static'),

@@ -1,0 +1,29 @@
+@use 'src/styling/_colors.module' as *;
+@use 'src/styling/spacing' as *;
+
+.row-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-top: 16px;
+}
+
+.script-block {
+  min-width: 100px;
+  width: fit-content;
+}
+
+.script-section {
+  background-color: $color-neutral-700;
+  border-radius: 16px 16px 0px 0px;
+  border: 8px solid $color-primary-300;
+  border-bottom: 0px;
+  flex: 2.5;
+  padding: $xl $xxxxl;
+}
+
+.slots-wrapper {
+  display: flex;
+  flex-direction: column;
+}

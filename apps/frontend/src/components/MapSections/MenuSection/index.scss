@@ -1,0 +1,30 @@
+@use 'src/styling/_colors.module' as *;
+@use 'src/styling/spacing' as *;
+
+.menu-section {
+  background-color: $color-primary-100;
+  border-radius: 16px;
+  border: 4px solid $color-primary-300;
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  justify-content: space-between;
+  margin-bottom: $xxxl;
+  padding: $xl;
+
+  &__actions {
+    display: flex;
+    gap: $xxs;
+  }
+
+  &__level-info {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__stars {
+    display: flex;
+  }
+}

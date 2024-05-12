@@ -1,0 +1,226 @@
+@use 'src/styling/_colors.module' as *;
+@use 'src/styling/typography' as *;
+
+.typography-color {
+  &__neutral-black {
+    color: $color-neutral-black;
+  }
+
+  &__neutral-white {
+    color: $color-neutral-white;
+  }
+
+  &__neutral-900 {
+    color: $color-neutral-900;
+  }
+
+  &__neutral-800 {
+    color: $color-neutral-800;
+  }
+
+  &__neutral-700 {
+    color: $color-neutral-700;
+  }
+
+  &__neutral-600 {
+    color: $color-neutral-600;
+  }
+
+  &__neutral-500 {
+    color: $color-neutral-500;
+  }
+
+  &__neutral-400 {
+    color: $color-neutral-400;
+  }
+
+  &__neutral-300 {
+    color: $color-neutral-300;
+  }
+
+  &__neutral-200 {
+    color: $color-neutral-200;
+  }
+
+  &__neutral-100 {
+    color: $color-neutral-100;
+  }
+
+  // Green colors
+  &__green-900 {
+    color: $color-green-900;
+  }
+
+  &__green-800 {
+    color: $color-green-800;
+  }
+
+  &__green-700 {
+    color: $color-green-700;
+  }
+
+  &__green-600 {
+    color: $color-green-600;
+  }
+
+  &__green-500 {
+    color: $color-green-500;
+  }
+
+  &__green-400 {
+    color: $color-green-400;
+  }
+
+  &__green-300 {
+    color: $color-green-300;
+  }
+
+  &__green-200 {
+    color: $color-green-200;
+  }
+
+  &__green-100 {
+    color: $color-green-100;
+  }
+
+  // Primary colors
+  &__primary-900 {
+    color: $color-primary-900;
+  }
+
+  &__primary-800 {
+    color: $color-primary-800;
+  }
+
+  &__primary-700 {
+    color: $color-primary-700;
+  }
+
+  &__primary-600 {
+    color: $color-primary-600;
+  }
+
+  &__primary-500 {
+    color: $color-primary-500;
+  }
+
+  &__primary-400 {
+    color: $color-primary-400;
+  }
+
+  &__primary-300 {
+    color: $color-primary-300;
+  }
+
+  &__primary-200 {
+    color: $color-primary-200;
+  }
+
+  &__primary-100 {
+    color: $color-primary-100;
+  }
+
+  // Orange colors
+  &__orange-900 {
+    color: $color-orange-900;
+  }
+
+  &__orange-800 {
+    color: $color-orange-800;
+  }
+
+  &__orange-700 {
+    color: $color-orange-700;
+  }
+
+  &__orange-600 {
+    color: $color-orange-600;
+  }
+
+  &__orange-500 {
+    color: $color-orange-500;
+  }
+
+  &__orange-400 {
+    color: $color-orange-400;
+  }
+
+  &__orange-300 {
+    color: $color-orange-300;
+  }
+
+  &__orange-200 {
+    color: $color-orange-200;
+  }
+
+  &__orange-100 {
+    color: $color-orange-100;
+  }
+
+  // Red colors
+  &__red-900 {
+    color: $color-red-900;
+  }
+
+  &__red-800 {
+    color: $color-red-800;
+  }
+
+  &__red-700 {
+    color: $color-red-700;
+  }
+
+  &__red-600 {
+    color: $color-red-600;
+  }
+
+  &__red-500 {
+    color: $color-red-500;
+  }
+
+  &__red-400 {
+    color: $color-red-400;
+  }
+
+  &__red-300 {
+    color: $color-red-300;
+  }
+
+  &__red-200 {
+    color: $color-red-200;
+  }
+
+  &__red-100 {
+    color: $color-red-100;
+  }
+}
+
+.typography {
+  &__heading1 {
+    @include heading-1;
+  }
+
+  &__heading2 {
+    @include heading-2;
+  }
+
+  &__heading3 {
+    @include heading-3;
+  }
+
+  &__subtitle1 {
+    @include subtitle-1;
+  }
+
+  &__subtitle2 {
+    @include subtitle-2;
+  }
+
+  &__body1 {
+    @include body-1-regular;
+  }
+
+  &__body2 {
+    @include body-2-medium;
+  }
+}
