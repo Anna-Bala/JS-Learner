@@ -3,6 +3,7 @@ import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 
 import ModalWrapper from '../ModalWrapper';
+import Typography from '../../Typography';
 import './index.scss';
 
 type TProps = {
@@ -29,11 +30,17 @@ const HTMLModal = ({ htmlSourceCode, isOpen, onPrimaryAction }: TProps) => {
         srcDoc='<p id="demo">JavaScript can change HTML content.</p>'
         style={{ display: 'none', width: 0, height: 0 }}
       ></iframe>
-      <div className="code-wrapper">
-        <pre>
-          <code className="language-html">{htmlSourceCode}</code>
-        </pre>
-      </div>
+      {htmlSourceCode ? (
+        <div className="code-wrapper">
+          <pre>
+            <code className="language-html">{htmlSourceCode}</code>
+          </pre>
+        </div>
+      ) : (
+        <Typography color="orange-800" variant="body1">
+          No HTML source code is needed for this challange.
+        </Typography>
+      )}
     </ModalWrapper>
   );
 };

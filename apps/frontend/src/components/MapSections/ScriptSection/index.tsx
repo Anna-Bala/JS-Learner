@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 
 import CodeBlock from '../../CodeBlock';
-
+import { evaluateChallange } from './utils';
 import './index.scss';
 
 type TProps = {
-  evaluateChallange: () => boolean;
+  codeBlocksInCorrectOrder: string[];
   scriptSlots: string[][];
 };
 
-const ScriptSection = ({ evaluateChallange, scriptSlots }: TProps) => {
+const ScriptSection = ({ codeBlocksInCorrectOrder, scriptSlots }: TProps) => {
   const handleJsCodeButtonClick = () => {
     const allCodeBlocks = document.getElementsByClassName('script-block');
     const jsCode = Array.from(allCodeBlocks)
@@ -24,9 +24,9 @@ const ScriptSection = ({ evaluateChallange, scriptSlots }: TProps) => {
     try {
       eval(jsCodeFormatted);
     } catch {
-      window.alert('INCORRECT :(');
+      window.alert('WRONG FORMAT!');
     } finally {
-      const result = evaluateChallange();
+      const result = evaluateChallange(codeBlocksInCorrectOrder);
       if (result) window.alert('CORRECT!');
       else window.alert('INCORRECT :(');
     }
