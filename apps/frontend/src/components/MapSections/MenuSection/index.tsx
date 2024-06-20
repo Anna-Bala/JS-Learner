@@ -33,7 +33,7 @@ const MenuSection = ({ handleInfoIconButtonClick, level }: TProps) => (
         {level.name}
       </Typography>
       <div className="menu-section__stars">
-        {convertLevelScore(2).map((scoreValue, index) =>
+        {convertLevelScore(level.score).map((scoreValue, index) =>
           scoreValue ? <StarFilledIcon key={index} size={48} /> : <StarEmptyIcon key={index} size={48} />,
         )}
       </div>
