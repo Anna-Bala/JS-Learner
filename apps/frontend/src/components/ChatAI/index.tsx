@@ -71,9 +71,9 @@ const ChatAI = ({ challangeQuestions }: TProps) => {
           <div className="chatAI__send-section">
             <Divider />
             <div className="chatAI__questions">
-              {challangeQuestions.map(question => (
-                <button onClick={() => askAI(question)}>{question.chat}</button>
-              ))}
+              {challangeQuestions.map(question =>
+                question?.chat ? <button onClick={() => askAI(question)}>{question.chat}</button> : null,
+              )}
             </div>
             <TextInput
               className="chatAI__text-input"

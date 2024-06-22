@@ -44,8 +44,8 @@ const Map = ({ level }: TProps) => {
         </div>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'row', gap: '16px' }}>
           <CodeBlocksSection codeBlocks={level.codeBlocks} />
-          <ScriptSection evaluateChallange={level.evaluateChallange} scriptSlots={level.scriptSlots} />
-          <ResultSection resultIFrameSrcDoc={level.resultIFrameSrcDoc} />
+          <ScriptSection codeBlocksInCorrectOrder={level.codeBlocksInCorrectOrder} scriptSlots={level.scriptSlots} />
+          {level.resultIFrameSrcDoc && <ResultSection resultIFrameSrcDoc={level.resultIFrameSrcDoc} />}
         </div>
         <DebuggingTools level={level} />
         <ChatAI challangeQuestions={level.challangeQuestions} />
