@@ -16,28 +16,6 @@ export type TLevel = {
   challangeQuestions: TQuestion[];
 };
 
-const base: TLevel = {
-  challanges: ['', '', ''],
-  codeBlocks: [''],
-  codeBlocksInCorrectOrder: [''],
-  description: `\n\nYour challenge is to:`,
-  htmlSourceCode: ``,
-  name: '',
-  resultIFrameSrcDoc: ``,
-  score: 0,
-  scriptSlots: [
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-  ],
-  challangeQuestions: [
-    {
-      chat: '',
-      prompt: '',
-    },
-  ],
-};
-
 const L1Fundamentals: TLevel = {
   challanges: [
     'Change text inside <span> element from "Change my text" to "JS is awesome!"',
