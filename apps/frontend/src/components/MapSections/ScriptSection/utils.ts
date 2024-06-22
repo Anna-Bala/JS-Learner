@@ -6,6 +6,7 @@ export const evaluateChallange = (codeBlocksInCorrectOrder: string[]) => {
 
   scriptBlocksOnMap.forEach((scriptBlock, index) => {
     if (scriptBlock.innerHTML !== codeBlocksInCorrectOrder[index]) result = false;
+    if (scriptBlock.innerText === codeBlocksInCorrectOrder[index]) result = true;
   });
 
   return result;

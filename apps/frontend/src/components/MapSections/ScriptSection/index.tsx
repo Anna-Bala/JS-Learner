@@ -16,10 +16,9 @@ const ScriptSection = ({ codeBlocksInCorrectOrder, scriptSlots }: TProps) => {
       .map(codeBlock => codeBlock.innerHTML)
       .join('');
 
-    const jsCodeFormatted = jsCode.replaceAll(
-      'document',
-      "document.getElementById('resultIframe').contentWindow.document",
-    );
+    const jsCodeFormatted = jsCode
+      .replaceAll('document', "document.getElementById('resultIframe').contentWindow.document")
+      .replaceAll('&lt;', '<');
 
     try {
       eval(jsCodeFormatted);

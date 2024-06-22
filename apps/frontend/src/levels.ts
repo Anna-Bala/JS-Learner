@@ -677,6 +677,166 @@ const L11DataTypesAndFunctions: TLevel = {
   ],
 };
 
+const L1StatementsAndLogicalOperations = {
+  challanges: ['Assign the correct results or operators for given statements.'],
+  codeBlocks: ['===', '===', '!==', '!=='],
+  codeBlocksInCorrectOrder: ['!==', '===', '===', '!=='],
+  description: `We often want to determine the equality or difference between variables or values, to do that we use comparison operators. Some of them are already known to you from math.\n\nEqual to (==): Compares two values for equality, after converting both values to a common type.\n\nStrict equal to (===): Compares two values for equality without type conversion.\nSo for this operation to return true both value and type have to be the equal.\n\nNot equal to (!=): Compares two values for inequality, after converting both values to a common type.\n\nStrict not equal to (!==): Compares two values for inequality without type conversion.\n\nIt’s very uncommon to use non-strict operators - equal to (==) and not equal to (!=), because it leads to messy and buggy code.\nFor this level we will focus only on strict operators.\n\nYour challenge is to:`,
+  htmlSourceCode: ``,
+  name: 'Comparison Operators Part 1',
+  resultIFrameSrcDoc: ``,
+  score: 0,
+  scriptSlots: [
+    ['10', '', '1', '//Should return true'],
+    ['5', '', '5', '//Should return true'],
+    ['"3"', '', '3', '//Should return false'],
+    ['true', '', 'false', '//Should return true'],
+  ],
+  challangeQuestions: [
+    {
+      chat: 'Why does using the non strict operators leads to a buggy code?',
+      prompt: `Explain in short and simple why does using the non strict operators (equal or not equal to) leads to a buggy code in JavaScript?`,
+    },
+  ],
+};
+
+const L2StatementsAndLogicalOperations = {
+  challanges: ['Assign the correct results or operators for given statements.'],
+  codeBlocks: ['<=', '<=', '>=', '<'],
+  codeBlocksInCorrectOrder: ['>=', '<', '<=', '<='],
+  description: `In the previous level you have learned the first portion of comparison operators, now it is time for the second half.\n\nGreater than (>): Checks if the value on the left is greater than the value on the right.\n\nGreater than or equal to (>=): Checks if the value on the left is greater than or equal to the value on the right.\n\nLess than (<): Checks if the value on the left is less than the value on the right.\n\nLess than or equal to (<=): Checks if the value on the left is less than or equal to the value on the right.\n\nYour challenge is to:`,
+  htmlSourceCode: ``,
+  name: 'Comparison Operators Part 2',
+  resultIFrameSrcDoc: ``,
+  score: 0,
+  scriptSlots: [
+    ['1', '', '0', '//Should return true'],
+    ['-10', '', '0', '//Should return true'],
+    ['1', '', '0', '//Should return false'],
+    ['0', '', '0', '//Should return true'],
+  ],
+  challangeQuestions: [
+    {
+      chat: '',
+      prompt: '',
+    },
+  ],
+};
+
+const L3StatementsAndLogicalOperations: TLevel = {
+  challanges: ['Assign the correct results or operators for given statements.'],
+  codeBlocks: ['//Should return true', '||', '&&', '//Should return false'],
+  codeBlocksInCorrectOrder: ['&&', '||', '//Should return false', '//Should return true'],
+  description: `Logical operators are used to combine or invert boolean values.\n\nLogical AND (&&): Returns true if both operands are true; otherwise, returns false.\n\nLogical OR (||): Returns true if at least one of the operands is true; otherwise, returns false.\n\nLogical NOT (!): Returns the opposite boolean value of its operand.\n\nYour challenge is to:`,
+  htmlSourceCode: ``,
+  name: 'Logical Operators',
+  resultIFrameSrcDoc: ``,
+  score: 0,
+  scriptSlots: [
+    ['true', '', 'true', '//Should return true'],
+    ['false', '', 'false', '//Should return false'],
+    ['!', 'true', ''],
+    ['true', '||', 'false', ''],
+  ],
+  challangeQuestions: [
+    {
+      chat: 'Can I use logical operator on different data type besides the Boolean?',
+      prompt:
+        'Explain in simple and short way how logical operators can be used on strings and numbers in JavaScript. Skip explaining the operators.',
+    },
+  ],
+};
+
+const L4StatementsAndLogicalOperations: TLevel = {
+  challanges: [
+    'Complete first if statement and pass a proper condition for it so that the lightbulb image changes to “lightbulb-on.png”.',
+    'Complete second if…else if statement so that the text in <p> says “Variable x is greater than y”',
+  ],
+  codeBlocks: ['( !isLightbulbOn )', '( isLightbulbOn )', '( x < y )', '( x > y )', 'else'],
+  codeBlocksInCorrectOrder: ['( !isLightbulbOn )', '( x < y )', 'else'],
+  description: `In JavaScript, if, else if, and else statements are used to execute code based on certain conditions.\nif: Executes a block of code if a condition is true.\nelse if: Tests a new condition if the previous condition(s) are false.\nelse: Executes a block of code if none of the previous conditions are true.\n\nYour challenge is to:`,
+  htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <img alt="“lightbulb" src="/lightbulb-off.png" id="lightbulbImage" width="100"></img>\n   <p id="compareResult">missing result</p>\n   <span id="info"></span>\n </body>\n</html>`,
+  name: 'If, Else and Else if Statements',
+  resultIFrameSrcDoc: `<img alt="“lightbulb" src="/lightbulb-off.png" id="lightbulbImage" width="100"></img>\n   <p id="compareResult">missing result</p>\n   <span id="info"></span>\n`,
+  score: 0,
+  scriptSlots: [
+    ['const ', 'x', '=', '12', ';'],
+    ['const ', 'y', '=', '6', ';'],
+    ['const ', 'isLightbulbOn', '=', 'false', ';'],
+    ['if', '', '{ document.getElementById("lightbulbImage").src = "/lightbulb-on.png" }'],
+    [
+      'if',
+      '',
+      '{ document.getElementById("compareResult").innerHTML = "Variable x is smaller than y" }',
+      '',
+      '{ document.getElementById("compareResult").innerHTML = "Variable x is greater than y" }',
+    ],
+  ],
+  challangeQuestions: [
+    {
+      chat: '',
+      prompt: '',
+    },
+  ],
+};
+
+const L5StatementsAndLogicalOperations: TLevel = {
+  challanges: ['Complete switch statement so that alert says “Wednesday".'],
+  codeBlocks: ['case 2:', 'case 3:', 'break;', 'result = "Monday";', 'result = "Wednesday";'],
+  codeBlocksInCorrectOrder: ['result = "Monday";', 'case 2:', 'break;', 'case 3:', 'result = "Wednesday";'],
+  description: `In JavaScript, the switch statement is used to execute one block of code among many based on the value of an expression. It's a more readable alternative to multiple if...else if statements when you need to compare the same variable to different values.\n\nThe switch statement evaluates the expression once and compares its result with the values of each case. If a matching case is found, the code associated with that case is executed. The break statement is used to terminate the switch block, preventing the execution of subsequent cases.\n\nYour challenge is to:`,
+  htmlSourceCode: ``,
+  name: 'Switch Statement',
+  resultIFrameSrcDoc: ``,
+  score: 0,
+  scriptSlots: [
+    ['const dayOfWeek', '=', '3', ';'],
+    ['let result', '=', '""', ';'],
+    ['switch(dayOfWeek)', '{'],
+    ['case 1:', '', 'break;'],
+    ['', 'result = "Tuesday";', ''],
+    ['', '', 'break;'],
+    ['}'],
+    ['window.alert(result)', ';'],
+  ],
+  challangeQuestions: [
+    {
+      chat: 'What happens when multiple cases match a case value?',
+      prompt:
+        'Explain in simple and short way what happens when multiple cases match a case value in switch statement in JavaScript.',
+    },
+  ],
+};
+
+const L6StatementsAndLogicalOperations: TLevel = {
+  challanges: [
+    'Complete first while loop in that way so all elements from the fruits array are gone and the array is empty.',
+    'Complete the second while loop so that the numbers array is filled with numbers from 1 to 100.',
+  ],
+  codeBlocks: ['while', '0', '1', 'i++;', '(i <= fruits.length + 1)', 'fruits.pop();'],
+  codeBlocksInCorrectOrder: ['0', '(i <= fruits.length + 1)', 'fruits.pop();', '1', 'while', 'i++;'],
+  description: `In JavaScript, a while loop is used to repeatedly execute a block of code as long as a specified condition is true. It’s particularly useful when the number of iterations is not known beforehand. Here’s how while loop works in steps:\n\nCondition Check: Before each iteration, the while loop evaluates the condition.\nCode Execution: If the condition evaluates to true, the code inside the loop is executed.\nRepeat: After executing the code block, the loop goes back to step 1 and re-evaluates the condition.\nTermination: The loop continues until the condition evaluates to false.\n\nYour challenge is to:`,
+  htmlSourceCode: ``,
+  name: 'While Loop',
+  resultIFrameSrcDoc: ``,
+  score: 0,
+  scriptSlots: [
+    ['const fruits', '=', '["apple", "orange", "cherry"]', ';'],
+    ['const numbers', '=', '[]', ';'],
+    ['let i', '=', '', ';'],
+    ['while', '', '{', '', 'i++;', '}', ';'],
+    ['i', '=', '', ';'],
+    ['', '(i <= 100)', '{', 'numbers.push(i);', '', '}', ';'],
+  ],
+  challangeQuestions: [
+    {
+      chat: 'Why do we have to increase the value of the i variable?',
+      prompt:
+        'Explain in simple and short way why is it important to rebember about increasing the value of the variable used in the while condition in JavaScript.',
+    },
+  ],
+};
+
 const fundamentals: TLevel[] = [L1Fundamentals, L2Fundamentals, L3Fundamentals, L4Fundamentals, L5Fundamentals];
 const dataTypesAndFunctions: TLevel[] = [
   L1DataTypesAndFunctions,
@@ -691,7 +851,15 @@ const dataTypesAndFunctions: TLevel[] = [
   L10DataTypesAndFunctions,
   L11DataTypesAndFunctions,
 ];
+const statementsAndLogicalOperations: TLevel[] = [
+  L1StatementsAndLogicalOperations,
+  L2StatementsAndLogicalOperations,
+  L3StatementsAndLogicalOperations,
+  L4StatementsAndLogicalOperations,
+  L5StatementsAndLogicalOperations,
+  L6StatementsAndLogicalOperations,
+];
 
-const levels: TLevel[] = [...fundamentals, ...dataTypesAndFunctions];
+const levels: TLevel[] = [...fundamentals, ...dataTypesAndFunctions, ...statementsAndLogicalOperations];
 
 export default levels;
