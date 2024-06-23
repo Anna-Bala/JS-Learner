@@ -7,33 +7,37 @@ import Typography from '../../components/Typography';
 import colors from '../../styling/_colors.module.scss';
 import './index.scss';
 
-const renderListSection = (sectionName: string, levels: TLevel[], additionalInfo?: string) => (
-  <div className="level-list__section-wrapper">
-    <Typography color="primary-600" variant="heading3">
-      {sectionName}
-    </Typography>
-    <Typography color="primary-600" variant="subtitle1">
-      {additionalInfo}
-    </Typography>
-    <div className="level-list__levels-wrapper" id={`${sectionName}-container`}>
-      <IconButton
-        className="level-list__button"
-        icon={<PlayIcon fill={colors['color-primary-300']} size={24} />}
-        onClick={() => (document.getElementById(`${sectionName}-container`).scrollLeft -= 100)}
-      />
-      {levels.map((level: TLevel) => (
-        <LevelOption level={level} key={level.name} />
-      ))}
-      <IconButton
-        className="level-list__button -right"
-        icon={<PlayIcon fill={colors['color-primary-300']} size={24} />}
-        onClick={() => (document.getElementById(`${sectionName}-container`).scrollLeft += 100)}
-      />
-    </div>
-  </div>
-);
+type TProps = {
+  setLevel: React.Dispatch<React.SetStateAction<TLevel>>;
+};
 
-const LevelsList = () => {
+const LevelsList = ({ setLevel }: TProps) => {
+  const renderListSection = (sectionName: string, levels: TLevel[], additionalInfo?: string) => (
+    <div className="level-list__section-wrapper">
+      <Typography color="primary-600" variant="heading3">
+        {sectionName}
+      </Typography>
+      <Typography color="primary-600" variant="subtitle1">
+        {additionalInfo}
+      </Typography>
+      <div className="level-list__levels-wrapper" id={`${sectionName}-container`}>
+        <IconButton
+          className="level-list__button"
+          icon={<PlayIcon fill={colors['color-primary-300']} size={24} />}
+          onClick={() => (document.getElementById(`${sectionName}-container`).scrollLeft -= 100)}
+        />
+        {levels.map((level: TLevel) => (
+          <LevelOption level={level} key={level.name} setLevel={setLevel} />
+        ))}
+        <IconButton
+          className="level-list__button -right"
+          icon={<PlayIcon fill={colors['color-primary-300']} size={24} />}
+          onClick={() => (document.getElementById(`${sectionName}-container`).scrollLeft += 100)}
+        />
+      </div>
+    </div>
+  );
+
   return (
     <section className="level-list">
       <header className="level-list__header">
