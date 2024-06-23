@@ -1,3 +1,4 @@
+export { default as CartIcon } from './Cart';
 export { default as CloseIcon } from './Close';
 export { default as HomeIcon } from './Home';
 export { default as InfoIcon } from './Info';
