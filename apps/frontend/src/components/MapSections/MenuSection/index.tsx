@@ -3,6 +3,7 @@ import Typography from '../../Typography';
 import { convertLevelScore } from '../../utils';
 import { HomeIcon, InfoIcon, StarEmptyIcon, StarFilledIcon } from '../../Icons';
 import { IconButton } from '../../Buttons';
+import Link from '../../Routing/Link';
 import type { TLevel } from '../../../levels';
 
 import colors from '../../../styling/_colors.module.scss';
@@ -28,7 +29,9 @@ const MenuSection = ({ handleInfoIconButtonClick, level }: TProps) => (
       </div>
     </div>
     <div className="menu-section__actions">
-      <IconButton icon={<HomeIcon fill={iconsColor} size={48} />} onClick={() => {}} />
+      <Link href="/">
+        <IconButton icon={<HomeIcon fill={iconsColor} size={48} />} onClick={() => {}} />
+      </Link>
       <IconButton icon={<InfoIcon fill={iconsColor} size={48} />} onClick={handleInfoIconButtonClick} />
     </div>
   </div>
