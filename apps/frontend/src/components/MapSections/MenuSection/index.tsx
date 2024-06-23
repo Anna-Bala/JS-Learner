@@ -1,5 +1,6 @@
 import Typography from '../../Typography';
 
+import { convertLevelScore } from '../../utils';
 import { HomeIcon, InfoIcon, StarEmptyIcon, StarFilledIcon } from '../../Icons';
 import { IconButton } from '../../Buttons';
 import type { TLevel } from '../../../levels';
@@ -10,18 +11,6 @@ import './index.scss';
 type TProps = {
   handleInfoIconButtonClick: () => void;
   level: TLevel;
-};
-
-const convertLevelScore = (levelScore: number) => {
-  const result = [0, 0, 0];
-
-  for (let i = 0; i < 3; i++) {
-    if (levelScore - (i + 1) > -1) {
-      result[i] = 1;
-    }
-  }
-
-  return result;
 };
 
 const iconsColor = colors['color-primary-400'];
