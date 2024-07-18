@@ -24,6 +24,7 @@ const LevelsList = ({ setLevel }: TProps) => {
         <IconButton
           className="level-list__button"
           icon={<PlayIcon fill={colors['color-primary-300']} size={24} />}
+          //@ts-expect-error
           onClick={() => (document.getElementById(`${sectionName}-container`).scrollLeft -= 100)}
         />
         {levels.map((level: TLevel) => (
@@ -32,6 +33,7 @@ const LevelsList = ({ setLevel }: TProps) => {
         <IconButton
           className="level-list__button -right"
           icon={<PlayIcon fill={colors['color-primary-300']} size={24} />}
+          //@ts-expect-error
           onClick={() => (document.getElementById(`${sectionName}-container`).scrollLeft += 100)}
         />
       </div>
