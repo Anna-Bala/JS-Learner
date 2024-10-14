@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import CodeBlock from '../../CodeBlock';
+import DroppableCodeBlock from '../../DroppableCodeBlock';
 import { evaluateChallange } from './utils';
 import './index.scss';
 
@@ -53,8 +53,9 @@ const ScriptSection = ({ codeBlocksInCorrectOrder, scriptSlots }: TProps) => {
               const isStaticBlock = slotContent !== '';
 
               return (
-                <CodeBlock
+                <DroppableCodeBlock
                   className={isStaticBlock ? 'script-block -static' : 'script-block'}
+                  id={`${rowIndex}-${index}-${slotContent}`}
                   info={{ content: slotContent, id: index }}
                   key={`${rowIndex}-${index}-${slotContent}`}
                   variant={isStaticBlock ? 'static' : 'slot'}

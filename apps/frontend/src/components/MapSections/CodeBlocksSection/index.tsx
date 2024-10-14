@@ -1,6 +1,6 @@
 import './index.scss';
 
-import CodeBlock from '../../CodeBlock';
+import DraggableCodeBlock from '../../DraggableCodeBlock';
 
 type TProps = {
   codeBlocks: string[];
@@ -9,7 +9,7 @@ type TProps = {
 const CodeBlocksSection = ({ codeBlocks }: TProps) => (
   <div className="code-blocks-section">
     {codeBlocks.map((content, index) => (
-      <CodeBlock key={index} info={{ id: index, content }} />
+      <DraggableCodeBlock key={index} info={{ id: index, content }} />
     ))}
   </div>
 );
