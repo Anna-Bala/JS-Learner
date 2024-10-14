@@ -59,7 +59,6 @@ const ScriptSection = ({ codeBlocksInCorrectOrder, scriptSlots }: TProps) => {
                   key={`${rowIndex}-${index}-${slotContent}`}
                   variant={isStaticBlock ? 'static' : 'slot'}
                 />
-                // <div className={slotContent !== '' ? 'script-block -static' : 'script-block'}>{slotContent}</div>
               );
             })}
           </div>

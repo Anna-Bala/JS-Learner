@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import { CodeBlocksSection, MenuSection, ResultSection, ScriptSection, TaskSection } from '../MapSections';
 import { HTMLModal, InstructionsModal } from '../Modals';
-import Character from '../Character';
 import ChatAI from '../ChatAI';
 import DebuggingTools from '../DebuggingTools';
 import type { TLevel } from '../../levels';
@@ -37,7 +36,6 @@ const Map = ({ level }: TProps) => {
   return (
     <div className="map-wrapper">
       <div className="map-content">
-        <Character />
         <div style={{ display: 'flex', flexDirection: 'row', gap: '24px' }}>
           <TaskSection challanges={level.challanges} description={level.description} />
           <MenuSection handleInfoIconButtonClick={toggleIsInstructionsModalOpen} level={level} />
