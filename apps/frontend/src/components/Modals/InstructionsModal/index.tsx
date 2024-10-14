@@ -18,26 +18,6 @@ const InstructionsModal = ({ isOpen, onPrimaryAction }: TProps) => (
   >
     <div className="info-row">
       <Typography color="neutral-black" variant="body1">
-        Use
-      </Typography>
-      <img alt="Arrows" className="arrows-image" src="/arrows.png" />
-      <Typography color="neutral-black" variant="body1">
-        to move your character.
-      </Typography>
-    </div>
-
-    <div className="info-row">
-      <Typography color="neutral-black" variant="body1">
-        Press
-      </Typography>
-      <img alt="Spacebar" src="/spacebar.png" />
-      <Typography color="neutral-black" variant="body1">
-        to pick up or drop code blocks.
-      </Typography>
-    </div>
-
-    <div className="info-row">
-      <Typography color="neutral-black" variant="body1">
         Press
       </Typography>
       <img alt="H key" src="/H-key.png" />
