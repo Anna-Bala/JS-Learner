@@ -263,8 +263,8 @@ const L3DataTypesAndFunctions: TLevel = {
     'Declare a function that will change text inside <span> element from “Repetitive code is not a good practice” to “Functions are awesome!” and name it modifyText.',
     'Invoke only the modifyText function.',
   ],
-  codeBlocks: ['modifyText()', '{', '}', 'function ', 'window.alert("My first dupa!")', 'runAlert()'],
-  codeBlocksInCorrectOrder: ['runAlert()', 'window.alert("My first dupa!")', 'function ', '{', '}', 'modifyText()'],
+  codeBlocks: ['modifyText()', '{', '}', 'function ', 'window.alert("My first function!")', 'runAlert()'],
+  codeBlocksInCorrectOrder: ['runAlert()', 'window.alert("My first function!")', 'function ', '{', '}', 'modifyText()'],
   description: `Functions are like wrappers where you can put any code you want to. Why you might ask? 
 Imagine that you have a piece of code that does the same thing in your program, without function you would have to copy and paste the same lines of code around your program. Not only does that make your code messy and hard to maintain but it’s an easy way to allow some bugs to slip into your algorithm.\n\nThat’s where functions come in handy, you move your redundant piece of code into a function, give it a good and understandable name and then call (invoke) it wherever you need it in your code.\n\nWhen it comes to syntax it is pretty straightforward, a JavaScript function is defined with the function keyword, followed by a name, followed by parentheses (). The code to be executed, by the function, is placed inside curly brackets: {}\n\nTo run an already declared function you simply have to write its name followed by the () operator which will invoke it.\n\nYour challenge is to:`,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <span id="message">Repetitive code is not a good practice</span>\n </body>\n</html>`,

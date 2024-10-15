@@ -49,7 +49,7 @@ const Map = ({ level }: TProps) => {
     if (over) {
       const sourceId = active.id as number;
       const sourceContent = level.codeBlocks[sourceId - 1];
-      const destination = over.id;
+      const destinationId = over.id;
 
       setAllDroppedCodeBlocksInScriptSlots(prevState => {
         const updatedState = Object.keys(prevState || {}).reduce((acc, droppableId) => {
@@ -65,7 +65,7 @@ const Map = ({ level }: TProps) => {
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-expect-error
-        updatedState[destination as keyof typeof updatedState] = {
+        updatedState[destinationId as keyof typeof updatedState] = {
           id: sourceId,
           content: sourceContent,
         };

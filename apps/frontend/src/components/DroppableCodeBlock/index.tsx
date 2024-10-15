@@ -1,4 +1,5 @@
 import { useDroppable } from '@dnd-kit/core';
+import colors from '../../styling/_colors.module.scss';
 import './index.scss';
 
 type TProps = {
@@ -18,9 +19,12 @@ const DroppableCodeBlock = ({ className = '', disabled, id, info, variant = 'def
     disabled,
   });
 
-  const style = {
-    backgroundColor: isOver ? 'red' : undefined,
-  };
+  const style = isOver
+    ? {
+        backgroundColor: isOver ? colors['color-green-300'] : undefined,
+        borderColor: isOver ? colors['color-green-500'] : undefined,
+      }
+    : undefined;
 
   return (
     <div

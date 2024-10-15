@@ -1,3 +1,4 @@
+import { useDroppable } from '@dnd-kit/core';
 import './index.scss';
 
 import DraggableCodeBlock from '../../DraggableCodeBlock';
@@ -10,14 +11,20 @@ type TProps = {
 };
 
 const CodeBlocksSection = ({ allDroppedCodeBlocksInScriptSlots, codeBlocks }: TProps) => {
-  const allDroppedCodeBlocksInScriptSlotsKeys = Object.keys(allDroppedCodeBlocksInScriptSlots || {});
+  const { setNodeRef } = useDroppable({
+    id: 'code-blocks-section',
+  });
+
+  const allDroppedCodeBlocksInScriptSlotsKeys = Object.keys(allDroppedCodeBlocksInScriptSlots || {}).filter(
+    key => key !== 'code-blocks-section',
+  );
   const allDroppedCodeBlocksInScriptSlotIds =
     allDroppedCodeBlocksInScriptSlots !== null
-      ? allDroppedCodeBlocksInScriptSlotsKeys.map(key => allDroppedCodeBlocksInScriptSlots?.[key]?.id - 1)
+      ? allDroppedCodeBlocksInScriptSlotsKeys.map(key => (allDroppedCodeBlocksInScriptSlots?.[key]?.id || 0) - 1)
       : [];
 
   return (
-    <div className="code-blocks-section">
+    <div className="code-blocks-section" ref={setNodeRef}>
       {codeBlocks.map((content, index) =>
         allDroppedCodeBlocksInScriptSlotIds.includes(index) ? null : (
           <DraggableCodeBlock key={index} info={{ id: index + 1, content }} />
