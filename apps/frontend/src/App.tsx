@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { DndContext } from '@dnd-kit/core';
 
 import levels from './levels';
 import LevelsList from './containers/LevelsList';
@@ -15,9 +14,7 @@ const App = () => {
         <LevelsList setLevel={setLevel} />
       </Route>
       <Route path="/level">
-        <DndContext>
-          <Map level={level} />
-        </DndContext>
+        <Map level={level} />
       </Route>
     </>
   );

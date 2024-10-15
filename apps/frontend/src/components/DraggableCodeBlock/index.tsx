@@ -12,7 +12,7 @@ type TProps = {
 
 const DraggableCodeBlock = ({ className = '', info, variant = 'default' }: TProps) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: info.id + 1,
+    id: info.id,
   });
 
   const style = transform

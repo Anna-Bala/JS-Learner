@@ -3,6 +3,7 @@ import './index.scss';
 
 type TProps = {
   className?: string;
+  disabled: boolean;
   id: string;
   variant?: 'default' | 'error' | 'static' | 'slot';
   info?: {
@@ -11,9 +12,10 @@ type TProps = {
   };
 };
 
-const DroppableCodeBlock = ({ className = '', id, info, variant = 'default' }: TProps) => {
+const DroppableCodeBlock = ({ className = '', disabled, id, info, variant = 'default' }: TProps) => {
   const { isOver, setNodeRef } = useDroppable({
     id,
+    disabled,
   });
 
   const style = {
