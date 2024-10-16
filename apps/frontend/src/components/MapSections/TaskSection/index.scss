@@ -10,7 +10,11 @@
   display: flex;
   flex-direction: column;
   margin-bottom: $xxxl;
-  padding: $xl $xxxxl;
+  padding: $xl $xxxxl 0 $xxxxl;
   white-space: break-spaces;
   width: 70%;
+
+  &__button {
+    margin-top: auto;
+  }
 }
