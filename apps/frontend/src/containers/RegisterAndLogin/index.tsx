@@ -11,7 +11,7 @@ type TProps = {
 };
 
 const RegisterAndLogin = ({ isLogin = false }: TProps) => {
-  const [nickname, setNickname] = useState('');
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -29,21 +29,21 @@ const RegisterAndLogin = ({ isLogin = false }: TProps) => {
           </Typography>
 
           <div className="login__input-wrapper">
-            <Typography color="orange-600" variant="label" htmlFor="nickname">
-              Nickname
+            <Typography color="orange-600" variant="label" htmlFor="userName">
+              Username
             </Typography>
-            <TextInput color="orange" name="nickname" onChange={setNickname} value={nickname} />
+            <TextInput color="orange" name="userName" onChange={setUserName} value={userName} />
           </div>
 
           <div className="login__input-wrapper">
-            <Typography color="orange-600" variant="label" htmlFor="nickname">
+            <Typography color="orange-600" variant="label" htmlFor="password">
               Password
             </Typography>
             <TextInput color="orange" name="password" onChange={setPassword} value={password} isPasswordInput />
           </div>
           {!isLogin ? (
             <div className="login__input-wrapper">
-              <Typography color="orange-600" variant="label" htmlFor="nickname">
+              <Typography color="orange-600" variant="label" htmlFor="confirmPassword">
                 Confirm Password
               </Typography>
               <TextInput
