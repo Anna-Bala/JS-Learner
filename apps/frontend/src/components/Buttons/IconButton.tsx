@@ -9,7 +9,7 @@ type TProps = {
 };
 
 const IconButton = ({ className = '', icon, onClick }: TProps) => (
-  <button className={`icon-button ${className}`} onClick={onClick}>
+  <button className={`icon-button ${className}`} onClick={onClick} type="button">
     {icon}
   </button>
 );

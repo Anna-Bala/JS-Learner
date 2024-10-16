@@ -39,14 +39,20 @@ const RegisterAndLogin = ({ isLogin = false }: TProps) => {
             <Typography color="orange-600" variant="label" htmlFor="nickname">
               Password
             </Typography>
-            <TextInput color="orange" name="password" onChange={setPassword} value={password} />
+            <TextInput color="orange" name="password" onChange={setPassword} value={password} isPasswordInput />
           </div>
           {!isLogin ? (
             <div className="login__input-wrapper">
               <Typography color="orange-600" variant="label" htmlFor="nickname">
                 Confirm Password
               </Typography>
-              <TextInput color="orange" name="confirmPassword" onChange={setConfirmPassword} value={confirmPassword} />
+              <TextInput
+                color="orange"
+                name="confirmPassword"
+                onChange={setConfirmPassword}
+                value={confirmPassword}
+                isPasswordInput
+              />
             </div>
           ) : null}
 

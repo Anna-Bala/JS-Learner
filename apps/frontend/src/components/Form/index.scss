@@ -28,6 +28,19 @@ $mappedBorderFocusColorsList: (
   border: 0.7px solid black;
   outline: none;
   padding: $xs $sm;
+  width: 100%;
+
+  &__wrapper {
+    position: relative;
+  }
+
+  &__icon {
+    position: absolute;
+    z-index: 10;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
 @each $color in $colors {
