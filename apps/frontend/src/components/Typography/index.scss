@@ -223,4 +223,8 @@
   &__body2 {
     @include body-2-medium;
   }
+
+  &__label {
+    @include subtitle-2;
+  }
 }

@@ -10,6 +10,7 @@ const variantsMapping = {
   subtitle2: 'h6',
   body1: 'p',
   body2: 'p',
+  label: 'label',
 };
 
 type TProps = {
@@ -63,7 +64,8 @@ type TProps = {
     | 'red-300'
     | 'red-200'
     | 'red-100';
-  variant: 'heading1' | 'heading2' | 'heading3' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2';
+  htmlFor?: string;
+  variant: 'heading1' | 'heading2' | 'heading3' | 'subtitle1' | 'subtitle2' | 'body1' | 'body2' | 'label';
 };
 
 const Typography = ({ children, className = '', color, variant, ...props }: TProps) => {

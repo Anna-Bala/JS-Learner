@@ -26,7 +26,7 @@ const TextInput = ({ className = '', color, multiline, name, onChange, value }: 
       rows={multiline}
     ></textarea>
   ) : (
-    <input className={`text-input text-input-color__${color} ${className}`} {...sharedProps}></input>
+    <input className={`text-input text-input-color__${color} ${className}`} {...sharedProps} id={name}></input>
   );
 };
 

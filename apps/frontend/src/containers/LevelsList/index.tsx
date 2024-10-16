@@ -1,4 +1,4 @@
-import { CartIcon, PlayIcon } from '../../components/Icons';
+import { PlayIcon } from '../../components/Icons';
 import { IconButton } from '../../components/Buttons';
 import LevelOption from '../../components/LevelOption';
 import levels, { TLevel } from '../../levels';
@@ -48,7 +48,6 @@ const LevelsList = ({ setLevel }: TProps) => {
           <Typography color="primary-600" variant="subtitle1">
             Total points earned: x
           </Typography>
-          <IconButton icon={<CartIcon size={55} fill={colors['color-primary-400']} />} onClick={() => {}} />
         </div>
       </header>
       <main>
