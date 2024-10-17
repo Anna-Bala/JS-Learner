@@ -90,6 +90,7 @@ const Map = ({ level }: TProps) => {
             <CodeBlocksSection
               allDroppedCodeBlocksInScriptSlots={allDroppedCodeBlocksInScriptSlots}
               codeBlocks={level.codeBlocks}
+              codeBlocksInCorrectOrder={level.codeBlocksInCorrectOrder}
             />
             <ScriptSection
               allDroppedCodeBlocksInScriptSlots={allDroppedCodeBlocksInScriptSlots}
