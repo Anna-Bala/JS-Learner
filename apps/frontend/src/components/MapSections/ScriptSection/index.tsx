@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { evaluateChallange } from './utils';
+import { handleRunJSCode } from '../../utils';
+import RunCodeModal from '../../Modals/RunCodeModal';
 import DraggableCodeBlock from '../../DraggableCodeBlock';
 import DroppableCodeBlock from '../../DroppableCodeBlock';
 import './index.scss';
@@ -14,29 +15,14 @@ type TProps = {
 };
 
 const ScriptSection = ({ allDroppedCodeBlocksInScriptSlots, codeBlocksInCorrectOrder, scriptSlots }: TProps) => {
-  const handleJsCodeButtonClick = () => {
-    const allCodeBlocks = document.getElementsByClassName('script-block');
-    const jsCode = Array.from(allCodeBlocks)
-      .map(codeBlock => codeBlock.innerHTML)
-      .join('');
+  const [isRunCodeModalOpen, setIsRunCodeModalOpen] = useState(false);
 
-    const jsCodeFormatted = jsCode
-      .replaceAll('document', "document.getElementById('resultIframe').contentWindow.document")
-      .replaceAll('&lt;', '<');
+  const toggleIsRunCodeModalOpen = () => setIsRunCodeModalOpen(prevState => !prevState);
 
-    try {
-      eval(jsCodeFormatted);
-    } catch {
-      window.alert('WRONG FORMAT!');
-    } finally {
-      const result = evaluateChallange(codeBlocksInCorrectOrder);
-      if (result) window.alert('CORRECT!');
-      else window.alert('INCORRECT :(');
-    }
-  };
+  const runJsCode = () => handleRunJSCode(codeBlocksInCorrectOrder);
 
   const appendKeydownActions = (event: KeyboardEvent) => {
-    if (event.code === 'KeyJ') handleJsCodeButtonClick();
+    if (event.code === 'KeyJ') toggleIsRunCodeModalOpen();
   };
 
   useEffect(() => {
@@ -49,32 +35,35 @@ const ScriptSection = ({ allDroppedCodeBlocksInScriptSlots, codeBlocksInCorrectO
   }, []);
 
   return (
-    <div className="script-section">
-      <div className="slots-wrapper">
-        {scriptSlots.map((codeLine, rowIndex) => (
-          <div className="row-wrapper" key={rowIndex}>
-            {codeLine.map((slotContent, index) => {
-              const scriptBlockId = `${rowIndex}-${index}-${slotContent}`;
-              const isStaticBlock = slotContent !== '';
-              const droppedCodeBlock = allDroppedCodeBlocksInScriptSlots?.[scriptBlockId];
+    <>
+      <div className="script-section">
+        <div className="slots-wrapper">
+          {scriptSlots.map((codeLine, rowIndex) => (
+            <div className="row-wrapper" key={rowIndex}>
+              {codeLine.map((slotContent, index) => {
+                const scriptBlockId = `${rowIndex}-${index}-${slotContent}`;
+                const isStaticBlock = slotContent !== '';
+                const droppedCodeBlock = allDroppedCodeBlocksInScriptSlots?.[scriptBlockId];
 
-              return droppedCodeBlock ? (
-                <DraggableCodeBlock className="script-block" info={droppedCodeBlock} key={scriptBlockId} />
-              ) : (
-                <DroppableCodeBlock
-                  className={isStaticBlock ? 'script-block -static' : 'script-block'}
-                  disabled={isStaticBlock}
-                  id={scriptBlockId}
-                  info={{ content: slotContent, id: index }}
-                  key={scriptBlockId}
-                  variant={isStaticBlock ? 'static' : 'slot'}
-                />
-              );
-            })}
-          </div>
-        ))}
+                return droppedCodeBlock ? (
+                  <DraggableCodeBlock className="script-block" info={droppedCodeBlock} key={scriptBlockId} />
+                ) : (
+                  <DroppableCodeBlock
+                    className={isStaticBlock ? 'script-block -static' : 'script-block'}
+                    disabled={isStaticBlock}
+                    id={scriptBlockId}
+                    info={{ content: slotContent, id: index }}
+                    key={scriptBlockId}
+                    variant={isStaticBlock ? 'static' : 'slot'}
+                  />
+                );
+              })}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+      <RunCodeModal handleClose={toggleIsRunCodeModalOpen} isOpen={isRunCodeModalOpen} onPrimaryAction={runJsCode} />
+    </>
   );
 };
 
