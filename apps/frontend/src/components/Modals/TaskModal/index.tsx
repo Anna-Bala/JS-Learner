@@ -1,6 +1,8 @@
 import ModalWrapper from '../ModalWrapper';
 import Typography from '../../Typography';
 
+import './index.scss';
+
 type TProps = {
   isOpen: boolean;
   levelDescription: string;
@@ -15,7 +17,7 @@ const TaskModal = ({ isOpen, levelDescription, onPrimaryAction }: TProps) => (
     primaryActionText="close"
     title="Level knowledge"
   >
-    <Typography color="neutral-black" variant="body1">
+    <Typography className="task-modal__content" color="neutral-black" variant="body1">
       {levelDescription}
     </Typography>
   </ModalWrapper>
