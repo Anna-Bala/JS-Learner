@@ -1,18 +1,21 @@
+import { Button } from '../../Buttons';
 import './index.scss';
 
 type TProps = {
   challanges: string[];
-  description: string;
+  openTaskModal: () => void;
 };
 
-const TaskSection = ({ challanges, description }: TProps) => (
+const TaskSection = ({ challanges, openTaskModal }: TProps) => (
   <div className="task-section">
-    <p>{description}</p>
     <ul>
       {challanges.map(challange => (
         <li key={challange}>{challange}</li>
       ))}
     </ul>
+    <Button className="task-section__button" color="neutral" onClick={openTaskModal} variant="small">
+      Learn
+    </Button>
   </div>
 );
 

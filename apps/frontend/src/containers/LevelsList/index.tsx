@@ -62,7 +62,7 @@ const LevelsList = ({ setLevel }: TProps) => {
             )}
             {renderListSection(
               'Statements and Logical Operations',
-              levels.dataTypesAndFunctions,
+              levels.statementsAndLogicalOperations,
               'To unlock this section you have to complete at least 6 levels with 2 out of 3 stars',
             )}
           </>

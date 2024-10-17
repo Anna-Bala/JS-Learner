@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 
 import { CodeBlocksSection, MenuSection, ResultSection, ScriptSection, TaskSection } from '../MapSections';
-import { HTMLModal, InstructionsModal } from '../Modals';
+import { HTMLModal, InstructionsModal, TaskModal } from '../Modals';
 import ChatAI from '../ChatAI';
 import DebuggingTools from '../DebuggingTools';
 import type { TLevel } from '../../levels';
@@ -23,15 +23,18 @@ export type TAllDroppedCodeBlocksInScriptSlots = {
 const Map = ({ level }: TProps) => {
   const [isHTMLModalOpen, setIsHTMLModalOpen] = useState(false);
   const [isInstructionsModalOpen, setIsInstructionsModalOpen] = useState(false);
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [allDroppedCodeBlocksInScriptSlots, setAllDroppedCodeBlocksInScriptSlots] =
     useState<TAllDroppedCodeBlocksInScriptSlots>(null);
 
   const toggleIsHTMLModalOpen = () => setIsHTMLModalOpen(prevState => !prevState);
   const toggleIsInstructionsModalOpen = () => setIsInstructionsModalOpen(prevState => !prevState);
+  const toggleIsTaskModalOpen = () => setIsTaskModalOpen(prevState => !prevState);
 
   const appendKeydownActions = (event: KeyboardEvent) => {
     if (event.code === 'KeyH') toggleIsHTMLModalOpen();
-    if (event.code === 'KeyI' || event.code === 'Tab') toggleIsInstructionsModalOpen();
+    if (event.code === 'KeyI') toggleIsInstructionsModalOpen();
+    if (event.code === 'KeyK' || event.code === 'Tab') toggleIsTaskModalOpen();
   };
 
   useEffect(() => {
@@ -80,13 +83,14 @@ const Map = ({ level }: TProps) => {
       <div className="map-wrapper">
         <div className="map-content">
           <div style={{ display: 'flex', flexDirection: 'row', gap: '24px' }}>
-            <TaskSection challanges={level.challanges} description={level.description} />
+            <TaskSection challanges={level.challanges} openTaskModal={toggleIsTaskModalOpen} />
             <MenuSection handleInfoIconButtonClick={toggleIsInstructionsModalOpen} level={level} />
           </div>
           <div style={{ flex: 1, display: 'flex', flexDirection: 'row', gap: '16px' }}>
             <CodeBlocksSection
               allDroppedCodeBlocksInScriptSlots={allDroppedCodeBlocksInScriptSlots}
               codeBlocks={level.codeBlocks}
+              codeBlocksInCorrectOrder={level.codeBlocksInCorrectOrder}
             />
             <ScriptSection
               allDroppedCodeBlocksInScriptSlots={allDroppedCodeBlocksInScriptSlots}
@@ -104,6 +108,11 @@ const Map = ({ level }: TProps) => {
           onPrimaryAction={toggleIsHTMLModalOpen}
         />
         <InstructionsModal isOpen={isInstructionsModalOpen} onPrimaryAction={toggleIsInstructionsModalOpen} />
+        <TaskModal
+          isOpen={isTaskModalOpen}
+          levelDescription={level.description}
+          onPrimaryAction={toggleIsTaskModalOpen}
+        />
       </div>
     </DndContext>
   );
