@@ -19,7 +19,7 @@ import { UsersModule } from './users/users.module';
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.MY_SQL_HOST,
-      port:  27920,
+      port: 27920,
       username: process.env.MY_SQL_USERNAME,
       password: process.env.MY_SQL_PASSWORD,
       database: process.env.MY_SQL_DATABASE,
