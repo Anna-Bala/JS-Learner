@@ -18,6 +18,8 @@ const evaluateChallange = (codeBlocksInCorrectOrder: string[]) => {
 
   scriptBlocksOnMap.forEach((scriptBlock, index) => {
     if (scriptBlock.innerHTML !== codeBlocksInCorrectOrder[index]) result = false;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-expect-error
     if (scriptBlock.innerText === codeBlocksInCorrectOrder[index]) result = true;
   });
 
