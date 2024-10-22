@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Button } from '../../components/Buttons';
+import { USERS_API_URL } from '../../api/constants';
 import Link from '../../components/Routing/Link';
 import TextInput from '../../components/Form/TextInput';
 import Typography from '../../components/Typography';
@@ -11,9 +12,39 @@ type TProps = {
 };
 
 const RegisterAndLogin = ({ isLogin = false }: TProps) => {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('');
+
+  const handleRegister = async (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    setError('');
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    const data = {
+      username: userName,
+      password,
+    };
+
+    const registerResponse = await fetch(USERS_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (registerResponse.status === 201 || registerResponse.status === 200) setIsSuccess(true);
+    else setError('Something went wrong while creating an account, please try again.');
+  };
+
+  const handleLogin = () => {};
 
   return (
     <section className="login">
@@ -21,6 +52,11 @@ const RegisterAndLogin = ({ isLogin = false }: TProps) => {
         <Typography color="orange-600" variant="heading1">
           JavaScript Learner
         </Typography>
+        {isSuccess ? (
+          <Typography color="orange-600" variant="heading3">
+            Registration complete, please go to the login page
+          </Typography>
+        ) : null}
       </header>
       <main>
         <form className="login__form">
@@ -56,7 +92,18 @@ const RegisterAndLogin = ({ isLogin = false }: TProps) => {
             </div>
           ) : null}
 
-          <Button className="login__form-button" color="orange" variant="small" onClick={() => {}}>
+          {error ? (
+            <Typography className="login__error" color="red-400" variant="body1">
+              {error}
+            </Typography>
+          ) : null}
+
+          <Button
+            className="login__form-button"
+            color="orange"
+            onClick={isLogin ? handleLogin : handleRegister}
+            variant="small"
+          >
             {isLogin ? 'Login' : 'Register'}
           </Button>
         </form>
