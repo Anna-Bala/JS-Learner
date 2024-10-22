@@ -21,8 +21,12 @@ export class UsersController {
   }
 
   @Post()
-  createUser(@Body() createUserDto: CreateUser) {
-    this.userService.createUser(createUserDto); //todo - return without password
+  async createUser(@Body() createUserDto: CreateUser) {
+    const result = await this.userService.createUser(createUserDto);
+
+    delete result.password;
+
+    return result;
   }
 
   @Delete(':id')
