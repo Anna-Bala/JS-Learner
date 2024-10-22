@@ -1,5 +1,7 @@
 export { default as CartIcon } from './Cart';
 export { default as CloseIcon } from './Close';
+export { default as EyeClosedIcon } from './EyeClosed';
+export { default as EyeOpenIcon } from './EyeOpen';
 export { default as HomeIcon } from './Home';
 export { default as InfoIcon } from './Info';
 export { default as LockerIcon } from './Locker';
