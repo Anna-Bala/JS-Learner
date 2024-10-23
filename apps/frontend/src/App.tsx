@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { checkAuthentication } from './api/utils';
 import levels from './levels';
 import LevelsList from './containers/LevelsList';
 import Map from './components/Map';
@@ -8,6 +9,10 @@ import Route from './components/Routing/Route';
 
 const App = () => {
   const [level, setLevel] = useState(levels.fundamentals[0]);
+
+  useEffect(() => {
+    checkAuthentication();
+  }, []);
 
   return (
     <>

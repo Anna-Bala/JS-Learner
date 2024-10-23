@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Button } from '../../components/Buttons';
-import { USERS_API_URL } from '../../api/constants';
+import { LOGIN_API_URL, USERS_API_URL } from '../../api/constants';
 import Link from '../../components/Routing/Link';
 import TextInput from '../../components/Form/TextInput';
 import Typography from '../../components/Typography';
@@ -44,7 +44,34 @@ const RegisterAndLogin = ({ isLogin = false }: TProps) => {
     else setError('Something went wrong while creating an account, please try again.');
   };
 
-  const handleLogin = () => {};
+  const handleLogin = async (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    setError('');
+
+    const data = {
+      user: {
+        username: userName,
+        password,
+      },
+    };
+
+    const loginResponse = await fetch(LOGIN_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+      credentials: 'include',
+    });
+
+    if (loginResponse.status !== 201 && loginResponse.status !== 200)
+      setError('Your username or password is incorrect, please try again.');
+    else {
+      window.history.pushState({}, '', '/');
+      const navEvent = new PopStateEvent('popstate');
+      window.dispatchEvent(navEvent);
+    }
+  };
 
   return (
     <section className="login">
