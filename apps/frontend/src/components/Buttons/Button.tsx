@@ -8,14 +8,24 @@ type TProps = {
   color: 'neutral' | 'green' | 'primary' | 'orange' | 'red';
   disabled?: boolean;
   onClick: () => void;
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
   variant?: 'small' | 'medium' | 'large';
 };
 
-const Button = ({ children, className = '', color, disabled = false, onClick, variant = 'medium' }: TProps) => (
+const Button = ({
+  children,
+  className = '',
+  color,
+  disabled = false,
+  onClick,
+  type = 'button',
+  variant = 'medium',
+}: TProps) => (
   <button
     className={`button button-color__${color} button__${variant} ${className}`}
     disabled={disabled}
     onClick={onClick}
+    type={type}
   >
     <Typography color="neutral-white" variant="body2">
       {children}

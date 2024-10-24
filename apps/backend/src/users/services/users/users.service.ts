@@ -16,6 +16,10 @@ export class UsersService {
     return this.userRepository.find();
   }
 
+  fetchUserById(id: number) {
+    return this.userRepository.findOne({ where: { id } });
+  }
+
   async createUser(userDetails: CreateUserParams) {
     const { password, ...user } = userDetails;
 

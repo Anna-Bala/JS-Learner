@@ -15,6 +15,10 @@
     display: none;
   }
 
+  &__error {
+    margin-top: $md;
+  }
+
   &__form {
     align-items: center;
     background-color: $color-orange-100;
@@ -33,7 +37,10 @@
 
   &__header {
     align-items: baseline;
+    align-items: center;
     display: flex;
+    flex-direction: column;
+    gap: $md;
     justify-content: center;
     margin-top: $xxxxl;
   }
