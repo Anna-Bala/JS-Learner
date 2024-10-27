@@ -13,6 +13,7 @@ import { User } from './typeorm/entities/User';
 import { UserLevel } from './typeorm/entities/UserLevel';
 import { UserLevelModule } from './user-level/user-level.module';
 import { UsersModule } from './users/users.module';
+import { LevelsModule } from './levels/levels.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     SeedModule,
     UserLevelModule,
+    LevelsModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.MY_SQL_HOST,
