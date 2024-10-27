@@ -77,7 +77,7 @@ const RegisterAndLogin = ({ isLogin = false }: TProps) => {
     <section className="login">
       <header className="login__header">
         <Typography color="orange-600" variant="heading1">
-          JavaScript Learner
+          Drag&Code
         </Typography>
         {isSuccess ? (
           <Typography color="orange-600" variant="heading3">

@@ -44,7 +44,7 @@ const LevelsList = ({ setLevel }: TProps) => {
     <section className="level-list">
       <header className="level-list__header">
         <Typography color="primary-600" variant="heading1">
-          JavaScript Learner
+          Drag&Code
         </Typography>
         <div className="level-list__header-wrapper">
           <Typography color="primary-600" variant="subtitle1">
