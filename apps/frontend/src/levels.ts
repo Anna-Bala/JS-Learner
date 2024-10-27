@@ -11,7 +11,6 @@ export type TLevel = {
   htmlSourceCode: string;
   name: string;
   resultIFrameSrcDoc: string;
-  score: number;
   scriptSlots: string[][];
   challangeQuestions: TQuestion[];
 };
@@ -50,7 +49,6 @@ const L1Fundamentals: TLevel = {
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <span id="span-element">Change my text</span>\n   <p id="paragraph-element">Change my font size</p>\n   <img alt="Example image" id="image-element"></img>\n </body>\n</html>`,
   name: 'Finding elements by the ID',
   resultIFrameSrcDoc: `<span id="span-element">Change my text</span><p id="paragraph-element">Change my font size</p><img alt="Example image" id="image-element"></img>`,
-  score: 2,
   scriptSlots: [
     ['document.', '', '.innerHTML = ', '', ';'],
     ['document.', '', '', '', '=', '', ';'],
@@ -98,7 +96,6 @@ const L2Fundamentals: TLevel = {
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <p id="text">I’m a text inside the HTML content</p>\n </body>\n</html>`,
   name: 'Writing Output',
   resultIFrameSrcDoc: `<p id="text">I’m a text inside the HTML content</p>`,
-  score: 0,
   scriptSlots: [
     ['', 'getElementById("text")', '.innerHTML = ', '', ';'],
     ['window', '', '', ';'],
@@ -132,7 +129,6 @@ const L3Fundamentals: TLevel = {
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <p id="paragraph">I’m a text inside the HTML content</p>\n </body>\n</html>`,
   name: 'Comments',
   resultIFrameSrcDoc: `<p id="paragraph">Comments provide extra context</p>`,
-  score: 0,
   scriptSlots: [
     ['document.', 'getElementById("paragraph")', '.innerHTML = "Comments are great"', ';', ''],
     ['', 'When you want to provide some extra content about your code you can use multiline comments', ''],
@@ -153,7 +149,6 @@ const L4Fundamentals: TLevel = {
   htmlSourceCode: ``,
   name: 'Variables',
   resultIFrameSrcDoc: ``,
-  score: 0,
   scriptSlots: [
     ['', 'x', '', '5', ',', '', '=', '', ';'],
     ['', '', '=', ' “JavaScript became much safer in 2015”', ';'],
@@ -182,7 +177,6 @@ const L5Fundamentals: TLevel = {
   htmlSourceCode: ``,
   name: 'Arithmetic Operators',
   resultIFrameSrcDoc: ``,
-  score: 0,
   scriptSlots: [
     ['', 'x', '=', '5', ';'],
     ['const ', 'y', '=', '2', ';'],
@@ -207,7 +201,6 @@ const L1DataTypesAndFunctions: TLevel = {
   htmlSourceCode: ``,
   name: 'Basic principles of data types',
   resultIFrameSrcDoc: ``,
-  score: 0,
   scriptSlots: [
     ['', 'x', '=', '', '', '', ';'],
     ['x', '=', '', ';'],
@@ -238,7 +231,6 @@ const L2DataTypesAndFunctions: TLevel = {
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <p id="text">You can modify my content so that I become invisible</p>\n </body>\n</html>`,
   name: 'Null and Undefined',
   resultIFrameSrcDoc: `<p id="text">You can modify my content so that I become invisible</p>`,
-  score: 0,
   scriptSlots: [
     ['typeof ', '', ';', '//Returns "object"'],
     ['typeof ', '', ';', '//Returns "undefined"'],
@@ -269,7 +261,6 @@ const L3DataTypesAndFunctions: TLevel = {
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <span id="message">Repetitive code is not a good practice</span>\n </body>\n</html>`,
   name: 'Simple functions',
   resultIFrameSrcDoc: `<span id="message">Repetitive code is not a good practice</span>`,
-  score: 0,
   scriptSlots: [
     ['function ', '', '{', '', '}', ';'],
     ['', 'modifyText()', '', 'document.getElementById("message").innerHTML = ', '"Functions are awesome!"', '', ';'],
@@ -310,7 +301,6 @@ const L4DataTypesAndFunctions: TLevel = {
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <p id="info">Change my text</p>\n </body>\n</html>`,
   name: 'Functions with parameters',
   resultIFrameSrcDoc: `<p id="info">Change my text</p>`,
-  score: 0,
   scriptSlots: [
     ['', 'modifyParagraph', '', '{', '', 'text', '', ';'],
     ['modifyParagraph', '', ';'],
@@ -346,7 +336,6 @@ const L5DataTypesAndFunctions: TLevel = {
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <span id="result">missing result</span>\n </body>\n</html>`,
   name: 'Return statement',
   resultIFrameSrcDoc: `<span id="result">missing result</span>`,
-  score: 0,
   scriptSlots: [
     ['', 'additionOfTwoNumbers', '', '{', '', '}', ';'],
     ['', 'resultOfAddition', '=', '', ';'],
@@ -395,7 +384,6 @@ const L6DataTypesAndFunctions: TLevel = {
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <img alt="car" src="/car.png" id="car" width="180" style="display:none"/>\n </body>\n</html>`,
   name: 'Objects',
   resultIFrameSrcDoc: `<img alt="car" src="/car.png" id="car" width="180" style="display:none"/>`,
-  score: 0,
   scriptSlots: [
     ['const ', 'car', '=', '{}', ';'],
     ['car', '.', '', '=', '', ';'],
@@ -452,7 +440,6 @@ const L7DataTypesAndFunctions: TLevel = {
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <span>My length:</span><span id="result">x</span><p id="greeting">Hello World!</p>\n </body>\n</html>`,
   name: 'String Methods Part 1',
   resultIFrameSrcDoc: `<span id="text">My length:</span><span id="result">x</span><p id="greeting">Hello World!</p>`,
-  score: 0,
   scriptSlots: [
     ['document.getElementById("result").innerHTML = ', '', '', ';'],
     ['', 'document.getElementById("greeting").innerHTML', ';'],
@@ -492,7 +479,6 @@ const L8DataTypesAndFunctions: TLevel = {
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <p id="message">Change me!</p>\n </body>\n</html>`,
   name: 'String Methods Part 2',
   resultIFrameSrcDoc: `<p id="message">Change me!</p>`,
-  score: 0,
   scriptSlots: [
     [
       'const message =',
@@ -535,7 +521,6 @@ const L9DataTypesAndFunctions: TLevel = {
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <p id="result">missing result</p>\n </body>\n</html>`,
   name: 'Introduction to Arrays',
   resultIFrameSrcDoc: `<p id="result">missing result</p>`,
-  score: 0,
   scriptSlots: [
     ['const ', '', '=', '[', '', ',', '"orange"', '', '', ']', ';'],
     ['', 'listOfNumbers', '', '[', '', ',', '1', ',', '', ']', ';'],
@@ -590,7 +575,6 @@ const L10DataTypesAndFunctions: TLevel = {
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <p id="arrayLength">Array has x elements</p>\n   <p id="allElements"></p>\n </body>\n</html>`,
   name: 'Array Methods Part 1',
   resultIFrameSrcDoc: `<p id="arrayLength">Array has x elements</p><p id="allElements"></p>`,
-  score: 0,
   scriptSlots: [
     ['const ', '', '=', '[', '', ',', '"bird"', ',', '', ']', ';'],
     ['document.getElementById("arrayLength").innerHTML =', '"Array has ".concat(', '', '', ',', '" elements")', ';'],
@@ -633,7 +617,6 @@ const L11DataTypesAndFunctions: TLevel = {
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <div id="result">missing result</div>\n   <p id="allElements"></p>\n </body>\n</html>`,
   name: 'Array Methods Part 2',
   resultIFrameSrcDoc: `<div id="result">missing result</div>\n   <p id="allElements"></p>`,
-  score: 0,
   scriptSlots: [
     ['const ', 'binary =', '[0, 0, 1, 0, 1, 1]', ';'],
     ['const ', 'programmingLanguages =', '["Python", "C#", "JavaScript", "Ruby"]', ';'],
@@ -662,7 +645,6 @@ const L1StatementsAndLogicalOperations = {
   htmlSourceCode: ``,
   name: 'Comparison Operators Part 1',
   resultIFrameSrcDoc: ``,
-  score: 0,
   scriptSlots: [
     ['10', '', '1', '//Should return true'],
     ['5', '', '5', '//Should return true'],
@@ -685,7 +667,6 @@ const L2StatementsAndLogicalOperations = {
   htmlSourceCode: ``,
   name: 'Comparison Operators Part 2',
   resultIFrameSrcDoc: ``,
-  score: 0,
   scriptSlots: [
     ['1', '', '0', '//Should return true'],
     ['-10', '', '0', '//Should return true'],
@@ -708,7 +689,6 @@ const L3StatementsAndLogicalOperations: TLevel = {
   htmlSourceCode: ``,
   name: 'Logical Operators',
   resultIFrameSrcDoc: ``,
-  score: 0,
   scriptSlots: [
     ['true', '', 'true', '//Should return true'],
     ['false', '', 'false', '//Should return false'],
@@ -735,7 +715,6 @@ const L4StatementsAndLogicalOperations: TLevel = {
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <img alt="“lightbulb" src="/lightbulb-off.png" id="lightbulbImage" width="100"></img>\n   <p id="compareResult">missing result</p>\n   <span id="info"></span>\n </body>\n</html>`,
   name: 'If, Else and Else if Statements',
   resultIFrameSrcDoc: `<img alt="“lightbulb" src="/lightbulb-off.png" id="lightbulbImage" width="100"></img>\n   <p id="compareResult">missing result</p>\n   <span id="info"></span>\n`,
-  score: 0,
   scriptSlots: [
     ['const ', 'x', '=', '12', ';'],
     ['const ', 'y', '=', '6', ';'],
@@ -765,7 +744,6 @@ const L5StatementsAndLogicalOperations: TLevel = {
   htmlSourceCode: ``,
   name: 'Switch Statement',
   resultIFrameSrcDoc: ``,
-  score: 0,
   scriptSlots: [
     ['const dayOfWeek', '=', '3', ';'],
     ['let result', '=', '""', ';'],
@@ -796,7 +774,6 @@ const L6StatementsAndLogicalOperations: TLevel = {
   htmlSourceCode: ``,
   name: 'While Loop',
   resultIFrameSrcDoc: ``,
-  score: 0,
   scriptSlots: [
     ['const fruits', '=', '["apple", "orange", "cherry"]', ';'],
     ['const numbers', '=', '[]', ';'],
