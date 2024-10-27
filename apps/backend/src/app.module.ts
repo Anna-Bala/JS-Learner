@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { Level } from './typeorm/entities/Level';
+import { SeedModule } from './seed/seed.module';
 import { User } from './typeorm/entities/User';
 import { UsersModule } from './users/users.module';
 
@@ -18,6 +20,7 @@ import { UsersModule } from './users/users.module';
     }),
     AuthModule,
     UsersModule,
+    SeedModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.MY_SQL_HOST,
@@ -25,7 +28,7 @@ import { UsersModule } from './users/users.module';
       username: process.env.MY_SQL_USERNAME,
       password: process.env.MY_SQL_PASSWORD,
       database: process.env.MY_SQL_DATABASE,
-      entities: [User],
+      entities: [User, Level],
       synchronize: true,
     }),
   ],

@@ -10,6 +10,7 @@ export type TLevel = {
   description: string;
   htmlSourceCode: string;
   name: string;
+  dbName: string;
   resultIFrameSrcDoc: string;
   scriptSlots: string[][];
   challangeQuestions: TQuestion[];
@@ -48,6 +49,7 @@ const L1Fundamentals: TLevel = {
   description: `JavaScript (JS) is a versatile programming language primarily used for creating interactive elements and dynamic content on websites.\n\nThanks to it we can change element's content, CSS styling or HTML attribute values. But first we need to know which HTML element from DOM tree should be manipulated.\n\nOne of many JavaScript methods to "find" a HTML element is getElementById(id) where "id" represents string attribute.`,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <span id="span-element">Change my text</span>\n   <p id="paragraph-element">Change my font size</p>\n   <img alt="Example image" id="image-element"></img>\n </body>\n</html>`,
   name: 'Finding elements by the ID',
+  dbName: 'finding_elements_by_the_id',
   resultIFrameSrcDoc: `<span id="span-element">Change my text</span><p id="paragraph-element">Change my font size</p><img alt="Example image" id="image-element"></img>`,
   scriptSlots: [
     ['document.', '', '.innerHTML = ', '', ';'],
@@ -95,6 +97,7 @@ const L2Fundamentals: TLevel = {
   description: `There are few ways to display the result of the JavaScript code. We can directly modify the HTML content or use the “window.alert()” or “console.log()” methods. \n\n “window.alert()” uses browser built-in functionalities to display a simple dialog with optional message. \n\n “console.log()” is a method that prints the result of the JavaScript code into the browser console. To open the browser console click right mouse button and from the context menu choose “Inspect” and go to “Console” tab, here you will see all “console.log()” output. This is a very common way to debug in JavaScript.`,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <p id="text">I’m a text inside the HTML content</p>\n </body>\n</html>`,
   name: 'Writing Output',
+  dbName: 'writing_output',
   resultIFrameSrcDoc: `<p id="text">I’m a text inside the HTML content</p>`,
   scriptSlots: [
     ['', 'getElementById("text")', '.innerHTML = ', '', ';'],
@@ -128,6 +131,7 @@ const L3Fundamentals: TLevel = {
   description: `Comments are mostly used in two cases: adding additional information about the code to make it more clear for yourself and others or disabling a specific part of the code so that it does not execute.\n\nThere are two types of comments: single line and multi-line comments. Single line comments start with //.\nMulti-line comments start with /* and end with */`,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <p id="paragraph">I’m a text inside the HTML content</p>\n </body>\n</html>`,
   name: 'Comments',
+  dbName: 'comments',
   resultIFrameSrcDoc: `<p id="paragraph">Comments provide extra context</p>`,
   scriptSlots: [
     ['document.', 'getElementById("paragraph")', '.innerHTML = "Comments are great"', ';', ''],
@@ -148,6 +152,7 @@ const L4Fundamentals: TLevel = {
   description: `You can think of variables as containers for storing data. There are 3 most common ways of declaring variables, it’s by using keywords var, let and const. The var keyword is becoming a deprecated way of declaring variables and should only be used in code written for very old browsers.\n\nlet and const keywords were introduced to JavaScript in 2015 and became a standard for writing a good and maintainable code. The key difference between const and let is that when we declare a const variable we cannot change its value or type.\nWe should only use the var keyword for declaring a variable when we want to support old browsers.`,
   htmlSourceCode: ``,
   name: 'Variables',
+  dbName: 'variables',
   resultIFrameSrcDoc: ``,
   scriptSlots: [
     ['', 'x', '', '5', ',', '', '=', '', ';'],
@@ -176,6 +181,7 @@ const L5Fundamentals: TLevel = {
   description: `JavaScript arithmetic operators are used to perform arithmetic on numbers (literals or variables). Here are all arithmetic operators: addition +, subtraction -, multiplication *, exponentiation **, division /, modulus %, increment ++, decrement --\n\nFirst five operators are pretty straightforward, they work just like in math. Modulus is also taken from mathematics but for a quick reminder it produces the division remainder. Increment operator increments numbers by 1 and decrement operator decrements numbers also by 1.\n\nJust like in school mathematics multiplication and division operations have higher precedence than addition and subtraction and the precedence can be changed by using parentheses.`,
   htmlSourceCode: ``,
   name: 'Arithmetic Operators',
+  dbName: 'arithmetic_operators',
   resultIFrameSrcDoc: ``,
   scriptSlots: [
     ['', 'x', '=', '5', ';'],
@@ -200,6 +206,7 @@ const L1DataTypesAndFunctions: TLevel = {
   description: `There are eight data types in JavaScript: String, Number, Boolean, Bigint, Undefined, Null, Symbol, Object.\nThe object data type can be a built-in object, which are: objects, arrays, dates, promises, maps, sets and more or an user defined object.\nJavaScript types are dynamic which means that one variable can be reassigned to keep a different data type.\n\nLet’s focus on the first three types. You will learn more about other data types in further levels. String is simply a text and it is written with single (‘) or double quotes (“).\nWhen it comes to Numbers in JavaScript an important thing about them is that all of them are decimal numbers.\nBooleans are very simple data type, they can only have two values: true or false, they are mostly used in writing conditions in code.\n\nJavaScript provides an operator typeof that returns the type of a variable or an expression.`,
   htmlSourceCode: ``,
   name: 'Basic principles of data types',
+  dbName: 'basic_principles_of_data_types',
   resultIFrameSrcDoc: ``,
   scriptSlots: [
     ['', 'x', '=', '', '', '', ';'],
@@ -230,6 +237,7 @@ const L2DataTypesAndFunctions: TLevel = {
   description: `Differing between null and undefined might be quite confusing at the beginning, but actually it’s not that hard.\nWhen we declare a variable without any value then its value becomes undefined and its type also becomes undefined.\nOn the other hand when we assign a null to a variable then this variable is defined and what we tell our code is that the variable is “empty”. null gives us a way of indicating that a given variable should not have any value.`,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <p id="text">You can modify my content so that I become invisible</p>\n </body>\n</html>`,
   name: 'Null and Undefined',
+  dbName: 'null_and_undefined',
   resultIFrameSrcDoc: `<p id="text">You can modify my content so that I become invisible</p>`,
   scriptSlots: [
     ['typeof ', '', ';', '//Returns "object"'],
@@ -260,6 +268,7 @@ const L3DataTypesAndFunctions: TLevel = {
   description: `Functions are like wrappers where you can put any code you want to. Why you might ask?\n\nImagine that you have a piece of code that does the same thing in your program, without function you would have to copy and paste the same lines of code around your program. Not only does that make your code messy and hard to maintain but it’s an easy way to allow some bugs to slip into your algorithm.\n\nThat’s where functions come in handy, you move your redundant piece of code into a function, give it a good and understandable name and then call (invoke) it wherever you need it in your code.\n\nWhen it comes to syntax it is pretty straightforward, a JavaScript function is defined with the function keyword, followed by a name, followed by parentheses (). The code to be executed, by the function, is placed inside curly brackets: {}\n\nTo run an already declared function you simply have to write its name followed by the () operator which will invoke it.`,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <span id="message">Repetitive code is not a good practice</span>\n </body>\n</html>`,
   name: 'Simple functions',
+  dbName: 'simple_functions',
   resultIFrameSrcDoc: `<span id="message">Repetitive code is not a good practice</span>`,
   scriptSlots: [
     ['function ', '', '{', '', '}', ';'],
@@ -300,6 +309,7 @@ const L4DataTypesAndFunctions: TLevel = {
   description: `What if there are two fragments of code that do almost the same thing in our program? We could still wrap this code into a function but we need a way to differ between specific use cases. That’s where function parameters come in handy.\n\nFunction parameters are listed inside the parentheses () where we declare function, inside the function the parameters behave as local variables, which means that those variables are only usable inside the function. You can include as many parameters for function as you want.\n\nWhen we invoke a function the values that we pass to it are called arguments.`,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <p id="info">Change my text</p>\n </body>\n</html>`,
   name: 'Functions with parameters',
+  dbName: 'functions_with_parameters',
   resultIFrameSrcDoc: `<p id="info">Change my text</p>`,
   scriptSlots: [
     ['', 'modifyParagraph', '', '{', '', 'text', '', ';'],
@@ -335,6 +345,7 @@ const L5DataTypesAndFunctions: TLevel = {
   description: `Return statements are used inside functions. Functions usually do some work and then give back a result.\n\nThis result is called the return value, and it's sent back to wherever the function was invoked from.\n\nWhen JavaScript hits a return statement inside a function, it stops running the code in that function right there.`,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <span id="result">missing result</span>\n </body>\n</html>`,
   name: 'Return statement',
+  dbName: 'return_statement',
   resultIFrameSrcDoc: `<span id="result">missing result</span>`,
   scriptSlots: [
     ['', 'additionOfTwoNumbers', '', '{', '', '}', ';'],
@@ -383,6 +394,7 @@ const L6DataTypesAndFunctions: TLevel = {
   description: `A JavaScript object is a collection of key-value pairs, where the keys (also called properties) have assigned values to them, those values can be any type of data (numbers, strings, functions, other objects, etc.). It's like a container that holds related data and functionality.\n\nJust like in real life we have all kinds of objects, for example a car. Cars can have different properties like color, model or weight. Cars also have different functionalities, they can drive, break or start, in JavaScript functions inside objects are called methods.`,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <img alt="car" src="/car.png" id="car" width="180" style="display:none"/>\n </body>\n</html>`,
   name: 'Objects',
+  dbName: 'objects',
   resultIFrameSrcDoc: `<img alt="car" src="/car.png" id="car" width="180" style="display:none"/>`,
   scriptSlots: [
     ['const ', 'car', '=', '{}', ';'],
@@ -439,6 +451,7 @@ const L7DataTypesAndFunctions: TLevel = {
   description: `JavaScript Strings allow you to perform some built-in operations on them called methods. Let’s focus on the most used String methods which are: length, slice(), toUpperCase() and concat().\n\nlength - it returns a number indicating the length of the text\n\nslice(start, end) - this methods takes two parameters start and end positions then extracts a part of a string and returns it\n\ntoUpperCase() - it converts a string to uppercase\n\nconcat(value1, …, valueN) - it joins two or more strings `,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <span>My length:</span><span id="result">x</span><p id="greeting">Hello World!</p>\n </body>\n</html>`,
   name: 'String Methods Part 1',
+  dbName: 'string_methods_part_1',
   resultIFrameSrcDoc: `<span id="text">My length:</span><span id="result">x</span><p id="greeting">Hello World!</p>`,
   scriptSlots: [
     ['document.getElementById("result").innerHTML = ', '', '', ';'],
@@ -478,6 +491,7 @@ const L8DataTypesAndFunctions: TLevel = {
   description: `You’ve already been introduced to some of the most commonly used String methods but there are some other really important methods left, those are:  trim(), replace(), and split(). \n\ntrim() - this method removes whitespaces from the beginning and the end of a string\n\nreplace(value1, value2) - it takes up two parameters and replaces specified value1 with value2\n\nsplit(value) - it divides string where given value occurs in a text and returns an array of strings (You will learn more about Arrays in further levels)`,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <p id="message">Change me!</p>\n </body>\n</html>`,
   name: 'String Methods Part 2',
+  dbName: 'string_methods_part_2',
   resultIFrameSrcDoc: `<p id="message">Change me!</p>`,
   scriptSlots: [
     [
@@ -520,6 +534,7 @@ const L9DataTypesAndFunctions: TLevel = {
   description: `JavaScript arrays are lists that can store multiple values in a single variable. Each value in an array is called an element, and each element has a numbered position called an index, starting from 0.\n\nThere are many ways to declare an array but the most popular one is to use a const keyword and put array elements into square brackets.\n\nTo access an array element you have to referr to the index number.`,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <p id="result">missing result</p>\n </body>\n</html>`,
   name: 'Introduction to Arrays',
+  dbName: 'introduction_to_arrays',
   resultIFrameSrcDoc: `<p id="result">missing result</p>`,
   scriptSlots: [
     ['const ', '', '=', '[', '', ',', '"orange"', '', '', ']', ';'],
@@ -574,6 +589,7 @@ const L10DataTypesAndFunctions: TLevel = {
   description: `Just like Strings Arrays have their own methods, there are lots of them but we will focus on the most used ones.\nHere are the first four Array methods that you will learn: length, join(), pop(), push()\n\nlength - it returns a number that indicates the amount of items\n\njoin(value) - this method joins all elements from array with a separator (value) and returns a string\n\nNaturally when we work with arrays we somehow want to add and remove items from it, pop() and push() are one of the ways to do that.\n\npop() - it removes the last element\n\npush() - it adds new item at the end`,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <p id="arrayLength">Array has x elements</p>\n   <p id="allElements"></p>\n </body>\n</html>`,
   name: 'Array Methods Part 1',
+  dbName: 'array_methods_part_1',
   resultIFrameSrcDoc: `<p id="arrayLength">Array has x elements</p><p id="allElements"></p>`,
   scriptSlots: [
     ['const ', '', '=', '[', '', ',', '"bird"', ',', '', ']', ';'],
@@ -616,6 +632,7 @@ const L11DataTypesAndFunctions: TLevel = {
   description: `It’s time for another dose of useful Array methods: includes(), sort(), filter().\n\nincludes(value) - it returns a Boolean value (true or false) depending on if value is present in array’s items\n\nsort() - this methods sorts items in alphabetical order (works only for an array of Strings)\n\nfilter(function {}) - this method is a little bit more complex. It creates a new array with all elements that pass a test provided by a function. Function that is provided for this method should return a Boolean, when it is true then the given item is included in the new array.`,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <div id="result">missing result</div>\n   <p id="allElements"></p>\n </body>\n</html>`,
   name: 'Array Methods Part 2',
+  dbName: 'array_methods_part_2',
   resultIFrameSrcDoc: `<div id="result">missing result</div>\n   <p id="allElements"></p>`,
   scriptSlots: [
     ['const ', 'binary =', '[0, 0, 1, 0, 1, 1]', ';'],
@@ -644,6 +661,7 @@ const L1StatementsAndLogicalOperations = {
   description: `We often want to determine the equality or difference between variables or values, to do that we use comparison operators. Some of them are already known to you from math.\n\nEqual to (==): Compares two values for equality, after converting both values to a common type.\n\nStrict equal to (===): Compares two values for equality without type conversion.\nSo for this operation to return true both value and type have to be the equal.\n\nNot equal to (!=): Compares two values for inequality, after converting both values to a common type.\n\nStrict not equal to (!==): Compares two values for inequality without type conversion.\n\nIt’s very uncommon to use non-strict operators - equal to (==) and not equal to (!=), because it leads to messy and buggy code.\nFor this level we will focus only on strict operators.`,
   htmlSourceCode: ``,
   name: 'Comparison Operators Part 1',
+  dbName: 'comparison_operators_part_1',
   resultIFrameSrcDoc: ``,
   scriptSlots: [
     ['10', '', '1', '//Should return true'],
@@ -666,6 +684,7 @@ const L2StatementsAndLogicalOperations = {
   description: `In the previous level you have learned the first portion of comparison operators, now it is time for the second half.\n\nGreater than (>): Checks if the value on the left is greater than the value on the right.\n\nGreater than or equal to (>=): Checks if the value on the left is greater than or equal to the value on the right.\n\nLess than (<): Checks if the value on the left is less than the value on the right.\n\nLess than or equal to (<=): Checks if the value on the left is less than or equal to the value on the right.`,
   htmlSourceCode: ``,
   name: 'Comparison Operators Part 2',
+  dbName: 'comparison_operators_part_2',
   resultIFrameSrcDoc: ``,
   scriptSlots: [
     ['1', '', '0', '//Should return true'],
@@ -688,6 +707,7 @@ const L3StatementsAndLogicalOperations: TLevel = {
   description: `Logical operators are used to combine or invert boolean values.\n\nLogical AND (&&): Returns true if both operands are true; otherwise, returns false.\n\nLogical OR (||): Returns true if at least one of the operands is true; otherwise, returns false.\n\nLogical NOT (!): Returns the opposite boolean value of its operand.`,
   htmlSourceCode: ``,
   name: 'Logical Operators',
+  dbName: 'logical_operators',
   resultIFrameSrcDoc: ``,
   scriptSlots: [
     ['true', '', 'true', '//Should return true'],
@@ -714,6 +734,7 @@ const L4StatementsAndLogicalOperations: TLevel = {
   description: `In JavaScript, if, else if, and else statements are used to execute code based on certain conditions.\nif: Executes a block of code if a condition is true.\nelse if: Tests a new condition if the previous condition(s) are false.\nelse: Executes a block of code if none of the previous conditions are true.`,
   htmlSourceCode: `<!doctype html>\n<html>\n <body>\n   <img alt="“lightbulb" src="/lightbulb-off.png" id="lightbulbImage" width="100"></img>\n   <p id="compareResult">missing result</p>\n   <span id="info"></span>\n </body>\n</html>`,
   name: 'If, Else and Else if Statements',
+  dbName: 'if_else_and_else_if_statements',
   resultIFrameSrcDoc: `<img alt="“lightbulb" src="/lightbulb-off.png" id="lightbulbImage" width="100"></img>\n   <p id="compareResult">missing result</p>\n   <span id="info"></span>\n`,
   scriptSlots: [
     ['const ', 'x', '=', '12', ';'],
@@ -743,6 +764,7 @@ const L5StatementsAndLogicalOperations: TLevel = {
   description: `In JavaScript, the switch statement is used to execute one block of code among many based on the value of an expression. It's a more readable alternative to multiple if...else if statements when you need to compare the same variable to different values.\n\nThe switch statement evaluates the expression once and compares its result with the values of each case. If a matching case is found, the code associated with that case is executed. The break statement is used to terminate the switch block, preventing the execution of subsequent cases.`,
   htmlSourceCode: ``,
   name: 'Switch Statement',
+  dbName: 'switch_statement',
   resultIFrameSrcDoc: ``,
   scriptSlots: [
     ['const dayOfWeek', '=', '3', ';'],
@@ -773,6 +795,7 @@ const L6StatementsAndLogicalOperations: TLevel = {
   description: `In JavaScript, a while loop is used to repeatedly execute a block of code as long as a specified condition is true. It’s particularly useful when the number of iterations is not known beforehand. Here’s how while loop works in steps:\n\nCondition Check: Before each iteration, the while loop evaluates the condition.\n\nCode Execution: If the condition evaluates to true, the code inside the loop is executed.\n\nRepeat: After executing the code block, the loop goes back to step 1 and re-evaluates the condition.\n\nTermination: The loop continues until the condition evaluates to false.`,
   htmlSourceCode: ``,
   name: 'While Loop',
+  dbName: 'while_loop',
   resultIFrameSrcDoc: ``,
   scriptSlots: [
     ['const fruits', '=', '["apple", "orange", "cherry"]', ';'],
