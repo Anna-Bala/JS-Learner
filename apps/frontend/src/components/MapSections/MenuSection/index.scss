@@ -17,6 +17,7 @@
     display: flex;
     gap: $xxs;
     margin-top: $md;
+    align-items: flex-start;
   }
 
   &__level-info {
@@ -28,5 +29,9 @@
 
   &__stars {
     display: flex;
+  }
+
+  &__timer {
+    margin-left: auto;
   }
 }

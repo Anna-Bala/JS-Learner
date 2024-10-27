@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 
 import { CodeBlocksSection, MenuSection, ResultSection, ScriptSection, TaskSection } from '../MapSections';
@@ -21,6 +21,14 @@ export type TAllDroppedCodeBlocksInScriptSlots = {
 } | null;
 
 const Map = ({ level }: TProps) => {
+  const [score, setScore] = useState(3);
+  const [jsRunErrored, setJsRunErrored] = useState(false);
+  const [userUsedAI, setUserUsedAI] = useState(false);
+  const [isPassedTimeLimit, setIsPassedTimeLimit] = useState(false);
+
+  const [timeLeft, setTimeLeft] = useState(600);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
   const [isHTMLModalOpen, setIsHTMLModalOpen] = useState(false);
   const [isInstructionsModalOpen, setIsInstructionsModalOpen] = useState(false);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
@@ -31,7 +39,49 @@ const Map = ({ level }: TProps) => {
   const toggleIsInstructionsModalOpen = () => setIsInstructionsModalOpen(prevState => !prevState);
   const toggleIsTaskModalOpen = () => setIsTaskModalOpen(prevState => !prevState);
 
+  const substractScoreByOne = () => setScore(prevState => prevState - 1);
+
+  const handleScoreChange = (action: 'jsRun' | 'useAI' | 'pass10Minutes') => {
+    if (action === 'jsRun') {
+      if (!jsRunErrored) substractScoreByOne();
+      setJsRunErrored(true);
+    }
+    if (action === 'useAI') {
+      if (!userUsedAI) substractScoreByOne();
+      setUserUsedAI(true);
+    }
+    if (action === 'pass10Minutes') {
+      if (!isPassedTimeLimit) substractScoreByOne();
+      setIsPassedTimeLimit(true);
+    }
+  };
+
+  const startTimer = () => {
+    if (intervalRef.current) return;
+
+    intervalRef.current = setInterval(() => {
+      setTimeLeft(prevTime => {
+        if (prevTime <= 1) {
+          clearInterval(intervalRef.current || undefined);
+          intervalRef.current = null;
+          handleScoreChange('pass10Minutes');
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+  };
+
+  const stopTimer = () => {
+    clearInterval(intervalRef.current!);
+    intervalRef.current = null;
+  };
+
   const appendKeydownActions = (event: KeyboardEvent) => {
+    if (event.target instanceof HTMLElement) {
+      if (event?.target?.classList.contains('text-input')) return;
+    }
+
     if (event.code === 'KeyH') toggleIsHTMLModalOpen();
     if (event.code === 'KeyI') toggleIsInstructionsModalOpen();
     if (event.code === 'KeyK' || event.code === 'Tab') toggleIsTaskModalOpen();
@@ -39,9 +89,11 @@ const Map = ({ level }: TProps) => {
 
   useEffect(() => {
     document.addEventListener('keydown', appendKeydownActions);
+    startTimer();
 
     return () => {
       document.removeEventListener('keydown', appendKeydownActions);
+      stopTimer();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -84,23 +136,33 @@ const Map = ({ level }: TProps) => {
         <div className="map-content">
           <div style={{ display: 'flex', flexDirection: 'row', gap: '24px' }}>
             <TaskSection challanges={level.challanges} openTaskModal={toggleIsTaskModalOpen} />
-            <MenuSection handleInfoIconButtonClick={toggleIsInstructionsModalOpen} level={level} />
+            <MenuSection
+              currentScore={score}
+              handleInfoIconButtonClick={toggleIsInstructionsModalOpen}
+              handleScoreChange={handleScoreChange}
+              level={level}
+              timeLeft={timeLeft}
+            />
           </div>
           <div style={{ flex: 1, display: 'flex', flexDirection: 'row', gap: '16px' }}>
             <CodeBlocksSection
               allDroppedCodeBlocksInScriptSlots={allDroppedCodeBlocksInScriptSlots}
               codeBlocks={level.codeBlocks}
               codeBlocksInCorrectOrder={level.codeBlocksInCorrectOrder}
+              currentScore={score}
+              handleScoreChange={handleScoreChange}
             />
             <ScriptSection
               allDroppedCodeBlocksInScriptSlots={allDroppedCodeBlocksInScriptSlots}
               codeBlocksInCorrectOrder={level.codeBlocksInCorrectOrder}
+              currentScore={score}
+              handleScoreChange={handleScoreChange}
               scriptSlots={level.scriptSlots}
             />
             {level.resultIFrameSrcDoc && <ResultSection resultIFrameSrcDoc={level.resultIFrameSrcDoc} />}
           </div>
           <DebuggingTools level={level} />
-          <ChatAI challangeQuestions={level.challangeQuestions} />
+          <ChatAI challangeQuestions={level.challangeQuestions} handleScoreChange={handleScoreChange} />
         </div>
         <HTMLModal
           htmlSourceCode={level.htmlSourceCode}

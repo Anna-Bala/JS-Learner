@@ -12,9 +12,17 @@ type TProps = {
   allDroppedCodeBlocksInScriptSlots: TAllDroppedCodeBlocksInScriptSlots;
   codeBlocks: string[];
   codeBlocksInCorrectOrder: string[];
+  currentScore: number;
+  handleScoreChange: (action: 'jsRun' | 'useAI' | 'pass10Minutes') => void;
 };
 
-const CodeBlocksSection = ({ allDroppedCodeBlocksInScriptSlots, codeBlocks, codeBlocksInCorrectOrder }: TProps) => {
+const CodeBlocksSection = ({
+  allDroppedCodeBlocksInScriptSlots,
+  codeBlocks,
+  codeBlocksInCorrectOrder,
+  currentScore,
+  handleScoreChange,
+}: TProps) => {
   const [isRunCodeModalOpen, setIsRunCodeModalOpen] = useState(false);
   const [didCodeRun, setDidCodeRun] = useState(false);
 
@@ -26,7 +34,7 @@ const CodeBlocksSection = ({ allDroppedCodeBlocksInScriptSlots, codeBlocks, code
 
   const runJsCode = () => {
     setDidCodeRun(true);
-    handleRunJSCode(codeBlocksInCorrectOrder);
+    handleRunJSCode(codeBlocksInCorrectOrder, handleScoreChange, currentScore);
   };
 
   const allDroppedCodeBlocksInScriptSlotsKeys = Object.keys(allDroppedCodeBlocksInScriptSlots || {}).filter(

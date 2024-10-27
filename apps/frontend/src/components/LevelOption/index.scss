@@ -29,14 +29,12 @@
 
   &__link {
     align-self: flex-end;
-  }
-
-  &__points {
-    margin-bottom: $xl;
+    margin-top: $xl;
   }
 
   &__score {
     display: flex;
     margin-bottom: $xxs;
+    margin-top: $xl;
   }
 }

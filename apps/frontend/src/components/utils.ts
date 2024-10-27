@@ -26,7 +26,11 @@ const evaluateChallange = (codeBlocksInCorrectOrder: string[]) => {
   return result;
 };
 
-export const handleRunJSCode = (codeBlocksInCorrectOrder: string[]) => {
+export const handleRunJSCode = (
+  codeBlocksInCorrectOrder: string[],
+  handleScoreChange: (action: 'jsRun' | 'useAI' | 'pass10Minutes') => void,
+  currentScore: number,
+) => {
   const allCodeBlocks = document.getElementsByClassName('script-block');
   const jsCode = Array.from(allCodeBlocks)
     .map(codeBlock => codeBlock.innerHTML)
@@ -39,10 +43,13 @@ export const handleRunJSCode = (codeBlocksInCorrectOrder: string[]) => {
   try {
     eval(jsCodeFormatted);
   } catch {
-    window.alert('WRONG FORMAT!');
+    handleScoreChange('jsRun');
   } finally {
     const result = evaluateChallange(codeBlocksInCorrectOrder);
-    if (result) window.alert('CORRECT!');
-    else window.alert('INCORRECT :(');
+
+    if (window.location.href.includes('localhost')) {
+      if (result) window.alert('CORRECT!');
+      else window.alert('INCORRECT :(');
+    }
   }
 };

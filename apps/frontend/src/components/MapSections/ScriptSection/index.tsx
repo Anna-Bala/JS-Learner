@@ -11,17 +11,28 @@ import type { TAllDroppedCodeBlocksInScriptSlots } from '../../Map';
 type TProps = {
   allDroppedCodeBlocksInScriptSlots: TAllDroppedCodeBlocksInScriptSlots;
   codeBlocksInCorrectOrder: string[];
+  currentScore: number;
+  handleScoreChange: (action: 'jsRun' | 'useAI' | 'pass10Minutes') => void;
   scriptSlots: string[][];
 };
 
-const ScriptSection = ({ allDroppedCodeBlocksInScriptSlots, codeBlocksInCorrectOrder, scriptSlots }: TProps) => {
+const ScriptSection = ({
+  allDroppedCodeBlocksInScriptSlots,
+  codeBlocksInCorrectOrder,
+  currentScore,
+  handleScoreChange,
+  scriptSlots,
+}: TProps) => {
   const [isRunCodeModalOpen, setIsRunCodeModalOpen] = useState(false);
 
   const toggleIsRunCodeModalOpen = () => setIsRunCodeModalOpen(prevState => !prevState);
 
-  const runJsCode = () => handleRunJSCode(codeBlocksInCorrectOrder);
+  const runJsCode = () => handleRunJSCode(codeBlocksInCorrectOrder, handleScoreChange, currentScore);
 
   const appendKeydownActions = (event: KeyboardEvent) => {
+    if (event.target instanceof HTMLElement) {
+      if (event?.target?.classList.contains('text-input')) return;
+    }
     if (event.code === 'KeyJ') toggleIsRunCodeModalOpen();
   };
 

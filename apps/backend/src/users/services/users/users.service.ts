@@ -20,6 +20,10 @@ export class UsersService {
     return this.userRepository.findOne({ where: { id } });
   }
 
+  fetchUserByUserName(username: string) {
+    return this.userRepository.findOne({ where: { username } });
+  }
+
   async createUser(userDetails: CreateUserParams) {
     const { password, ...user } = userDetails;
 

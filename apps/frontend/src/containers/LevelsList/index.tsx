@@ -24,6 +24,7 @@ const LevelsList = ({ setLevel }: TProps) => {
         <IconButton
           className="level-list__button"
           icon={<PlayIcon fill={colors['color-primary-300']} size={24} />}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-expect-error
           onClick={() => (document.getElementById(`${sectionName}-container`).scrollLeft -= 100)}
         />
@@ -33,6 +34,7 @@ const LevelsList = ({ setLevel }: TProps) => {
         <IconButton
           className="level-list__button -right"
           icon={<PlayIcon fill={colors['color-primary-300']} size={24} />}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-expect-error
           onClick={() => (document.getElementById(`${sectionName}-container`).scrollLeft += 100)}
         />
@@ -48,7 +50,7 @@ const LevelsList = ({ setLevel }: TProps) => {
         </Typography>
         <div className="level-list__header-wrapper">
           <Typography color="primary-600" variant="subtitle1">
-            Total points earned: x
+            To do: ranking button
           </Typography>
         </div>
       </header>
