@@ -17,6 +17,7 @@ export class SeedService {
       const existingLevel = await this.levelRepository.findOne({
         where: { name: level.name },
       });
+
       if (!existingLevel) {
         await this.levelRepository.save(level);
         console.log(`Seeded: ${level.name}`);
