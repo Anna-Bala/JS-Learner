@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 
 import { CodeBlocksSection, MenuSection, ResultSection, ScriptSection, TaskSection } from '../MapSections';
-import { HTMLModal, InstructionsModal, TaskModal } from '../Modals';
+import { HTMLModal, InstructionsModal, LevelSummaryModal, TaskModal } from '../Modals';
 import ChatAI from '../ChatAI';
 import DebuggingTools from '../DebuggingTools';
 import type { TLevel } from '../../levels';
@@ -25,6 +25,7 @@ const Map = ({ level }: TProps) => {
   const [jsRunErrored, setJsRunErrored] = useState(false);
   const [userUsedAI, setUserUsedAI] = useState(false);
   const [isPassedTimeLimit, setIsPassedTimeLimit] = useState(false);
+  const [isCorrectlySolved, setIsCorrectlySolved] = useState<boolean | undefined>(undefined);
 
   const [timeLeft, setTimeLeft] = useState(600);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -38,6 +39,7 @@ const Map = ({ level }: TProps) => {
   const toggleIsHTMLModalOpen = () => setIsHTMLModalOpen(prevState => !prevState);
   const toggleIsInstructionsModalOpen = () => setIsInstructionsModalOpen(prevState => !prevState);
   const toggleIsTaskModalOpen = () => setIsTaskModalOpen(prevState => !prevState);
+  const closeLevelSummaryModal = () => setIsCorrectlySolved(undefined);
 
   const substractScoreByOne = () => setScore(prevState => prevState - 1);
 
@@ -141,6 +143,7 @@ const Map = ({ level }: TProps) => {
               handleInfoIconButtonClick={toggleIsInstructionsModalOpen}
               handleScoreChange={handleScoreChange}
               level={level}
+              setIsCorrectlySolved={setIsCorrectlySolved}
               timeLeft={timeLeft}
             />
           </div>
@@ -149,17 +152,15 @@ const Map = ({ level }: TProps) => {
               allDroppedCodeBlocksInScriptSlots={allDroppedCodeBlocksInScriptSlots}
               codeBlocks={level.codeBlocks}
               codeBlocksInCorrectOrder={level.codeBlocksInCorrectOrder}
-              currentScore={score}
               handleScoreChange={handleScoreChange}
-              levelNameDb={level.dbName}
+              setIsCorrectlySolved={setIsCorrectlySolved}
             />
             <ScriptSection
               allDroppedCodeBlocksInScriptSlots={allDroppedCodeBlocksInScriptSlots}
               codeBlocksInCorrectOrder={level.codeBlocksInCorrectOrder}
-              currentScore={score}
               handleScoreChange={handleScoreChange}
-              levelNameDb={level.dbName}
               scriptSlots={level.scriptSlots}
+              setIsCorrectlySolved={setIsCorrectlySolved}
             />
             {level.resultIFrameSrcDoc && <ResultSection resultIFrameSrcDoc={level.resultIFrameSrcDoc} />}
           </div>
@@ -176,6 +177,13 @@ const Map = ({ level }: TProps) => {
           isOpen={isTaskModalOpen}
           levelDescription={level.description}
           onPrimaryAction={toggleIsTaskModalOpen}
+        />
+        <LevelSummaryModal
+          handleClose={closeLevelSummaryModal}
+          isCorrectlySolved={isCorrectlySolved}
+          isOpen={isCorrectlySolved !== undefined}
+          levelNameDb={level.dbName}
+          score={score}
         />
       </div>
     </DndContext>

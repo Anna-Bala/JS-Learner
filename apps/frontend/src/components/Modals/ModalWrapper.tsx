@@ -12,13 +12,23 @@ type TProps = {
   children: ReactNode;
   color: 'neutral' | 'green' | 'primary' | 'orange' | 'red';
   handleClose?: () => void;
+  isLoading?: boolean;
   isOpen: boolean;
   onPrimaryAction: () => void;
   primaryActionText: string;
   title: string;
 };
 
-const ModalWrapper = ({ children, color, handleClose, isOpen, onPrimaryAction, primaryActionText, title }: TProps) =>
+const ModalWrapper = ({
+  children,
+  color,
+  handleClose,
+  isLoading,
+  isOpen,
+  onPrimaryAction,
+  primaryActionText,
+  title,
+}: TProps) =>
   isOpen ? (
     <div className="modal-shadow">
       <div className={`modal-wrapper modal-wrapper-color__${color}`}>
@@ -27,7 +37,11 @@ const ModalWrapper = ({ children, color, handleClose, isOpen, onPrimaryAction, p
             {title}
           </Typography>
           {handleClose && (
-            <IconButton icon={<CloseIcon size={20} fill={colors['color-neutral-900']} />} onClick={handleClose} />
+            <IconButton
+              icon={<CloseIcon size={20} fill={colors['color-neutral-900']} />}
+              disabled={isLoading}
+              onClick={handleClose}
+            />
           )}
         </div>
 
@@ -36,7 +50,7 @@ const ModalWrapper = ({ children, color, handleClose, isOpen, onPrimaryAction, p
         <div className="modal-wrapper__main">{children}</div>
 
         <div className="modal-wrapper__footer">
-          <Button color={color} variant="small" onClick={onPrimaryAction}>
+          <Button color={color} disabled={isLoading} variant="small" onClick={onPrimaryAction}>
             {primaryActionText}
           </Button>
         </div>

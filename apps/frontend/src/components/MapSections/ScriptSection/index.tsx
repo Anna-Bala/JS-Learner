@@ -11,25 +11,24 @@ import type { TAllDroppedCodeBlocksInScriptSlots } from '../../Map';
 type TProps = {
   allDroppedCodeBlocksInScriptSlots: TAllDroppedCodeBlocksInScriptSlots;
   codeBlocksInCorrectOrder: string[];
-  currentScore: number;
   handleScoreChange: (action: 'jsRun' | 'useAI' | 'pass10Minutes') => void;
-  levelNameDb: string;
   scriptSlots: string[][];
+  setIsCorrectlySolved: React.Dispatch<React.SetStateAction<boolean | undefined>>;
 };
 
 const ScriptSection = ({
   allDroppedCodeBlocksInScriptSlots,
   codeBlocksInCorrectOrder,
-  currentScore,
   handleScoreChange,
-  levelNameDb,
   scriptSlots,
+  setIsCorrectlySolved,
 }: TProps) => {
   const [isRunCodeModalOpen, setIsRunCodeModalOpen] = useState(false);
 
   const toggleIsRunCodeModalOpen = () => setIsRunCodeModalOpen(prevState => !prevState);
 
-  const runJsCode = () => handleRunJSCode(codeBlocksInCorrectOrder, handleScoreChange, currentScore, levelNameDb);
+  const runJsCode = () =>
+    handleRunJSCode(codeBlocksInCorrectOrder, handleScoreChange, setIsCorrectlySolved, toggleIsRunCodeModalOpen);
 
   const appendKeydownActions = (event: KeyboardEvent) => {
     if (event.target instanceof HTMLElement) {

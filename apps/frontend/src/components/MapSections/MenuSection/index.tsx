@@ -17,18 +17,26 @@ type TProps = {
   handleInfoIconButtonClick: () => void;
   handleScoreChange: (action: 'jsRun' | 'useAI' | 'pass10Minutes') => void;
   level: TLevel;
+  setIsCorrectlySolved: React.Dispatch<React.SetStateAction<boolean | undefined>>;
   timeLeft: number;
 };
 
 const iconsColor = colors['color-primary-400'];
 
-const MenuSection = ({ currentScore, handleInfoIconButtonClick, handleScoreChange, level, timeLeft }: TProps) => {
+const MenuSection = ({
+  currentScore,
+  handleInfoIconButtonClick,
+  handleScoreChange,
+  level,
+  setIsCorrectlySolved,
+  timeLeft,
+}: TProps) => {
   const [isRunCodeModalOpen, setIsRunCodeModalOpen] = useState(false);
 
   const toggleIsRunCodeModalOpen = () => setIsRunCodeModalOpen(prevState => !prevState);
 
   const runJsCode = () =>
-    handleRunJSCode(level.codeBlocksInCorrectOrder, handleScoreChange, currentScore, level.dbName);
+    handleRunJSCode(level.codeBlocksInCorrectOrder, handleScoreChange, setIsCorrectlySolved, toggleIsRunCodeModalOpen);
 
   const formatTimeLeft = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);

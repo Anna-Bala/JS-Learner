@@ -1,5 +1,3 @@
-import { updateLevelScore } from '../api/utils';
-
 export const convertLevelScore = (levelScore: number) => {
   const result = [0, 0, 0];
 
@@ -28,11 +26,11 @@ const evaluateChallange = (codeBlocksInCorrectOrder: string[]) => {
   return result;
 };
 
-export const handleRunJSCode = async (
+export const handleRunJSCode = (
   codeBlocksInCorrectOrder: string[],
   handleScoreChange: (action: 'jsRun' | 'useAI' | 'pass10Minutes') => void,
-  currentScore: number,
-  levelNameDb: string,
+  setIsCorrectlySolved: React.Dispatch<React.SetStateAction<boolean | undefined>>,
+  toggleIsRunCodeModalOpen: () => void,
 ) => {
   const allCodeBlocks = document.getElementsByClassName('script-block');
   const jsCode = Array.from(allCodeBlocks)
@@ -49,14 +47,7 @@ export const handleRunJSCode = async (
     handleScoreChange('jsRun');
   } finally {
     const isCorrect = evaluateChallange(codeBlocksInCorrectOrder);
-
-    if (window.location.href.includes('localhost')) {
-      if (isCorrect) window.alert('CORRECT!');
-      else window.alert('INCORRECT :(');
-    }
-
-    if (isCorrect) {
-      await updateLevelScore({ levelNameDb, score: currentScore });
-    }
+    setIsCorrectlySolved(isCorrect);
+    toggleIsRunCodeModalOpen();
   }
 };

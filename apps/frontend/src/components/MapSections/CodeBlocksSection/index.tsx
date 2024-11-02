@@ -12,18 +12,16 @@ type TProps = {
   allDroppedCodeBlocksInScriptSlots: TAllDroppedCodeBlocksInScriptSlots;
   codeBlocks: string[];
   codeBlocksInCorrectOrder: string[];
-  currentScore: number;
   handleScoreChange: (action: 'jsRun' | 'useAI' | 'pass10Minutes') => void;
-  levelNameDb: string;
+  setIsCorrectlySolved: React.Dispatch<React.SetStateAction<boolean | undefined>>;
 };
 
 const CodeBlocksSection = ({
   allDroppedCodeBlocksInScriptSlots,
   codeBlocks,
   codeBlocksInCorrectOrder,
-  currentScore,
   handleScoreChange,
-  levelNameDb,
+  setIsCorrectlySolved,
 }: TProps) => {
   const [isRunCodeModalOpen, setIsRunCodeModalOpen] = useState(false);
   const [didCodeRun, setDidCodeRun] = useState(false);
@@ -36,7 +34,7 @@ const CodeBlocksSection = ({
 
   const runJsCode = () => {
     setDidCodeRun(true);
-    handleRunJSCode(codeBlocksInCorrectOrder, handleScoreChange, currentScore, levelNameDb);
+    handleRunJSCode(codeBlocksInCorrectOrder, handleScoreChange, setIsCorrectlySolved, toggleIsRunCodeModalOpen);
   };
 
   const allDroppedCodeBlocksInScriptSlotsKeys = Object.keys(allDroppedCodeBlocksInScriptSlots || {}).filter(
