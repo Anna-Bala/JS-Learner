@@ -6,7 +6,7 @@ import DraggableCodeBlock from '../../DraggableCodeBlock';
 import DroppableCodeBlock from '../../DroppableCodeBlock';
 import './index.scss';
 
-import type { TAllDroppedCodeBlocksInScriptSlots } from '../../Map';
+import type { TAllDroppedCodeBlocksInScriptSlots, TTimer } from '../../Map';
 
 type TProps = {
   allDroppedCodeBlocksInScriptSlots: TAllDroppedCodeBlocksInScriptSlots;
@@ -14,6 +14,7 @@ type TProps = {
   handleScoreChange: (action: 'jsRun' | 'useAI' | 'pass10Minutes') => void;
   scriptSlots: string[][];
   setIsCorrectlySolved: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  timer: TTimer;
 };
 
 const ScriptSection = ({
@@ -22,10 +23,19 @@ const ScriptSection = ({
   handleScoreChange,
   scriptSlots,
   setIsCorrectlySolved,
+  timer,
 }: TProps) => {
   const [isRunCodeModalOpen, setIsRunCodeModalOpen] = useState(false);
 
-  const toggleIsRunCodeModalOpen = () => setIsRunCodeModalOpen(prevState => !prevState);
+  const toggleIsRunCodeModalOpen = () => {
+    setIsRunCodeModalOpen(prevState => !prevState);
+    timer.pauseTimer();
+  };
+
+  const handleIsRunCodeModalClose = () => {
+    setIsRunCodeModalOpen(false);
+    timer.resumeTimer();
+  };
 
   const runJsCode = () =>
     handleRunJSCode(codeBlocksInCorrectOrder, handleScoreChange, setIsCorrectlySolved, toggleIsRunCodeModalOpen);
@@ -74,7 +84,7 @@ const ScriptSection = ({
           ))}
         </div>
       </div>
-      <RunCodeModal handleClose={toggleIsRunCodeModalOpen} isOpen={isRunCodeModalOpen} onPrimaryAction={runJsCode} />
+      <RunCodeModal handleClose={handleIsRunCodeModalClose} isOpen={isRunCodeModalOpen} onPrimaryAction={runJsCode} />
     </>
   );
 };

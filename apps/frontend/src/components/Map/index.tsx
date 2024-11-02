@@ -20,6 +20,12 @@ export type TAllDroppedCodeBlocksInScriptSlots = {
   };
 } | null;
 
+export type TTimer = {
+  isTimerActive: boolean;
+  pauseTimer: () => void;
+  resumeTimer: () => void;
+};
+
 const Map = ({ level }: TProps) => {
   const [score, setScore] = useState(3);
   const [jsRunErrored, setJsRunErrored] = useState(false);
@@ -28,6 +34,7 @@ const Map = ({ level }: TProps) => {
   const [isCorrectlySolved, setIsCorrectlySolved] = useState<boolean | undefined>(undefined);
 
   const [timeLeft, setTimeLeft] = useState(600);
+  const [isTimerActive, setIsTimerActive] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const [isHTMLModalOpen, setIsHTMLModalOpen] = useState(false);
@@ -59,13 +66,15 @@ const Map = ({ level }: TProps) => {
   };
 
   const startTimer = () => {
-    if (intervalRef.current) return;
+    if (intervalRef.current || timeLeft <= 0) return;
 
+    setIsTimerActive(true);
     intervalRef.current = setInterval(() => {
       setTimeLeft(prevTime => {
         if (prevTime <= 1) {
           clearInterval(intervalRef.current || undefined);
           intervalRef.current = null;
+          setIsTimerActive(false);
           handleScoreChange('pass10Minutes');
           return 0;
         }
@@ -77,6 +86,20 @@ const Map = ({ level }: TProps) => {
   const stopTimer = () => {
     clearInterval(intervalRef.current!);
     intervalRef.current = null;
+  };
+
+  const pauseTimer = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+      setIsTimerActive(false);
+    }
+  };
+
+  const resumeTimer = () => {
+    if (!intervalRef.current && timeLeft > 0) {
+      startTimer();
+    }
   };
 
   const appendKeydownActions = (event: KeyboardEvent) => {
@@ -132,6 +155,12 @@ const Map = ({ level }: TProps) => {
     }
   };
 
+  const timer = {
+    isTimerActive,
+    pauseTimer,
+    resumeTimer,
+  };
+
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <div className="map-wrapper">
@@ -145,6 +174,7 @@ const Map = ({ level }: TProps) => {
               level={level}
               setIsCorrectlySolved={setIsCorrectlySolved}
               timeLeft={timeLeft}
+              timer={timer}
             />
           </div>
           <div style={{ flex: 1, display: 'flex', flexDirection: 'row', gap: '16px' }}>
@@ -154,6 +184,7 @@ const Map = ({ level }: TProps) => {
               codeBlocksInCorrectOrder={level.codeBlocksInCorrectOrder}
               handleScoreChange={handleScoreChange}
               setIsCorrectlySolved={setIsCorrectlySolved}
+              timer={timer}
             />
             <ScriptSection
               allDroppedCodeBlocksInScriptSlots={allDroppedCodeBlocksInScriptSlots}
@@ -161,6 +192,7 @@ const Map = ({ level }: TProps) => {
               handleScoreChange={handleScoreChange}
               scriptSlots={level.scriptSlots}
               setIsCorrectlySolved={setIsCorrectlySolved}
+              timer={timer}
             />
             {level.resultIFrameSrcDoc && <ResultSection resultIFrameSrcDoc={level.resultIFrameSrcDoc} />}
           </div>
@@ -184,6 +216,7 @@ const Map = ({ level }: TProps) => {
           isOpen={isCorrectlySolved !== undefined}
           levelNameDb={level.dbName}
           score={score}
+          timer={timer}
         />
       </div>
     </DndContext>

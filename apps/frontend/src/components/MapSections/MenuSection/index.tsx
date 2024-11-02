@@ -8,6 +8,7 @@ import RunCodeModal from '../../Modals/RunCodeModal';
 import Typography from '../../Typography';
 
 import type { TLevel } from '../../../levels';
+import type { TTimer } from '../../Map';
 
 import colors from '../../../styling/_colors.module.scss';
 import './index.scss';
@@ -19,6 +20,7 @@ type TProps = {
   level: TLevel;
   setIsCorrectlySolved: React.Dispatch<React.SetStateAction<boolean | undefined>>;
   timeLeft: number;
+  timer: TTimer;
 };
 
 const iconsColor = colors['color-primary-400'];
@@ -30,10 +32,19 @@ const MenuSection = ({
   level,
   setIsCorrectlySolved,
   timeLeft,
+  timer,
 }: TProps) => {
   const [isRunCodeModalOpen, setIsRunCodeModalOpen] = useState(false);
 
-  const toggleIsRunCodeModalOpen = () => setIsRunCodeModalOpen(prevState => !prevState);
+  const toggleIsRunCodeModalOpen = () => {
+    setIsRunCodeModalOpen(prevState => !prevState);
+    timer.pauseTimer();
+  };
+
+  const handleIsRunCodeModalClose = () => {
+    setIsRunCodeModalOpen(false);
+    timer.resumeTimer();
+  };
 
   const runJsCode = () =>
     handleRunJSCode(level.codeBlocksInCorrectOrder, handleScoreChange, setIsCorrectlySolved, toggleIsRunCodeModalOpen);
@@ -68,7 +79,7 @@ const MenuSection = ({
           </Typography>
         </div>
       </div>
-      <RunCodeModal handleClose={toggleIsRunCodeModalOpen} isOpen={isRunCodeModalOpen} onPrimaryAction={runJsCode} />
+      <RunCodeModal handleClose={handleIsRunCodeModalClose} isOpen={isRunCodeModalOpen} onPrimaryAction={runJsCode} />
     </>
   );
 };

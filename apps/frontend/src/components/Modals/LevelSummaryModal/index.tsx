@@ -7,15 +7,18 @@ import ModalWrapper from '../ModalWrapper';
 import Typography from '../../Typography';
 import './index.scss';
 
+import type { TTimer } from '../../Map';
+
 type TProps = {
   handleClose: () => void;
   isCorrectlySolved?: boolean;
   isOpen: boolean;
   levelNameDb: string;
   score: number;
+  timer: TTimer;
 };
 
-const LevelSummaryModal = ({ handleClose, isCorrectlySolved, isOpen, levelNameDb, score }: TProps) => {
+const LevelSummaryModal = ({ handleClose, isCorrectlySolved, isOpen, levelNameDb, score, timer }: TProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [savingErrored, setSavingErrored] = useState(false);
 
@@ -25,14 +28,15 @@ const LevelSummaryModal = ({ handleClose, isCorrectlySolved, isOpen, levelNameDb
       setSavingErrored(false);
       await updateLevelScore({ levelNameDb, score })
         .then(() => {
-          setIsLoading(false);
           handleClose();
           window.history.pushState({}, '', '/');
           const navEvent = new PopStateEvent('popstate');
           window.dispatchEvent(navEvent);
         })
-        .catch(() => setSavingErrored(true));
+        .catch(() => setSavingErrored(true))
+        .finally(() => setIsLoading(false));
     } else {
+      timer.resumeTimer();
       handleClose();
     }
   };
