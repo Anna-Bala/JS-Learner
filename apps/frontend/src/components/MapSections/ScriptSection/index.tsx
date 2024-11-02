@@ -6,22 +6,44 @@ import DraggableCodeBlock from '../../DraggableCodeBlock';
 import DroppableCodeBlock from '../../DroppableCodeBlock';
 import './index.scss';
 
-import type { TAllDroppedCodeBlocksInScriptSlots } from '../../Map';
+import type { TAllDroppedCodeBlocksInScriptSlots, TTimer } from '../../Map';
 
 type TProps = {
   allDroppedCodeBlocksInScriptSlots: TAllDroppedCodeBlocksInScriptSlots;
   codeBlocksInCorrectOrder: string[];
+  handleScoreChange: (action: 'jsRun' | 'useAI' | 'pass10Minutes') => void;
   scriptSlots: string[][];
+  setIsCorrectlySolved: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  timer: TTimer;
 };
 
-const ScriptSection = ({ allDroppedCodeBlocksInScriptSlots, codeBlocksInCorrectOrder, scriptSlots }: TProps) => {
+const ScriptSection = ({
+  allDroppedCodeBlocksInScriptSlots,
+  codeBlocksInCorrectOrder,
+  handleScoreChange,
+  scriptSlots,
+  setIsCorrectlySolved,
+  timer,
+}: TProps) => {
   const [isRunCodeModalOpen, setIsRunCodeModalOpen] = useState(false);
 
-  const toggleIsRunCodeModalOpen = () => setIsRunCodeModalOpen(prevState => !prevState);
+  const toggleIsRunCodeModalOpen = () => {
+    setIsRunCodeModalOpen(prevState => !prevState);
+    timer.pauseTimer();
+  };
 
-  const runJsCode = () => handleRunJSCode(codeBlocksInCorrectOrder);
+  const handleIsRunCodeModalClose = () => {
+    setIsRunCodeModalOpen(false);
+    timer.resumeTimer();
+  };
+
+  const runJsCode = () =>
+    handleRunJSCode(codeBlocksInCorrectOrder, handleScoreChange, setIsCorrectlySolved, toggleIsRunCodeModalOpen);
 
   const appendKeydownActions = (event: KeyboardEvent) => {
+    if (event.target instanceof HTMLElement) {
+      if (event?.target?.classList.contains('text-input')) return;
+    }
     if (event.code === 'KeyJ') toggleIsRunCodeModalOpen();
   };
 
@@ -62,7 +84,7 @@ const ScriptSection = ({ allDroppedCodeBlocksInScriptSlots, codeBlocksInCorrectO
           ))}
         </div>
       </div>
-      <RunCodeModal handleClose={toggleIsRunCodeModalOpen} isOpen={isRunCodeModalOpen} onPrimaryAction={runJsCode} />
+      <RunCodeModal handleClose={handleIsRunCodeModalClose} isOpen={isRunCodeModalOpen} onPrimaryAction={runJsCode} />
     </>
   );
 };

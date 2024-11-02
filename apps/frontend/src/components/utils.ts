@@ -26,7 +26,12 @@ const evaluateChallange = (codeBlocksInCorrectOrder: string[]) => {
   return result;
 };
 
-export const handleRunJSCode = (codeBlocksInCorrectOrder: string[]) => {
+export const handleRunJSCode = (
+  codeBlocksInCorrectOrder: string[],
+  handleScoreChange: (action: 'jsRun' | 'useAI' | 'pass10Minutes') => void,
+  setIsCorrectlySolved: React.Dispatch<React.SetStateAction<boolean | undefined>>,
+  toggleIsRunCodeModalOpen: () => void,
+) => {
   const allCodeBlocks = document.getElementsByClassName('script-block');
   const jsCode = Array.from(allCodeBlocks)
     .map(codeBlock => codeBlock.innerHTML)
@@ -39,10 +44,10 @@ export const handleRunJSCode = (codeBlocksInCorrectOrder: string[]) => {
   try {
     eval(jsCodeFormatted);
   } catch {
-    window.alert('WRONG FORMAT!');
+    handleScoreChange('jsRun');
   } finally {
-    const result = evaluateChallange(codeBlocksInCorrectOrder);
-    if (result) window.alert('CORRECT!');
-    else window.alert('INCORRECT :(');
+    const isCorrect = evaluateChallange(codeBlocksInCorrectOrder);
+    setIsCorrectlySolved(isCorrect);
+    toggleIsRunCodeModalOpen();
   }
 };

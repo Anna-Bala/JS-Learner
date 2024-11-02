@@ -22,6 +22,6 @@ export class UserLevel {
   @JoinColumn({ name: 'level_id' })
   level: Level;
 
-  @Column()
+  @Column({ type: 'tinyint', default: 0 })
   score: number;
 }

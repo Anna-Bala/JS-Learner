@@ -13,9 +13,10 @@ import './index.scss';
 
 type TProps = {
   challangeQuestions: TQuestion[];
+  handleScoreChange: (action: 'jsRun' | 'useAI' | 'pass10Minutes') => void;
 };
 
-const ChatAI = ({ challangeQuestions }: TProps) => {
+const ChatAI = ({ challangeQuestions, handleScoreChange }: TProps) => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -52,6 +53,7 @@ const ChatAI = ({ challangeQuestions }: TProps) => {
       .then(response => {
         const aiAnswer = response?.choices?.[0]?.message?.content || '';
         setMessages(prevState => [...prevState, aiAnswer]);
+        handleScoreChange('useAI');
       })
       .catch(() => setIsError(true))
       .finally(() => toggleIsLoading());

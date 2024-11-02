@@ -25,9 +25,6 @@ const LevelOption = ({ level, setLevel }: TProps) => (
         scoreValue ? <StarFilledIcon key={index} size={48} /> : <StarEmptyIcon key={index} size={48} />,
       )}
     </div>
-    <Typography className="level-option__points" color="green-600" variant="body1">
-      Points earned: x
-    </Typography>
     <Link className="level-option__link" href="/level">
       <IconButton
         className="level-option__button"

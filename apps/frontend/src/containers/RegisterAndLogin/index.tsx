@@ -70,6 +70,10 @@ const RegisterAndLogin = ({ isLogin = false }: TProps) => {
       window.history.pushState({}, '', '/');
       const navEvent = new PopStateEvent('popstate');
       window.dispatchEvent(navEvent);
+
+      const loginResponseData = await loginResponse.json();
+      const userId = loginResponseData.userId.toString();
+      localStorage.setItem('userId', userId);
     }
   };
 
