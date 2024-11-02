@@ -13,6 +13,7 @@ type TProps = {
   codeBlocksInCorrectOrder: string[];
   currentScore: number;
   handleScoreChange: (action: 'jsRun' | 'useAI' | 'pass10Minutes') => void;
+  levelNameDb: string;
   scriptSlots: string[][];
 };
 
@@ -21,13 +22,14 @@ const ScriptSection = ({
   codeBlocksInCorrectOrder,
   currentScore,
   handleScoreChange,
+  levelNameDb,
   scriptSlots,
 }: TProps) => {
   const [isRunCodeModalOpen, setIsRunCodeModalOpen] = useState(false);
 
   const toggleIsRunCodeModalOpen = () => setIsRunCodeModalOpen(prevState => !prevState);
 
-  const runJsCode = () => handleRunJSCode(codeBlocksInCorrectOrder, handleScoreChange, currentScore);
+  const runJsCode = () => handleRunJSCode(codeBlocksInCorrectOrder, handleScoreChange, currentScore, levelNameDb);
 
   const appendKeydownActions = (event: KeyboardEvent) => {
     if (event.target instanceof HTMLElement) {

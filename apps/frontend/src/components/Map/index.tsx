@@ -151,12 +151,14 @@ const Map = ({ level }: TProps) => {
               codeBlocksInCorrectOrder={level.codeBlocksInCorrectOrder}
               currentScore={score}
               handleScoreChange={handleScoreChange}
+              levelNameDb={level.dbName}
             />
             <ScriptSection
               allDroppedCodeBlocksInScriptSlots={allDroppedCodeBlocksInScriptSlots}
               codeBlocksInCorrectOrder={level.codeBlocksInCorrectOrder}
               currentScore={score}
               handleScoreChange={handleScoreChange}
+              levelNameDb={level.dbName}
               scriptSlots={level.scriptSlots}
             />
             {level.resultIFrameSrcDoc && <ResultSection resultIFrameSrcDoc={level.resultIFrameSrcDoc} />}

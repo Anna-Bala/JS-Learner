@@ -27,7 +27,8 @@ const MenuSection = ({ currentScore, handleInfoIconButtonClick, handleScoreChang
 
   const toggleIsRunCodeModalOpen = () => setIsRunCodeModalOpen(prevState => !prevState);
 
-  const runJsCode = () => handleRunJSCode(level.codeBlocksInCorrectOrder, handleScoreChange, currentScore);
+  const runJsCode = () =>
+    handleRunJSCode(level.codeBlocksInCorrectOrder, handleScoreChange, currentScore, level.dbName);
 
   const formatTimeLeft = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);

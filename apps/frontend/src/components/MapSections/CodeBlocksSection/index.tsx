@@ -14,6 +14,7 @@ type TProps = {
   codeBlocksInCorrectOrder: string[];
   currentScore: number;
   handleScoreChange: (action: 'jsRun' | 'useAI' | 'pass10Minutes') => void;
+  levelNameDb: string;
 };
 
 const CodeBlocksSection = ({
@@ -22,6 +23,7 @@ const CodeBlocksSection = ({
   codeBlocksInCorrectOrder,
   currentScore,
   handleScoreChange,
+  levelNameDb,
 }: TProps) => {
   const [isRunCodeModalOpen, setIsRunCodeModalOpen] = useState(false);
   const [didCodeRun, setDidCodeRun] = useState(false);
@@ -34,7 +36,7 @@ const CodeBlocksSection = ({
 
   const runJsCode = () => {
     setDidCodeRun(true);
-    handleRunJSCode(codeBlocksInCorrectOrder, handleScoreChange, currentScore);
+    handleRunJSCode(codeBlocksInCorrectOrder, handleScoreChange, currentScore, levelNameDb);
   };
 
   const allDroppedCodeBlocksInScriptSlotsKeys = Object.keys(allDroppedCodeBlocksInScriptSlots || {}).filter(
