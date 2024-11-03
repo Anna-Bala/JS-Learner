@@ -16,6 +16,7 @@ type TProps = {
 
 const LevelsList = ({ setLevel }: TProps) => {
   const [allLevelsWithScore, setAllLevelsWithScore] = useState<TAllLevels>(levels);
+  const [numberOfLevelsWithMin2Stars, setNumberOfLevelsWithMin2Stars] = useState(0);
 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
@@ -52,6 +53,9 @@ const LevelsList = ({ setLevel }: TProps) => {
         });
 
         setAllLevelsWithScore(newLevelsWithScore);
+
+        const levelsWithMin2Stars = data.filter((scoreInfo: TScoreInfo) => scoreInfo.score >= 2);
+        setNumberOfLevelsWithMin2Stars(levelsWithMin2Stars.length);
       })
       .catch(() => {
         setAllLevelsWithScore(levels);
@@ -74,18 +78,21 @@ const LevelsList = ({ setLevel }: TProps) => {
         {
           <>
             <LevelsListSection
+              isSectionLocked={false}
               levelsWithScore={allLevelsWithScore.fundamentals}
               sectionName="Fundamentals"
               setLevel={setLevel}
             />
             <LevelsListSection
               additionalInfo="To unlock this section you have to complete at least 3 levels with 2 out of 3 stars"
+              isSectionLocked={numberOfLevelsWithMin2Stars < 3}
               levelsWithScore={allLevelsWithScore.dataTypesAndFunctions}
               sectionName="Data Types and Functions"
               setLevel={setLevel}
             />
             <LevelsListSection
               additionalInfo="To unlock this section you have to complete at least 6 levels with 2 out of 3 stars"
+              isSectionLocked={numberOfLevelsWithMin2Stars < 6}
               levelsWithScore={allLevelsWithScore.statementsAndLogicalOperations}
               sectionName="Statements and Logical Operations"
               setLevel={setLevel}

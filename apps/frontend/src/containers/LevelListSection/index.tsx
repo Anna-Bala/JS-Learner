@@ -9,13 +9,13 @@ import type { TLevel } from '../../levels';
 
 type TProps = {
   additionalInfo?: string;
-  isLocked: boolean;
+  isSectionLocked: boolean;
   levelsWithScore: TLevel[];
   sectionName: string;
   setLevel: React.Dispatch<React.SetStateAction<TLevel>>;
 };
 
-const LevelsListSection = ({ additionalInfo, isLocked, levelsWithScore, sectionName, setLevel }: TProps) => (
+const LevelsListSection = ({ additionalInfo, isSectionLocked, levelsWithScore, sectionName, setLevel }: TProps) => (
   <div className="level-list-section">
     <Typography color="primary-600" variant="heading3">
       {sectionName}
@@ -26,12 +26,12 @@ const LevelsListSection = ({ additionalInfo, isLocked, levelsWithScore, sectionN
       </Typography>
     ) : null}
     <div className="level-list-section__levels" id={`${sectionName}-container`}>
-      {isLocked ? (
+      {isSectionLocked ? (
         <div className="level-list-section__locked-overlay">
           <LockerIcon fill={colors['color-neutral-white']} size={69} />
         </div>
       ) : null}
-      {!isLocked ? (
+      {!isSectionLocked ? (
         <IconButton
           className="level-list-section__button"
           icon={<PlayIcon fill={colors['color-primary-300']} size={24} />}
@@ -42,10 +42,11 @@ const LevelsListSection = ({ additionalInfo, isLocked, levelsWithScore, sectionN
       ) : (
         <div />
       )}
-      {levelsWithScore.map((level: TLevel) => (
-        <LevelOption isLocked={isLocked} level={level} key={level.name} setLevel={setLevel} />
-      ))}
-      {!isLocked ? (
+      {levelsWithScore.map((level: TLevel, index) => {
+        const isLocked = isSectionLocked || (index === 0 ? false : (levelsWithScore[index - 1]?.score || 0) < 2);
+        return <LevelOption isLocked={isLocked} level={level} key={level.name} setLevel={setLevel} />;
+      })}
+      {!isSectionLocked ? (
         <IconButton
           className="level-list-section__button -right"
           icon={<PlayIcon fill={colors['color-primary-300']} size={24} />}
