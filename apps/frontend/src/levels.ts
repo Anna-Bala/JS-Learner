@@ -11,6 +11,7 @@ export type TLevel = {
   htmlSourceCode: string;
   name: string;
   dbName: string;
+  score?: number;
   resultIFrameSrcDoc: string;
   scriptSlots: string[][];
   challangeQuestions: TQuestion[];

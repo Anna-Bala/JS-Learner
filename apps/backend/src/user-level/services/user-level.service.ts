@@ -12,8 +12,11 @@ export class UserLevelService {
     private readonly userLevelRepository: Repository<UserLevel>,
   ) {}
 
-  fetchLevelSave() {
-    return this.userLevelRepository.find();
+  async fetchLevelSaveByUserId(userId: number): Promise<UserLevel[]> {
+    return this.userLevelRepository.find({
+      where: { user: { id: userId } },
+      relations: ['level'],
+    });
   }
 
   async saveUserLevel(levelSaveDto: LevelSaveDto): Promise<UserLevel> {
