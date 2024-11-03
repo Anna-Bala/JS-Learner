@@ -21,7 +21,7 @@ const LevelOption = ({ level, setLevel }: TProps) => (
       </Typography>
     </div>
     <div className="level-option__score">
-      {convertLevelScore(level.score).map((scoreValue, index) =>
+      {convertLevelScore(0).map((scoreValue, index) =>
         scoreValue ? <StarFilledIcon key={index} size={48} /> : <StarEmptyIcon key={index} size={48} />,
       )}
     </div>
