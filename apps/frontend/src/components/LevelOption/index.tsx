@@ -1,6 +1,6 @@
 import { convertLevelScore } from '../utils';
 import { IconButton } from '../Buttons';
-import { PlayIcon, StarEmptyIcon, StarFilledIcon } from '../../components/Icons';
+import { LockerIcon, PlayIcon, StarEmptyIcon, StarFilledIcon } from '../../components/Icons';
 import Link from '../Routing/Link';
 import Typography from '../Typography';
 import type { TLevel } from '../../levels';
@@ -9,31 +9,40 @@ import colors from '../../styling/_colors.module.scss';
 import './index.scss';
 
 type TProps = {
+  isLocked: boolean;
   level: TLevel;
   setLevel: React.Dispatch<React.SetStateAction<TLevel>>;
 };
 
-const LevelOption = ({ level, setLevel }: TProps) => (
-  <div className="level-option">
+const LevelOption = ({ isLocked, level, setLevel }: TProps) => (
+  <div className={`level-option ${isLocked ? '-locked' : ''}`}>
     <div className="level-option__header">
       <Typography color="neutral-white" variant="subtitle2">
         {level.name}
       </Typography>
     </div>
-    <div className="level-option__score">
-      {convertLevelScore(level?.score || 0).map((scoreValue, index) =>
-        scoreValue ? <StarFilledIcon key={index} size={48} /> : <StarEmptyIcon key={index} size={48} />,
-      )}
-    </div>
-    <Link className="level-option__link" href="/level">
-      <IconButton
-        className="level-option__button"
-        icon={<PlayIcon fill={colors['color-green-100']} size={18} />}
-        onClick={() => {
-          setLevel(level);
-        }}
-      />
-    </Link>
+    {!isLocked ? (
+      <>
+        <div className="level-option__score">
+          {convertLevelScore(level?.score || 0).map((scoreValue, index) =>
+            scoreValue ? <StarFilledIcon key={index} size={48} /> : <StarEmptyIcon key={index} size={48} />,
+          )}
+        </div>
+        <Link className="level-option__link" href="/level">
+          <IconButton
+            className="level-option__button"
+            icon={<PlayIcon fill={colors['color-green-100']} size={18} />}
+            onClick={() => {
+              setLevel(level);
+            }}
+          />
+        </Link>
+      </>
+    ) : (
+      <div className="level-option__icon">
+        <LockerIcon fill={colors['color-neutral-white']} size={69} />
+      </div>
+    )}
   </div>
 );
 
