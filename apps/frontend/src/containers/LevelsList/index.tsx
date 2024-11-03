@@ -1,46 +1,66 @@
-import { PlayIcon } from '../../components/Icons';
-import { IconButton } from '../../components/Buttons';
-import LevelOption from '../../components/LevelOption';
+import { useEffect, useState } from 'react';
+
+import { getLevelsWithScore } from '../../api/utils';
 import levels, { TLevel } from '../../levels';
+import LevelsListSection from '../LevelListSection';
 import Typography from '../../components/Typography';
 
-import colors from '../../styling/_colors.module.scss';
 import './index.scss';
+
+type TAllLevels = { fundamentals: TLevel[]; dataTypesAndFunctions: TLevel[]; statementsAndLogicalOperations: TLevel[] };
+type TScoreInfo = { score: number; id: number; level: { id: number; name: string } };
 
 type TProps = {
   setLevel: React.Dispatch<React.SetStateAction<TLevel>>;
 };
 
 const LevelsList = ({ setLevel }: TProps) => {
-  const renderListSection = (sectionName: string, levels: TLevel[], additionalInfo?: string) => (
-    <div className="level-list__section-wrapper">
-      <Typography color="primary-600" variant="heading3">
-        {sectionName}
-      </Typography>
-      <Typography color="primary-600" variant="subtitle1">
-        {additionalInfo}
-      </Typography>
-      <div className="level-list__levels-wrapper" id={`${sectionName}-container`}>
-        <IconButton
-          className="level-list__button"
-          icon={<PlayIcon fill={colors['color-primary-300']} size={24} />}
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          //@ts-expect-error
-          onClick={() => (document.getElementById(`${sectionName}-container`).scrollLeft -= 100)}
-        />
-        {levels.map((level: TLevel) => (
-          <LevelOption level={level} key={level.name} setLevel={setLevel} />
-        ))}
-        <IconButton
-          className="level-list__button -right"
-          icon={<PlayIcon fill={colors['color-primary-300']} size={24} />}
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          //@ts-expect-error
-          onClick={() => (document.getElementById(`${sectionName}-container`).scrollLeft += 100)}
-        />
-      </div>
-    </div>
-  );
+  const [allLevelsWithScore, setAllLevelsWithScore] = useState<TAllLevels>(levels);
+  const [numberOfLevelsWithMin2Stars, setNumberOfLevelsWithMin2Stars] = useState(0);
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+
+    if (!userId) {
+      setAllLevelsWithScore(levels);
+      return;
+    }
+
+    getLevelsWithScore(userId)
+      .then(data => data.json())
+      .then(data => {
+        if (data.length < 1) {
+          setAllLevelsWithScore(levels);
+          return;
+        }
+
+        const levelKeys = Object.keys(levels) as (keyof typeof newLevelsWithScore)[];
+        const newLevelsWithScore = { ...levels };
+
+        data.forEach((scoreInfo: TScoreInfo) => {
+          const scoreInfoLevelName = scoreInfo.level.name;
+
+          levelKeys.forEach(levelKey => {
+            newLevelsWithScore[levelKey].forEach((level: TLevel, index: number) => {
+              if (level.dbName === scoreInfoLevelName) {
+                newLevelsWithScore[levelKey][index] = {
+                  ...level,
+                  score: scoreInfo.score,
+                };
+              }
+            });
+          });
+        });
+
+        setAllLevelsWithScore(newLevelsWithScore);
+
+        const levelsWithMin2Stars = data.filter((scoreInfo: TScoreInfo) => scoreInfo.score >= 2);
+        setNumberOfLevelsWithMin2Stars(levelsWithMin2Stars.length);
+      })
+      .catch(() => {
+        setAllLevelsWithScore(levels);
+      });
+  }, []);
 
   return (
     <section className="level-list">
@@ -57,17 +77,26 @@ const LevelsList = ({ setLevel }: TProps) => {
       <main>
         {
           <>
-            {renderListSection('Fundamentals', levels.fundamentals)}
-            {renderListSection(
-              'Data Types and Functions',
-              levels.dataTypesAndFunctions,
-              'To unlock this section you have to complete at least 3 levels with 2 out of 3 stars',
-            )}
-            {renderListSection(
-              'Statements and Logical Operations',
-              levels.statementsAndLogicalOperations,
-              'To unlock this section you have to complete at least 6 levels with 2 out of 3 stars',
-            )}
+            <LevelsListSection
+              isSectionLocked={false}
+              levelsWithScore={allLevelsWithScore.fundamentals}
+              sectionName="Fundamentals"
+              setLevel={setLevel}
+            />
+            <LevelsListSection
+              additionalInfo="To unlock this section you have to complete at least 3 levels with 2 out of 3 stars"
+              isSectionLocked={numberOfLevelsWithMin2Stars < 3}
+              levelsWithScore={allLevelsWithScore.dataTypesAndFunctions}
+              sectionName="Data Types and Functions"
+              setLevel={setLevel}
+            />
+            <LevelsListSection
+              additionalInfo="To unlock this section you have to complete at least 6 levels with 2 out of 3 stars"
+              isSectionLocked={numberOfLevelsWithMin2Stars < 6}
+              levelsWithScore={allLevelsWithScore.statementsAndLogicalOperations}
+              sectionName="Statements and Logical Operations"
+              setLevel={setLevel}
+            />
           </>
         }
       </main>

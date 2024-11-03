@@ -1,7 +1,7 @@
 import type { TIconProps } from './types';
 
 const Locker = ({ fill, size }: TIconProps) => (
-  <svg width={size} height={size} viewBox="0 0 38 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width={size} height={size} viewBox="0 0 38 48" fill={fill} xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#clip0_34664_302)">
       <path
         fill-rule="evenodd"

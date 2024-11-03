@@ -22,6 +22,12 @@ export const checkAuthentication = () => {
     });
 };
 
+export const getLevelsWithScore = async (userId: string) => {
+  return fetch(`${LEVEL_SAVE_API_URL}/${userId}`, {
+    method: 'GET',
+  });
+};
+
 export const getAllLevels = async () => {
   return fetch(LEVELS_API_URL, {
     method: 'GET',
