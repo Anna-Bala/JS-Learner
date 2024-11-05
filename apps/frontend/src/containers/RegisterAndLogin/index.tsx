@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { logEvent } from 'firebase/analytics';
 
-import { analytics } from '../../firebase';
 import { Button } from '../../components/Buttons';
 import { LOGIN_API_URL, USERS_API_URL } from '../../api/constants';
 import Link from '../../components/Routing/Link';
@@ -44,10 +42,8 @@ const RegisterAndLogin = ({ isLogin = false }: TProps) => {
 
     if (registerResponse.status === 201 || registerResponse.status === 200) {
       setIsSuccess(true);
-      logEvent(analytics, 'sign_up', { successful: true, userName });
     } else {
       setError('Something went wrong while creating an account, please try again.');
-      logEvent(analytics, 'sign_up', { successful: false, userName });
     }
   };
 
@@ -73,7 +69,6 @@ const RegisterAndLogin = ({ isLogin = false }: TProps) => {
 
     if (loginResponse.status !== 201 && loginResponse.status !== 200) {
       setError('Your username or password is incorrect, please try again.');
-      logEvent(analytics, 'login', { successful: false, userName });
     } else {
       window.history.pushState({}, '', '/');
       const navEvent = new PopStateEvent('popstate');
@@ -82,7 +77,6 @@ const RegisterAndLogin = ({ isLogin = false }: TProps) => {
       const loginResponseData = await loginResponse.json();
       const userId = loginResponseData.userId.toString();
       localStorage.setItem('userId', userId);
-      logEvent(analytics, 'login', { successful: true, userName });
     }
   };
 
