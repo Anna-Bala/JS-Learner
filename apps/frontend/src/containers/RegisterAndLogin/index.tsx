@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import mixpanel from 'mixpanel-browser';
 
 import { Button } from '../../components/Buttons';
 import { LOGIN_API_URL, USERS_API_URL } from '../../api/constants';
@@ -42,8 +43,17 @@ const RegisterAndLogin = ({ isLogin = false }: TProps) => {
 
     if (registerResponse.status === 201 || registerResponse.status === 200) {
       setIsSuccess(true);
+
+      mixpanel.track('Sign Up', {
+        'User Name': userName,
+        Success: true,
+      });
     } else {
       setError('Something went wrong while creating an account, please try again.');
+
+      mixpanel.track('Sign Up', {
+        Success: false,
+      });
     }
   };
 

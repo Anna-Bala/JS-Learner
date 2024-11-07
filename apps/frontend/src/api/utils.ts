@@ -11,6 +11,12 @@ export const checkAuthentication = () => {
       }
     })
     .then(() => {
+      // mixpanel.identify('USER_ID');
+
+      // mixpanel.people.set({
+      //   $name: 'Jane Doe',
+      // }); //TO DO - change!
+
       window.history.pushState({}, '', '/');
       const navEvent = new PopStateEvent('popstate');
       window.dispatchEvent(navEvent);

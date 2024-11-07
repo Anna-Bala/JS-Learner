@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import mixpanel from 'mixpanel-browser';
 
 import { checkAuthentication } from './api/utils';
 import levels from './levels';
@@ -11,6 +12,12 @@ const App = () => {
   const [level, setLevel] = useState(levels.fundamentals[0]);
 
   useEffect(() => {
+    mixpanel.init(process.env.MIXPANEL_TOKEN || '', {
+      debug: true,
+      track_pageview: true,
+      persistence: 'localStorage',
+    });
+
     checkAuthentication();
   }, []);
 
