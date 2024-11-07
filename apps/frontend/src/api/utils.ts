@@ -28,6 +28,12 @@ export const checkAuthentication = () => {
     });
 };
 
+export const getAllUsersScore = async () => {
+  return fetch(LEVEL_SAVE_API_URL, {
+    method: 'GET',
+  });
+};
+
 export const getLevelsWithScore = async (userId: string) => {
   return fetch(`${LEVEL_SAVE_API_URL}/${userId}`, {
     method: 'GET',

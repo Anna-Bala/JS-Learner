@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { getLevelsWithScore } from '../../api/utils';
+import colors from '../../styling/_colors.module.scss';
+import IconButton from '../../components/Buttons/IconButton';
 import levels, { TLevel } from '../../levels';
 import LevelsListSection from '../LevelListSection';
+import RankingModal from '../../components/Modals/RankingModal';
+import TrophyIcon from '../../components/Icons/Trophy';
 import Typography from '../../components/Typography';
 
 import './index.scss';
@@ -17,6 +21,9 @@ type TProps = {
 const LevelsList = ({ setLevel }: TProps) => {
   const [allLevelsWithScore, setAllLevelsWithScore] = useState<TAllLevels>(levels);
   const [numberOfLevelsWithMin2Stars, setNumberOfLevelsWithMin2Stars] = useState(0);
+  const [isRankingModalOpen, setIsRankingModalOpen] = useState(false);
+
+  const toggleIsRankingModalOpen = () => setIsRankingModalOpen(prevState => !prevState);
 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
@@ -63,44 +70,48 @@ const LevelsList = ({ setLevel }: TProps) => {
   }, []);
 
   return (
-    <section className="level-list">
-      <header className="level-list__header">
-        <Typography color="primary-600" variant="heading1">
-          Drag&Code
-        </Typography>
-        <div className="level-list__header-wrapper">
-          <Typography color="primary-600" variant="subtitle1">
-            To do: ranking button
+    <>
+      <section className="level-list">
+        <header className="level-list__header">
+          <Typography color="primary-600" variant="heading1">
+            Drag&Code
           </Typography>
-        </div>
-      </header>
-      <main>
-        {
-          <>
-            <LevelsListSection
-              isSectionLocked={false}
-              levelsWithScore={allLevelsWithScore.fundamentals}
-              sectionName="Fundamentals"
-              setLevel={setLevel}
+          <div className="level-list__header-wrapper">
+            <IconButton
+              icon={<TrophyIcon fill={colors['color-primary-600']} size={48} />}
+              onClick={toggleIsRankingModalOpen}
             />
-            <LevelsListSection
-              additionalInfo="To unlock this section you have to complete at least 3 levels with 2 out of 3 stars"
-              isSectionLocked={numberOfLevelsWithMin2Stars < 3}
-              levelsWithScore={allLevelsWithScore.dataTypesAndFunctions}
-              sectionName="Data Types and Functions"
-              setLevel={setLevel}
-            />
-            <LevelsListSection
-              additionalInfo="To unlock this section you have to complete at least 6 levels with 2 out of 3 stars"
-              isSectionLocked={numberOfLevelsWithMin2Stars < 6}
-              levelsWithScore={allLevelsWithScore.statementsAndLogicalOperations}
-              sectionName="Statements and Logical Operations"
-              setLevel={setLevel}
-            />
-          </>
-        }
-      </main>
-    </section>
+          </div>
+        </header>
+        <main>
+          {
+            <>
+              <LevelsListSection
+                isSectionLocked={false}
+                levelsWithScore={allLevelsWithScore.fundamentals}
+                sectionName="Fundamentals"
+                setLevel={setLevel}
+              />
+              <LevelsListSection
+                additionalInfo="To unlock this section you have to complete at least 3 levels with 2 out of 3 stars"
+                isSectionLocked={numberOfLevelsWithMin2Stars < 3}
+                levelsWithScore={allLevelsWithScore.dataTypesAndFunctions}
+                sectionName="Data Types and Functions"
+                setLevel={setLevel}
+              />
+              <LevelsListSection
+                additionalInfo="To unlock this section you have to complete at least 6 levels with 2 out of 3 stars"
+                isSectionLocked={numberOfLevelsWithMin2Stars < 6}
+                levelsWithScore={allLevelsWithScore.statementsAndLogicalOperations}
+                sectionName="Statements and Logical Operations"
+                setLevel={setLevel}
+              />
+            </>
+          }
+        </main>
+      </section>
+      <RankingModal isOpen={isRankingModalOpen} onPrimaryAction={toggleIsRankingModalOpen} />
+    </>
   );
 };
 

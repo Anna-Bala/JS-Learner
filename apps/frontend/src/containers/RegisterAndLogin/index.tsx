@@ -86,7 +86,10 @@ const RegisterAndLogin = ({ isLogin = false }: TProps) => {
 
       const loginResponseData = await loginResponse.json();
       const userId = loginResponseData.userId.toString();
+      const userName = loginResponseData.userName;
+
       localStorage.setItem('userId', userId);
+      localStorage.setItem('userName', userName);
     }
   };
 
