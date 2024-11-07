@@ -9,3 +9,4 @@ export { default as PlayIcon } from './Play';
 export { default as ReplayIcon } from './Replay';
 export { default as StarEmptyIcon } from './StarEmpty';
 export { default as StarFilledIcon } from './StarFilled';
+export { default as TrophyIcon } from './Trophy';
