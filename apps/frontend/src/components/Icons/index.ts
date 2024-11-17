@@ -1,3 +1,4 @@
+export { default as BookIcon } from './Book';
 export { default as CartIcon } from './Cart';
 export { default as CloseIcon } from './Close';
 export { default as EyeClosedIcon } from './EyeClosed';

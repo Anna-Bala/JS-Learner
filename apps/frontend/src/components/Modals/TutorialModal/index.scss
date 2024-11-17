@@ -1,0 +1,8 @@
+@use 'src/styling/_colors.module' as *;
+@use 'src/styling/spacing' as *;
+
+.icon-row {
+  display: flex;
+  align-items: center;
+  gap: $xs;
+}
