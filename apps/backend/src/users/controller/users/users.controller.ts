@@ -6,6 +6,7 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Put,
 } from '@nestjs/common';
 import { CreateUser } from '../../dtos/CreateUser.dto';
 import { UsersService } from '../../services/users/users.service';
@@ -27,6 +28,11 @@ export class UsersController {
     delete result.password;
 
     return result;
+  }
+
+  @Put(':id/tutorial')
+  async markTutorialCompleted(@Param('id', ParseIntPipe) id: number) {
+    await this.userService.markTutorialCompleted(id);
   }
 
   @Delete(':id')

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { getLevelsWithScore } from '../../api/utils';
+import { RankingModal, TutorialModal } from '../../components/Modals';
 import colors from '../../styling/_colors.module.scss';
 import IconButton from '../../components/Buttons/IconButton';
 import levels, { TLevel } from '../../levels';
 import LevelsListSection from '../LevelListSection';
-import RankingModal from '../../components/Modals/RankingModal';
-import TrophyIcon from '../../components/Icons/Trophy';
+import { BookIcon, TrophyIcon } from '../../components/Icons';
 import Typography from '../../components/Typography';
 
 import './index.scss';
@@ -78,6 +78,10 @@ const LevelsList = ({ setLevel }: TProps) => {
           </Typography>
           <div className="level-list__header-wrapper">
             <IconButton
+              icon={<BookIcon fill={colors['color-primary-600']} size={48} />}
+              onClick={toggleIsRankingModalOpen}
+            />
+            <IconButton
               icon={<TrophyIcon fill={colors['color-primary-600']} size={48} />}
               onClick={toggleIsRankingModalOpen}
             />
@@ -111,6 +115,7 @@ const LevelsList = ({ setLevel }: TProps) => {
         </main>
       </section>
       <RankingModal isOpen={isRankingModalOpen} onPrimaryAction={toggleIsRankingModalOpen} />
+      <TutorialModal isOpen={true} closeModal={() => {}} />
     </>
   );
 };

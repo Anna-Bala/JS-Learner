@@ -25,14 +25,18 @@ export class AuthService {
   async login(user: any) {
     const payload = { username: user.username, sub: user.userId };
 
-    const user_id = await this.usersService
-      .fetchUserByUserName(user.username as string)
-      .then((user) => user.id);
+    const userFetched = await this.usersService.fetchUserByUserName(
+      user.username as string,
+    );
+
+    const user_id = userFetched.id;
+    const user_completed_tutorial = userFetched.completedTutorial;
 
     return {
       access_token: this.jwtService.sign(payload),
       user_id,
       username: user.username,
+      user_completed_tutorial,
     };
   }
 }

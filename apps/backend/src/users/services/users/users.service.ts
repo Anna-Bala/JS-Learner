@@ -33,9 +33,17 @@ export class UsersService {
       ...user,
       password: hashedPassword,
       createdAt: new Date().toISOString(),
+      completedTutorial: false,
     });
 
     return this.userRepository.save(newUser);
+  }
+
+  async markTutorialCompleted(id: number) {
+    const user = await this.userRepository.findOne({ where: { id } });
+    user.completedTutorial = true;
+
+    this.userRepository.save(user);
   }
 
   deleteUser(id: number) {
