@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 
+import { BookIcon, TrophyIcon } from '../../components/Icons';
+import { COMPLETE_TUTORIAL_API_URL } from '../../api/constants';
 import { getLevelsWithScore } from '../../api/utils';
 import { RankingModal, TutorialModal } from '../../components/Modals';
 import colors from '../../styling/_colors.module.scss';
 import IconButton from '../../components/Buttons/IconButton';
 import levels, { TLevel } from '../../levels';
 import LevelsListSection from '../LevelListSection';
-import { BookIcon, TrophyIcon } from '../../components/Icons';
 import Typography from '../../components/Typography';
 
 import './index.scss';
@@ -16,18 +17,30 @@ type TScoreInfo = { score: number; id: number; level: { id: number; name: string
 
 type TProps = {
   setLevel: React.Dispatch<React.SetStateAction<TLevel>>;
+  isTutorialModalOpen: boolean;
+  setIsTutorialModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const LevelsList = ({ setLevel }: TProps) => {
+const LevelsList = ({ setLevel, isTutorialModalOpen, setIsTutorialModalOpen }: TProps) => {
   const [allLevelsWithScore, setAllLevelsWithScore] = useState<TAllLevels>(levels);
   const [numberOfLevelsWithMin2Stars, setNumberOfLevelsWithMin2Stars] = useState(0);
   const [isRankingModalOpen, setIsRankingModalOpen] = useState(false);
 
   const toggleIsRankingModalOpen = () => setIsRankingModalOpen(prevState => !prevState);
 
-  useEffect(() => {
-    const userId = localStorage.getItem('userId');
+  const userId = localStorage.getItem('userId');
 
+  const handleCloseTutorialModal = async () => {
+    setIsTutorialModalOpen(false);
+
+    await fetch(COMPLETE_TUTORIAL_API_URL(Number(userId)), {
+      method: 'PUT',
+    }).then(() => {
+      localStorage.setItem('completedTutorial', '1');
+    });
+  };
+
+  useEffect(() => {
     if (!userId) {
       setAllLevelsWithScore(levels);
       return;
@@ -67,7 +80,7 @@ const LevelsList = ({ setLevel }: TProps) => {
       .catch(() => {
         setAllLevelsWithScore(levels);
       });
-  }, []);
+  }, [userId]);
 
   return (
     <>
@@ -79,7 +92,7 @@ const LevelsList = ({ setLevel }: TProps) => {
           <div className="level-list__header-wrapper">
             <IconButton
               icon={<BookIcon fill={colors['color-primary-600']} size={48} />}
-              onClick={toggleIsRankingModalOpen}
+              onClick={() => setIsTutorialModalOpen(true)}
             />
             <IconButton
               icon={<TrophyIcon fill={colors['color-primary-600']} size={48} />}
@@ -115,7 +128,7 @@ const LevelsList = ({ setLevel }: TProps) => {
         </main>
       </section>
       <RankingModal isOpen={isRankingModalOpen} onPrimaryAction={toggleIsRankingModalOpen} />
-      <TutorialModal isOpen={true} closeModal={() => {}} />
+      <TutorialModal isOpen={isTutorialModalOpen} closeModal={handleCloseTutorialModal} />
     </>
   );
 };

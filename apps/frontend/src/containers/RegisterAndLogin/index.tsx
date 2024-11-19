@@ -10,9 +10,10 @@ import './index.scss';
 
 type TProps = {
   isLogin?: boolean;
+  setIsTutorialModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const RegisterAndLogin = ({ isLogin = false }: TProps) => {
+const RegisterAndLogin = ({ isLogin = false, setIsTutorialModalOpen }: TProps) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
@@ -87,9 +88,11 @@ const RegisterAndLogin = ({ isLogin = false }: TProps) => {
       const loginResponseData = await loginResponse.json();
       const userId = loginResponseData.userId.toString();
       const userName = loginResponseData.userName;
+      const completedTutorial = loginResponseData.completedTutorial;
 
       localStorage.setItem('userId', userId);
       localStorage.setItem('userName', userName);
+      setIsTutorialModalOpen?.(!completedTutorial);
     }
   };
 
