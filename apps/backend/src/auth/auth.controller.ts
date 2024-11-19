@@ -31,7 +31,11 @@ export class AuthController {
       maxAge: 10 * 60 * 60 * 1000, // 10 hours
     });
 
-    return res.send({ userId: token.user_id, userName: token.username });
+    return res.send({
+      userId: token.user_id,
+      userName: token.username,
+      completedTutorial: token.user_completed_tutorial,
+    });
   }
 
   @Get('check')

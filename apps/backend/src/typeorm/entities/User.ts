@@ -13,4 +13,7 @@ export class User {
 
   @Column()
   createdAt: string;
+
+  @Column({ default: false })
+  completedTutorial: boolean;
 }
