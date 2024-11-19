@@ -9,6 +9,7 @@ import RegisterAndLogin from './containers/RegisterAndLogin';
 import Route from './components/Routing/Route';
 
 const App = () => {
+  const [isTutorialModalOpen, setIsTutorialModalOpen] = useState(false);
   const [level, setLevel] = useState(levels.fundamentals[0]);
 
   useEffect(() => {
@@ -24,13 +25,17 @@ const App = () => {
   return (
     <>
       <Route path="/">
-        <LevelsList setLevel={setLevel} />
+        <LevelsList
+          setLevel={setLevel}
+          isTutorialModalOpen={isTutorialModalOpen}
+          setIsTutorialModalOpen={setIsTutorialModalOpen}
+        />
       </Route>
       <Route path="/level">
         <Map level={level} />
       </Route>
       <Route path="/login">
-        <RegisterAndLogin isLogin />
+        <RegisterAndLogin isLogin setIsTutorialModalOpen={setIsTutorialModalOpen} />
       </Route>
       <Route path="/register">
         <RegisterAndLogin />
