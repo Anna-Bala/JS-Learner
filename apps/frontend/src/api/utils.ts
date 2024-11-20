@@ -1,3 +1,5 @@
+import mixpanel from 'mixpanel-browser';
+
 import { CHECK_API_URL, LEVEL_SAVE_API_URL, LEVELS_API_URL } from './constants';
 
 export const checkAuthentication = () => {
@@ -5,17 +7,16 @@ export const checkAuthentication = () => {
     method: 'GET',
     credentials: 'include',
   })
+    .then(response => response.json())
     .then(response => {
-      if (!response.ok) {
+      if (!response.isAuthenticated) {
         throw new Error('User not authenticated');
       }
-    })
-    .then(() => {
-      // mixpanel.identify('USER_ID');
 
-      // mixpanel.people.set({
-      //   $name: 'Jane Doe',
-      // }); //TO DO - change!
+      mixpanel.identify(response.user.id);
+      mixpanel.people.set({
+        $name: response.user.username,
+      });
 
       window.history.pushState({}, '', '/');
       const navEvent = new PopStateEvent('popstate');
