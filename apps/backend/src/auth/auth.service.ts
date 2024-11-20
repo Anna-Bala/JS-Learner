@@ -11,23 +11,28 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(password: string, id: number): Promise<any> {
-    const user = await this.usersService.fetchUserById(id);
+  async validateUser(password: string, username: string): Promise<any> {
+    const user = await this.usersService.fetchUserByUserName(username);
 
-    if (user && compare(user.password, password)) {
+    if (!user) {
+      return null;
+    }
+
+    const isPasswordMatch = await compare(password, user.password);
+
+    if (isPasswordMatch) {
       delete user.password;
-
       return user;
     }
     return null;
   }
 
   async login(user: any) {
-    const payload = { username: user.username, sub: user.userId };
-
     const userFetched = await this.usersService.fetchUserByUserName(
       user.username as string,
     );
+
+    const payload = { username: userFetched.username, sub: userFetched.id };
 
     const user_id = userFetched.id;
     const user_completed_tutorial = userFetched.completedTutorial;

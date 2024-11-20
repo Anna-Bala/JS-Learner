@@ -63,10 +63,8 @@ const RegisterAndLogin = ({ isLogin = false, setIsTutorialModalOpen }: TProps) =
     setError('');
 
     const data = {
-      user: {
-        username: userName,
-        password,
-      },
+      username: userName,
+      password,
     };
 
     const loginResponse = await fetch(LOGIN_API_URL, {

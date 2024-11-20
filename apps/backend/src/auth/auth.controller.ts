@@ -6,6 +6,7 @@ import {
   Response,
   UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { JwtService } from '@nestjs/jwt';
 
 import { AuthService } from './auth.service';
@@ -20,9 +21,10 @@ export class AuthController {
     private userService: UsersService,
   ) {}
 
+  @UseGuards(AuthGuard('local'))
   @Post('login')
   async login(@Request() req, @Response() res) {
-    const token = await this.authService.login(req.body.user);
+    const token = await this.authService.login(req.body);
 
     res.cookie('jwt', token.access_token, {
       httpOnly: true,
