@@ -40,21 +40,15 @@ export class AuthController {
     });
   }
 
-  @Get('check')
   @UseGuards(JwtAuthGuard)
+  @Get('check')
   async checkAuth(@Request() req, @Response() res) {
-    const token = req.cookies['jwt'];
-    if (!token) {
-      return res.status(401).json({ isAuthenticated: false });
-    }
-
     try {
-      const payload = this.jwtService.verify(token);
-      const user = await this.userService.fetchUserById(payload.sub);
+      const user = req.user;
+      const fullUser = await this.userService.fetchUserById(user.id);
+      delete fullUser.password;
 
-      delete user.password;
-
-      return res.json({ isAuthenticated: true, user });
+      return res.json({ isAuthenticated: true, user: fullUser });
     } catch (error) {
       return res.status(401).json({ isAuthenticated: false });
     }
