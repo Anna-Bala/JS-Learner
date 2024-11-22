@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import mixpanel from 'mixpanel-browser';
 
 import { AI_SYSTEM_MESSAGE, AI_USER_MESSAGE, DEFAULT_FIRST_MESSAGE, OPEN_AI_MODEL } from './constants';
 import { Button, PanelButton } from '../Buttons';
@@ -23,7 +24,13 @@ const ChatAI = ({ challangeQuestions, handleScoreChange }: TProps) => {
   const [messages, setMessages] = useState([DEFAULT_FIRST_MESSAGE]);
   const [userQuestion, setUserQuestion] = useState('');
 
-  const toggleChatOpen = () => setIsChatOpen(prevState => !prevState);
+  const toggleChatOpen = () => {
+    if (!isChatOpen) {
+      mixpanel.track('AI Chat Open');
+    }
+
+    setIsChatOpen(prevState => !prevState);
+  };
   const toggleIsLoading = () => setIsLoading(prevState => !prevState);
 
   const handleSendButton = () => {
@@ -35,6 +42,8 @@ const ChatAI = ({ challangeQuestions, handleScoreChange }: TProps) => {
     setMessages(prevState => [...prevState, question.chat]);
     setIsError(false);
     toggleIsLoading();
+
+    const isPredefinedPrompt = !!challangeQuestions.find(({ prompt }) => prompt === question.prompt);
 
     await openai.chat.completions
       .create({
@@ -51,11 +60,25 @@ const ChatAI = ({ challangeQuestions, handleScoreChange }: TProps) => {
         model: OPEN_AI_MODEL,
       })
       .then(response => {
+        mixpanel.track('AI Chat Send Message', {
+          prompt: question.prompt,
+          isPredefinedPrompt,
+          successRequest: true,
+        });
+
         const aiAnswer = response?.choices?.[0]?.message?.content || '';
         setMessages(prevState => [...prevState, aiAnswer]);
         handleScoreChange('useAI');
       })
-      .catch(() => setIsError(true))
+      .catch(() => {
+        setIsError(true);
+
+        mixpanel.track('AI Chat Send Message', {
+          prompt: question.prompt,
+          isPredefinedPrompt,
+          successRequest: false,
+        });
+      })
       .finally(() => toggleIsLoading());
   };
 

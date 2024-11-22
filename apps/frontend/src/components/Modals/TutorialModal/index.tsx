@@ -8,17 +8,12 @@ import Typography from '../../Typography';
 import './index.scss';
 
 type TProps = {
-  closeModal: () => void;
+  closeModal: (tutorialPageTitle: string) => void;
   isOpen: boolean;
 };
 
 const TutorialModal = ({ closeModal, isOpen }: TProps) => {
   const [page, setPage] = useState(1);
-
-  const handlePrimaryAction = () => {
-    if (page < 9) setPage(prevState => ++prevState);
-    else closeModal();
-  };
 
   const primaryActionText = {
     1: 'Scoring System',
@@ -30,6 +25,16 @@ const TutorialModal = ({ closeModal, isOpen }: TProps) => {
     7: 'AI chat',
     8: 'Finish tutorial',
     9: 'Close',
+  };
+
+  const handleCloseModal = () =>
+    closeModal(
+      page === 1 ? 'Welcome to the Drag&Code!' : primaryActionText[(page - 1) as keyof typeof primaryActionText],
+    );
+
+  const handlePrimaryAction = () => {
+    if (page < 9) setPage(prevState => ++prevState);
+    else handleCloseModal();
   };
 
   const pageContent = {
@@ -203,7 +208,7 @@ const TutorialModal = ({ closeModal, isOpen }: TProps) => {
       isOpen={isOpen}
       onPrimaryAction={handlePrimaryAction}
       primaryActionText={primaryActionText[page as keyof typeof primaryActionText]}
-      handleClose={closeModal}
+      handleClose={handleCloseModal}
       title={page === 1 ? 'Welcome to the Drag&Code!' : primaryActionText[(page - 1) as keyof typeof primaryActionText]}
     >
       {pageContent[page as keyof typeof pageContent]}

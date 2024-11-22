@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import mixpanel from 'mixpanel-browser';
 
 import { convertLevelScore, handleRunJSCode } from '../../utils';
 import { HomeIcon, InfoIcon, PlayIcon, StarEmptyIcon, StarFilledIcon } from '../../Icons';
@@ -55,6 +56,15 @@ const MenuSection = ({
     return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
   };
 
+  const onClickHomeButton = () => {
+    mixpanel.track('End level', {
+      levelName: level.dbName,
+      success: false,
+      timeLeft: timer.timeLeft,
+      score: currentScore,
+    });
+  };
+
   return (
     <>
       <div className="menu-section">
@@ -70,7 +80,7 @@ const MenuSection = ({
         </div>
         <div className="menu-section__actions">
           <Link href="/">
-            <IconButton icon={<HomeIcon fill={iconsColor} size={48} />} onClick={() => {}} />
+            <IconButton icon={<HomeIcon fill={iconsColor} size={48} />} onClick={onClickHomeButton} />
           </Link>
           <IconButton icon={<InfoIcon fill={iconsColor} size={48} />} onClick={handleInfoIconButtonClick} />
           <IconButton icon={<PlayIcon fill={iconsColor} size={48} />} onClick={toggleIsRunCodeModalOpen} />

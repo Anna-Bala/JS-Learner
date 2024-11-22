@@ -21,6 +21,7 @@ export type TAllDroppedCodeBlocksInScriptSlots = {
 } | null;
 
 export type TTimer = {
+  timeLeft: number;
   isTimerActive: boolean;
   pauseTimer: () => void;
   resumeTimer: () => void;
@@ -156,6 +157,7 @@ const Map = ({ level }: TProps) => {
   };
 
   const timer = {
+    timeLeft,
     isTimerActive,
     pauseTimer,
     resumeTimer,

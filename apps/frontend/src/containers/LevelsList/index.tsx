@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import mixpanel from 'mixpanel-browser';
 
 import { BookIcon, TrophyIcon } from '../../components/Icons';
 import { COMPLETE_TUTORIAL_API_URL } from '../../api/constants';
@@ -26,12 +27,22 @@ const LevelsList = ({ setLevel, isTutorialModalOpen, setIsTutorialModalOpen }: T
   const [numberOfLevelsWithMin2Stars, setNumberOfLevelsWithMin2Stars] = useState(0);
   const [isRankingModalOpen, setIsRankingModalOpen] = useState(false);
 
-  const toggleIsRankingModalOpen = () => setIsRankingModalOpen(prevState => !prevState);
+  const toggleIsRankingModalOpen = () => {
+    if (!isRankingModalOpen) {
+      mixpanel.track('Leaderboards Open');
+    }
+
+    setIsRankingModalOpen(prevState => !prevState);
+  };
 
   const userId = localStorage.getItem('userId');
 
-  const handleCloseTutorialModal = async () => {
+  const handleCloseTutorialModal = async (tutorialPageTitle: string) => {
     setIsTutorialModalOpen(false);
+
+    mixpanel.track('Tutorial Complete', {
+      tutorialPageTitle,
+    });
 
     await fetch(COMPLETE_TUTORIAL_API_URL(Number(userId)), {
       method: 'PUT',

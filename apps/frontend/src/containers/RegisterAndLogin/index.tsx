@@ -89,7 +89,16 @@ const RegisterAndLogin = ({ isLogin = false, setIsTutorialModalOpen }: TProps) =
 
     if (loginResponse.status !== 201 && loginResponse.status !== 200) {
       setError('Your username or password is incorrect, please try again.');
+
+      mixpanel.track('Login', {
+        success: false,
+      });
     } else {
+      mixpanel.track('Login', {
+        userName: data.username,
+        success: true,
+      });
+
       window.history.pushState({}, '', '/');
       const navEvent = new PopStateEvent('popstate');
       window.dispatchEvent(navEvent);
