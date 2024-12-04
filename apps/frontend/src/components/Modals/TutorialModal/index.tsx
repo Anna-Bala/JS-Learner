@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { BookIcon, HomeIcon, InfoIcon, PlayIcon, TrophyIcon } from '../../../components/Icons';
 import colors from '../../../styling/_colors.module.scss';
@@ -8,17 +8,13 @@ import Typography from '../../Typography';
 import './index.scss';
 
 type TProps = {
-  closeModal: () => void;
+  closeModal: (tutorialPageTitle: string, timeSpendInTutorialInSeconds: number) => void;
   isOpen: boolean;
 };
 
 const TutorialModal = ({ closeModal, isOpen }: TProps) => {
   const [page, setPage] = useState(1);
-
-  const handlePrimaryAction = () => {
-    if (page < 9) setPage(prevState => ++prevState);
-    else closeModal();
-  };
+  const [time, setTime] = useState(0);
 
   const primaryActionText = {
     1: 'Scoring System',
@@ -30,6 +26,33 @@ const TutorialModal = ({ closeModal, isOpen }: TProps) => {
     7: 'AI chat',
     8: 'Finish tutorial',
     9: 'Close',
+  };
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | undefined = undefined;
+
+    if (isOpen) {
+      interval = setInterval(() => {
+        setTime(prevTime => prevTime + 1);
+      }, 1000);
+    } else {
+      setTime(0);
+    }
+
+    return () => clearInterval(interval);
+  }, [isOpen]);
+
+  const handleCloseModal = () => {
+    setPage(1);
+    closeModal(
+      page === 1 ? 'Welcome to the Drag&Code!' : primaryActionText[(page - 1) as keyof typeof primaryActionText],
+      time,
+    );
+  };
+
+  const handlePrimaryAction = () => {
+    if (page < 9) setPage(prevState => ++prevState);
+    else handleCloseModal();
   };
 
   const pageContent = {
@@ -203,7 +226,7 @@ const TutorialModal = ({ closeModal, isOpen }: TProps) => {
       isOpen={isOpen}
       onPrimaryAction={handlePrimaryAction}
       primaryActionText={primaryActionText[page as keyof typeof primaryActionText]}
-      handleClose={closeModal}
+      handleClose={handleCloseModal}
       title={page === 1 ? 'Welcome to the Drag&Code!' : primaryActionText[(page - 1) as keyof typeof primaryActionText]}
     >
       {pageContent[page as keyof typeof pageContent]}

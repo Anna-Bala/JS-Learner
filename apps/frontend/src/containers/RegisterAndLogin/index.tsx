@@ -34,28 +34,39 @@ const RegisterAndLogin = ({ isLogin = false, setIsTutorialModalOpen }: TProps) =
       password,
     };
 
-    const registerResponse = await fetch(USERS_API_URL, {
+    await fetch(USERS_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-    });
+    })
+      .then(response => response.json())
+      .then(response => {
+        mixpanel.identify(response.id);
+        mixpanel.people.set({
+          $name: response.username,
+        });
 
-    if (registerResponse.status === 201 || registerResponse.status === 200) {
-      setIsSuccess(true);
+        mixpanel.track('Sign Up', {
+          userName: response.username,
+          success: true,
+        });
 
-      mixpanel.track('Sign Up', {
-        'User Name': userName,
-        Success: true,
+        setIsSuccess(true);
+      })
+      .catch(() => {
+        setError('Something went wrong while creating an account, please try again.');
+
+        mixpanel.reset();
+        mixpanel.people.set({
+          $name: '',
+        });
+
+        mixpanel.track('Sign Up', {
+          success: false,
+        });
       });
-    } else {
-      setError('Something went wrong while creating an account, please try again.');
-
-      mixpanel.track('Sign Up', {
-        Success: false,
-      });
-    }
   };
 
   const handleLogin = async (event: React.MouseEvent<HTMLElement>) => {
@@ -78,7 +89,16 @@ const RegisterAndLogin = ({ isLogin = false, setIsTutorialModalOpen }: TProps) =
 
     if (loginResponse.status !== 201 && loginResponse.status !== 200) {
       setError('Your username or password is incorrect, please try again.');
+
+      mixpanel.track('Login', {
+        success: false,
+      });
     } else {
+      mixpanel.track('Login', {
+        userName: data.username,
+        success: true,
+      });
+
       window.history.pushState({}, '', '/');
       const navEvent = new PopStateEvent('popstate');
       window.dispatchEvent(navEvent);
@@ -87,6 +107,11 @@ const RegisterAndLogin = ({ isLogin = false, setIsTutorialModalOpen }: TProps) =
       const userId = loginResponseData.userId.toString();
       const userName = loginResponseData.userName;
       const completedTutorial = loginResponseData.completedTutorial;
+
+      mixpanel.identify(userId);
+      mixpanel.people.set({
+        $name: userName,
+      });
 
       localStorage.setItem('userId', userId);
       localStorage.setItem('userName', userName);

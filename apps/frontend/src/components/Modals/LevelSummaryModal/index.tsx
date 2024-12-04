@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import mixpanel from 'mixpanel-browser';
 
 import { convertLevelScore } from '../../utils';
 import { StarEmptyIcon, StarFilledIcon } from '../../Icons';
@@ -28,6 +29,13 @@ const LevelSummaryModal = ({ handleClose, isCorrectlySolved, isOpen, levelNameDb
       setSavingErrored(false);
       await updateLevelScore({ levelNameDb, score })
         .then(() => {
+          mixpanel.track('End level', {
+            levelName: levelNameDb,
+            success: true,
+            timeLeft: timer.timeLeft,
+            score,
+          });
+
           handleClose();
           window.history.pushState({}, '', '/');
           const navEvent = new PopStateEvent('popstate');
