@@ -43,10 +43,11 @@ export const handleRunJSCode = (
 
   try {
     eval(jsCodeFormatted);
-  } catch {
-    handleScoreChange('jsRun');
   } finally {
     const isCorrect = evaluateChallange(codeBlocksInCorrectOrder);
+    if (!isCorrect) {
+      handleScoreChange('jsRun');
+    }
     setIsCorrectlySolved(isCorrect);
     toggleIsRunCodeModalOpen();
   }
