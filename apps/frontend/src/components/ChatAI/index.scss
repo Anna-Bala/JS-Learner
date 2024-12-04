@@ -12,9 +12,11 @@
   width: 35%;
 
   &__send-section {
+    background-color: $color-green-100;
     bottom: 0;
     margin-top: $xxxl;
-    padding-top: $sm;
+    padding: $xl;
+    padding-top: 0px;
     position: sticky;
   }
 
@@ -41,8 +43,7 @@
     border-bottom: none;
     max-height: 60vh;
     overflow: scroll;
-    padding: $xl;
-    padding-bottom: 0px;
+    padding-top: $xl;
     position: relative;
   }
 
@@ -72,6 +73,7 @@
   border-color: transparent;
   border-radius: 22px;
   padding: $sm $xl;
+  margin-bottom: $xl;
   text-align: center;
   width: 65%;
 
