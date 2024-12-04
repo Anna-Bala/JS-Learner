@@ -37,11 +37,12 @@ const LevelsList = ({ setLevel, isTutorialModalOpen, setIsTutorialModalOpen }: T
 
   const userId = localStorage.getItem('userId');
 
-  const handleCloseTutorialModal = async (tutorialPageTitle: string) => {
+  const handleCloseTutorialModal = async (tutorialPageTitle: string, timeSpendInTutorialInSeconds: number) => {
     setIsTutorialModalOpen(false);
 
-    mixpanel.track('Tutorial Complete', {
+    mixpanel.track('Tutorial Completed', {
       tutorialPageTitle,
+      timeSpendInTutorialInSeconds,
     });
 
     await fetch(COMPLETE_TUTORIAL_API_URL(Number(userId)), {
