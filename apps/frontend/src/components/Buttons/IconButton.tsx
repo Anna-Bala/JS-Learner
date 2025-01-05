@@ -7,9 +7,9 @@ type TProps = {
   disabled?: boolean;
   icon: ReactNode;
   onClick: () => void;
-  onMouseDown: () => void;
-  onMouseUp: () => void;
-  onMouseLeave: () => void;
+  onMouseDown?: () => void;
+  onMouseUp?: () => void;
+  onMouseLeave?: () => void;
 };
 
 const IconButton = ({ className = '', disabled, icon, onClick, onMouseDown, onMouseLeave, onMouseUp }: TProps) => (
