@@ -66,7 +66,7 @@ const CodeBlocksSection = ({
       timer.pauseTimer();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allDroppedCodeBlocksInScriptSlotIds, codeBlocksInCorrectOrder, didCodeRun]);
+  }, [allDroppedCodeBlocksInScriptSlotIds.length, codeBlocksInCorrectOrder.length, didCodeRun]);
 
   return (
     <>
