@@ -1,6 +1,8 @@
 import './index.scss';
 
 import Typography from '../Typography';
+import useWithSound from '../../hooks/useWithSound';
+import buttonClickSound from '../../../public/button-click.mp3';
 
 type TProps = {
   children: string;
@@ -20,17 +22,25 @@ const Button = ({
   onClick,
   type = 'button',
   variant = 'medium',
-}: TProps) => (
-  <button
-    className={`button button-color__${color} button__${variant} ${className}`}
-    disabled={disabled}
-    onClick={onClick}
-    type={type}
-  >
-    <Typography color="neutral-white" variant="body2">
-      {children}
-    </Typography>
-  </button>
-);
+}: TProps) => {
+  const { playSound } = useWithSound(buttonClickSound);
+  const handleButtonClick = () => {
+    onClick();
+    playSound();
+  };
+
+  return (
+    <button
+      className={`button button-color__${color} button__${variant} ${className}`}
+      disabled={disabled}
+      onClick={handleButtonClick}
+      type={type}
+    >
+      <Typography color="neutral-white" variant="body2">
+        {children}
+      </Typography>
+    </button>
+  );
+};
 
 export default Button;
