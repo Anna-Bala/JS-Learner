@@ -24,8 +24,9 @@ type TProps = {
 
 const LevelsList = ({ setLevel, isTutorialModalOpen, setIsTutorialModalOpen }: TProps) => {
   const [allLevelsWithScore, setAllLevelsWithScore] = useState<TAllLevels>(levels);
-  const [numberOfLevelsWithMin2Stars, setNumberOfLevelsWithMin2Stars] = useState(0);
+  const [isLoadingData, setIsLoadingData] = useState(false);
   const [isRankingModalOpen, setIsRankingModalOpen] = useState(false);
+  const [numberOfLevelsWithMin2Stars, setNumberOfLevelsWithMin2Stars] = useState(0);
 
   const toggleIsRankingModalOpen = () => {
     if (!isRankingModalOpen) {
@@ -57,6 +58,8 @@ const LevelsList = ({ setLevel, isTutorialModalOpen, setIsTutorialModalOpen }: T
       setAllLevelsWithScore(levels);
       return;
     }
+
+    setIsLoadingData(true);
 
     getLevelsWithScore(userId)
       .then(data => data.json())
@@ -91,11 +94,19 @@ const LevelsList = ({ setLevel, isTutorialModalOpen, setIsTutorialModalOpen }: T
       })
       .catch(() => {
         setAllLevelsWithScore(levels);
+      })
+      .finally(() => {
+        setIsLoadingData(false);
       });
   }, [userId]);
 
   return (
     <>
+      {isLoadingData ? (
+        <div className="level-list__loading">
+          <span className="loader"></span>
+        </div>
+      ) : null}
       <section className="level-list">
         <header className="level-list__header">
           <Typography color="primary-600" variant="heading1">
