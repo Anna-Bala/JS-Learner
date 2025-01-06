@@ -4,6 +4,7 @@ import mixpanel from 'mixpanel-browser';
 import { BookIcon, MusicOffIcon, MusicOnIcon, TrophyIcon } from '../../components/Icons';
 import { COMPLETE_TUTORIAL_API_URL } from '../../api/constants';
 import { getLevelsWithScore } from '../../api/utils';
+import { isBigDesktop } from '../../components/utils';
 import { RankingModal, TutorialModal } from '../../components/Modals';
 import { useSoundMuted } from '../../context/SoundMutedContext';
 import colors from '../../styling/_colors.module.scss';
@@ -119,19 +120,19 @@ const LevelsList = ({ setLevel, isTutorialModalOpen, setIsTutorialModalOpen }: T
             <IconButton
               icon={
                 isMuted ? (
-                  <MusicOffIcon fill={colors['color-primary-600']} size={60} />
+                  <MusicOffIcon fill={colors['color-primary-600']} size={isBigDesktop ? 70 : 60} />
                 ) : (
-                  <MusicOnIcon fill={colors['color-primary-600']} size={60} />
+                  <MusicOnIcon fill={colors['color-primary-600']} size={isBigDesktop ? 70 : 60} />
                 )
               }
               onClick={toggleSoundMute}
             />
             <IconButton
-              icon={<BookIcon fill={colors['color-primary-600']} size={48} />}
+              icon={<BookIcon fill={colors['color-primary-600']} size={isBigDesktop ? 56 : 48} />}
               onClick={() => setIsTutorialModalOpen(true)}
             />
             <IconButton
-              icon={<TrophyIcon fill={colors['color-primary-600']} size={48} />}
+              icon={<TrophyIcon fill={colors['color-primary-600']} size={isBigDesktop ? 56 : 48} />}
               onClick={toggleIsRankingModalOpen}
             />
           </div>

@@ -9,6 +9,11 @@
   letter-spacing: 0.0075em;
   text-decoration: none;
   text-transform: none;
+
+  @media (min-width: 1800px) {
+    font-size: 72px;
+    line-height: 84px;
+  }
 }
 
 @mixin heading-2() {
@@ -19,6 +24,11 @@
   line-height: 64px;
   text-decoration: none;
   text-transform: none;
+
+  @media (min-width: 1800px) {
+    font-size: 60px;
+    line-height: 76px;
+  }
 }
 
 @mixin heading-3() {
@@ -29,6 +39,11 @@
   line-height: 48px;
   text-decoration: none;
   text-transform: none;
+
+  @media (min-width: 1800px) {
+    font-size: 52px;
+    line-height: 60px;
+  }
 }
 
 @mixin subtitle-1() {
@@ -39,6 +54,11 @@
   line-height: 40px;
   text-decoration: none;
   text-transform: none;
+
+  @media (min-width: 1800px) {
+    font-size: 40px;
+    line-height: 52px;
+  }
 }
 
 @mixin subtitle-2() {
@@ -50,6 +70,11 @@
   letter-spacing: 0.4px;
   text-decoration: none;
   text-transform: uppercase;
+
+  @media (min-width: 1800px) {
+    font-size: 26px;
+    line-height: 36px;
+  }
 }
 
 @mixin body-1-regular() {
@@ -60,6 +85,11 @@
   line-height: 28px;
   text-decoration: none;
   text-transform: none;
+
+  @media (min-width: 1800px) {
+    font-size: 24px;
+    line-height: 34px;
+  }
 }
 
 @mixin body-2-medium() {
@@ -70,4 +100,9 @@
   line-height: 24px;
   text-decoration: none;
   text-transform: uppercase;
+
+  @media (min-width: 1800px) {
+    font-size: 22px;
+    line-height: 24px;
+  }
 }

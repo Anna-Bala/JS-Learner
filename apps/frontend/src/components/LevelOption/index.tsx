@@ -1,4 +1,4 @@
-import { convertLevelScore } from '../utils';
+import { convertLevelScore, isBigDesktop } from '../utils';
 import { IconButton } from '../Buttons';
 import { LockerIcon, PlayIcon, StarEmptyIcon, StarFilledIcon } from '../../components/Icons';
 import Link from '../Routing/Link';
@@ -25,7 +25,11 @@ const LevelOption = ({ isLocked, level, setLevel }: TProps) => (
       <>
         <div className="level-option__score">
           {convertLevelScore(level?.score || 0).map((scoreValue, index) =>
-            scoreValue ? <StarFilledIcon key={index} size={48} /> : <StarEmptyIcon key={index} size={48} />,
+            scoreValue ? (
+              <StarFilledIcon key={index} size={isBigDesktop ? 56 : 48} />
+            ) : (
+              <StarEmptyIcon key={index} size={isBigDesktop ? 56 : 48} />
+            ),
           )}
         </div>
         <Link className="level-option__link" href="/level">

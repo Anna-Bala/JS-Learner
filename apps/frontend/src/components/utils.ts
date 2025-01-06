@@ -1,3 +1,5 @@
+export const isBigDesktop = window.innerWidth >= 1800;
+
 export const convertLevelScore = (levelScore: number) => {
   const result = [0, 0, 0];
 

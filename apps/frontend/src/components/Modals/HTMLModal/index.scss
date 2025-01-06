@@ -11,6 +11,10 @@ pre.language-html {
   border-radius: 16px;
   margin: 0;
 
+  @media (min-width: 1800px) {
+    font-size: 20px;
+  }
+
   .token.comment,
   .token.block-comment,
   .token.prolog,
