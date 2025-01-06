@@ -7,8 +7,8 @@ import { updateLevelScore } from '../../../api/utils';
 import ModalWrapper from '../ModalWrapper';
 import Typography from '../../Typography';
 import useWithSound from '../../../hooks/useWithSound';
-import correctSound from '../../../../public/correct.mp3';
-import wrongSound from '../../../../public/wrong.mp3';
+import correctSound from '/correct.mp3';
+import wrongSound from '/wrong.mp3';
 import './index.scss';
 
 import type { TTimer } from '../../Map';

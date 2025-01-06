@@ -2,14 +2,14 @@ import './index.scss';
 
 import Typography from '../Typography';
 import useWithSound from '../../hooks/useWithSound';
-import buttonClickSound from '../../../public/button-click.mp3';
+import buttonClickSound from '/button-click.mp3';
 
 type TProps = {
   children: string;
   className?: string;
   color: 'neutral' | 'green' | 'primary' | 'orange' | 'red';
   disabled?: boolean;
-  onClick: () => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
   variant?: 'small' | 'medium' | 'large';
 };
@@ -24,8 +24,8 @@ const Button = ({
   variant = 'medium',
 }: TProps) => {
   const { playSound } = useWithSound(buttonClickSound);
-  const handleButtonClick = () => {
-    onClick();
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onClick(event);
     playSound();
   };
 

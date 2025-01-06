@@ -1,18 +1,18 @@
 import './index.scss';
 
 import useWithSound from '../../hooks/useWithSound';
-import buttonClickSound from '../../../public/button-click.mp3';
+import buttonClickSound from '/button-click.mp3';
 
 type TProps = {
   className?: string;
   color: 'neutral' | 'green' | 'primary' | 'orange' | 'red';
-  onClick: () => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const PanelButton = ({ className = '', color, onClick }: TProps) => {
   const { playSound } = useWithSound(buttonClickSound);
-  const handleButtonClick = () => {
-    onClick();
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onClick(event);
     playSound();
   };
 

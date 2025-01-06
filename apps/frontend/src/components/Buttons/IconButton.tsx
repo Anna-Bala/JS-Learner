@@ -3,13 +3,13 @@ import { ReactNode } from 'react';
 import './index.scss';
 
 import useWithSound from '../../hooks/useWithSound';
-import buttonClickSound from '../../../public/button-click.mp3';
+import buttonClickSound from '/button-click.mp3';
 
 type TProps = {
   className?: string;
   disabled?: boolean;
   icon: ReactNode;
-  onClick: () => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onMouseDown?: () => void;
   onMouseUp?: () => void;
   onMouseLeave?: () => void;
@@ -17,8 +17,8 @@ type TProps = {
 
 const IconButton = ({ className = '', disabled, icon, onClick, onMouseDown, onMouseLeave, onMouseUp }: TProps) => {
   const { playSound } = useWithSound(buttonClickSound);
-  const handleButtonClick = () => {
-    onClick();
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onClick(event);
     playSound();
   };
 

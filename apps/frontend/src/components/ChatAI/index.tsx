@@ -8,7 +8,7 @@ import Message from './Message';
 import openai from './openai';
 import TextInput from '../Form/TextInput';
 import useWithSound from '../../hooks/useWithSound';
-import aiSound from '../../../public/ai.mp3';
+import aiSound from '/ai.mp3';
 
 import type { TQuestion } from '../../levels';
 
