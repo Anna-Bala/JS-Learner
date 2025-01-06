@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import mixpanel from 'mixpanel-browser';
 
-import { BookIcon, TrophyIcon } from '../../components/Icons';
+import { BookIcon, MusicOffIcon, MusicOnIcon, TrophyIcon } from '../../components/Icons';
 import { COMPLETE_TUTORIAL_API_URL } from '../../api/constants';
 import { getLevelsWithScore } from '../../api/utils';
 import { RankingModal, TutorialModal } from '../../components/Modals';
+import { useSoundMuted } from '../../context/SoundMutedContext';
 import colors from '../../styling/_colors.module.scss';
 import IconButton from '../../components/Buttons/IconButton';
 import levels, { TLevel } from '../../levels';
@@ -100,6 +101,8 @@ const LevelsList = ({ setLevel, isTutorialModalOpen, setIsTutorialModalOpen }: T
       });
   }, [userId]);
 
+  const { isMuted, toggleSoundMute } = useSoundMuted();
+
   return (
     <>
       {isLoadingData ? (
@@ -113,6 +116,16 @@ const LevelsList = ({ setLevel, isTutorialModalOpen, setIsTutorialModalOpen }: T
             Drag&Code
           </Typography>
           <div className="level-list__header-wrapper">
+            <IconButton
+              icon={
+                isMuted ? (
+                  <MusicOffIcon fill={colors['color-primary-600']} size={60} />
+                ) : (
+                  <MusicOnIcon fill={colors['color-primary-600']} size={60} />
+                )
+              }
+              onClick={toggleSoundMute}
+            />
             <IconButton
               icon={<BookIcon fill={colors['color-primary-600']} size={48} />}
               onClick={() => setIsTutorialModalOpen(true)}
