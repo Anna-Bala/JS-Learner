@@ -40,7 +40,7 @@ const Map = ({ level }: TProps) => {
 
   const [isHTMLModalOpen, setIsHTMLModalOpen] = useState(false);
   const [isInstructionsModalOpen, setIsInstructionsModalOpen] = useState(false);
-  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState(true);
   const [allDroppedCodeBlocksInScriptSlots, setAllDroppedCodeBlocksInScriptSlots] =
     useState<TAllDroppedCodeBlocksInScriptSlots>(null);
 
