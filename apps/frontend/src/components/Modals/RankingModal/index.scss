@@ -53,6 +53,11 @@
     &.-white {
       background-color: $color-primary-100;
     }
+
+    @media (min-width: 1800px) {
+      height: 40px;
+      width: 40px;
+    }
   }
 
   &__score-text {
