@@ -174,8 +174,6 @@ const RegisterAndLogin = ({ isLogin = false, setIsTutorialModalOpen }: TProps) =
           <Button
             className="login__form-button"
             color="orange"
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            //@ts-expect-error
             onClick={isLogin ? handleLogin : handleRegister}
             variant="small"
           >

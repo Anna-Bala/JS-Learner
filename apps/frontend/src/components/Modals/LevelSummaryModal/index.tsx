@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import mixpanel from 'mixpanel-browser';
 
 import { convertLevelScore } from '../../utils';
@@ -6,6 +6,9 @@ import { StarEmptyIcon, StarFilledIcon } from '../../Icons';
 import { updateLevelScore } from '../../../api/utils';
 import ModalWrapper from '../ModalWrapper';
 import Typography from '../../Typography';
+import useWithSound from '../../../hooks/useWithSound';
+import correctSound from '/correct.mp3';
+import wrongSound from '/wrong.mp3';
 import './index.scss';
 
 import type { TTimer } from '../../Map';
@@ -22,6 +25,19 @@ type TProps = {
 const LevelSummaryModal = ({ handleClose, isCorrectlySolved, isOpen, levelNameDb, score, timer }: TProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [savingErrored, setSavingErrored] = useState(false);
+
+  const { playSound: playCorrectSound } = useWithSound(correctSound);
+  const { playSound: playWrongSound } = useWithSound(wrongSound);
+
+  useEffect(() => {
+    if (isOpen) {
+      if (isCorrectlySolved) {
+        playCorrectSound();
+      } else {
+        playWrongSound();
+      }
+    }
+  }, [isOpen, isCorrectlySolved]);
 
   const onAnyAction = async () => {
     if (isCorrectlySolved) {

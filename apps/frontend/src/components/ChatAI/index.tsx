@@ -7,6 +7,8 @@ import Divider from '../Divider';
 import Message from './Message';
 import openai from './openai';
 import TextInput from '../Form/TextInput';
+import useWithSound from '../../hooks/useWithSound';
+import aiSound from '/ai.mp3';
 
 import type { TQuestion } from '../../levels';
 
@@ -23,6 +25,8 @@ const ChatAI = ({ challangeQuestions, handleScoreChange }: TProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState([DEFAULT_FIRST_MESSAGE]);
   const [userQuestion, setUserQuestion] = useState('');
+
+  const { playSound } = useWithSound(aiSound);
 
   const toggleChatOpen = () => {
     if (!isChatOpen) {
@@ -60,6 +64,8 @@ const ChatAI = ({ challangeQuestions, handleScoreChange }: TProps) => {
         model: OPEN_AI_MODEL,
       })
       .then(response => {
+        playSound();
+
         mixpanel.track('AI Chat Send Message', {
           prompt: question.prompt,
           isPredefinedPrompt,

@@ -6,6 +6,8 @@ export { default as EyeOpenIcon } from './EyeOpen';
 export { default as HomeIcon } from './Home';
 export { default as InfoIcon } from './Info';
 export { default as LockerIcon } from './Locker';
+export { default as MusicOffIcon } from './MusicOff';
+export { default as MusicOnIcon } from './MusicOn';
 export { default as PlayIcon } from './Play';
 export { default as ReplayIcon } from './Replay';
 export { default as StarEmptyIcon } from './StarEmpty';
