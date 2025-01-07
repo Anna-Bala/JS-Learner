@@ -17,9 +17,14 @@
     "apps/*"
   ],
   "devDependencies": {
+    "@types/prismjs": "^1.26.3",
+    "sass": "^1.76.0",
     "turbo": "^1.12.4"
   },
   "dependencies": {
+    "firebase": "^10.11.1",
+    "openai": "4.33.1",
+    "prismjs": "^1.29.0",
     "watch": "^1.0.2"
   }
 }

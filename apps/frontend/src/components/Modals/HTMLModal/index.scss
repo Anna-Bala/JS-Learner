@@ -1,0 +1,40 @@
+@use 'src/styling/_colors.module' as *;
+
+.code-wrapper {
+  background-color: $color-neutral-700;
+  border: 4px solid $color-orange-300;
+  border-radius: 16px;
+}
+
+pre.language-html {
+  background-color: $color-neutral-700;
+  border-radius: 16px;
+  margin: 0;
+
+  @media (min-width: 1800px) {
+    font-size: 20px;
+  }
+
+  .token.comment,
+  .token.block-comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: $color-neutral-400;
+  }
+
+  .token.tag,
+  .token.attr-name,
+  .token.namespace,
+  .token.deleted {
+    color: $color-red-400;
+  }
+
+  .token.string,
+  .token.char,
+  .token.attr-value,
+  .token.regex,
+  .token.variable {
+    color: $color-green-500;
+  }
+}

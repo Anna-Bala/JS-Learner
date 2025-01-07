@@ -1,0 +1,54 @@
+@use 'sass:map';
+@use 'src/styling/_colors.module' as *;
+@use 'src/styling/spacing' as *;
+@use 'src/styling/typography' as *;
+
+$colors: 'green', 'neutral', 'orange', 'primary', 'red';
+
+$mappedBorderColorsList: (
+  'green': $color-green-300,
+  'neutral': $color-neutral-300,
+  'orange': $color-orange-300,
+  'primary': $color-primary-300,
+  'red': $color-red-300,
+);
+
+$mappedBorderFocusColorsList: (
+  'green': $color-green-400,
+  'neutral': $color-neutral-400,
+  'orange': $color-orange-400,
+  'primary': $color-primary-400,
+  'red': $color-red-400,
+);
+
+.text-input {
+  @include body-1-regular;
+  color: $color-neutral-900;
+  border-radius: 2.7px;
+  border: 0.7px solid black;
+  outline: none;
+  padding: $xs $sm;
+  width: 100%;
+
+  &__wrapper {
+    position: relative;
+  }
+
+  &__icon {
+    position: absolute;
+    z-index: 10;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@each $color in $colors {
+  .text-input-color__#{$color} {
+    border-color: map.get($mappedBorderColorsList, $color);
+
+    &:focus {
+      outline: 1px solid map.get($mappedBorderFocusColorsList, $color);
+    }
+  }
+}

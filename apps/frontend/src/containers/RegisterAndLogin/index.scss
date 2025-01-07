@@ -1,0 +1,75 @@
+@use 'sass:map';
+@use 'src/styling/_colors.module' as *;
+@use 'src/styling/spacing' as *;
+@use 'src/styling/typography' as *;
+
+.login {
+  background-color: $color-background;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: $xxxl $xxxxl;
+  row-gap: 100px;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__error {
+    margin-top: $md;
+  }
+
+  &__form {
+    align-items: center;
+    background-color: $color-orange-100;
+    border-radius: 8px;
+    border: 5px solid $color-orange-200;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: $xxl $xxl 0 $xxl;
+    width: 45%;
+  }
+
+  &__form-button {
+    margin-top: $xxxl;
+  }
+
+  &__header {
+    align-items: baseline;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: $md;
+    justify-content: center;
+    margin-top: $xxxxl;
+  }
+
+  &__input-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: $md;
+    width: 60%;
+  }
+
+  &__link {
+    @include body-1-regular;
+    color: $color-orange-500;
+    font-weight: 700;
+    text-decoration: underline;
+
+    &:hover {
+      color: $color-orange-600;
+    }
+  }
+
+  &__redirect {
+    align-items: center;
+    column-gap: $xxs;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: $sm auto 0 auto;
+    width: 45%;
+  }
+}

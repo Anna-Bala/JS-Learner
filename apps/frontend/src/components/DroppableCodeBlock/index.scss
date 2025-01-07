@@ -1,0 +1,62 @@
+@use 'src/styling/_colors.module' as *;
+@use 'src/styling/shadows' as *;
+@use 'src/styling/spacing' as *;
+@use 'src/styling/typography' as *;
+
+.code-block {
+  @include body-1-regular;
+  @include code-block-shadow-outside;
+  align-items: center;
+  border-radius: 2px;
+  border: 2px solid $color-green-300;
+  display: flex;
+  flex-direction: row;
+  min-height: 44px;
+  justify-content: center;
+  padding: $sm $xl;
+  min-width: 100px;
+  width: fit-content;
+
+  &__default {
+    background-color: $color-green-200;
+    color: $color-green-700;
+
+    &.collision {
+      background-color: $color-green-300;
+      border-color: $color-green-500;
+      box-shadow: none;
+      color: $color-green-800;
+    }
+  }
+
+  &__error {
+    background-color: $color-red-100;
+    border-color: $color-red-200;
+    color: $color-red-700;
+
+    &.collision {
+      background-color: $color-red-200;
+      border-color: $color-red-300;
+      box-shadow: none;
+      color: $color-red-800;
+    }
+  }
+
+  &__static {
+    background-color: $color-neutral-100;
+    border-color: $color-neutral-200;
+    box-shadow: none;
+    color: $color-neutral-600;
+  }
+
+  &__slot {
+    background-color: $color-green-100;
+    border-color: $color-green-200;
+    box-shadow: none;
+
+    &.collision {
+      background-color: $color-green-200;
+      border-color: $color-green-300;
+    }
+  }
+}
