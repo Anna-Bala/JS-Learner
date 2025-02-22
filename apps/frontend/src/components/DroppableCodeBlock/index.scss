@@ -5,7 +5,7 @@
 
 .code-block {
   @include body-1-regular;
-  @include code-block-shadow-outside;
+  @include shadow-border;
   align-items: center;
   border-radius: 2px;
   border: 2px solid $color-green-300;

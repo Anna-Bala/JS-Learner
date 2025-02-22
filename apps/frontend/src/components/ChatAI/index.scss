@@ -78,14 +78,14 @@
   width: 65%;
 
   &.-recived {
-    @include chat-shadow;
+    @include left-shadow;
     background-color: $color-neutral-100;
     color: $color-neutral-700;
     margin-left: $xl;
   }
 
   &.-send {
-    @include chat-shadow-2;
+    @include right-shadow;
     background-color: $color-green-200;
     color: $color-green-700;
     margin-left: auto;

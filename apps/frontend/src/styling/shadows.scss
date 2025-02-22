@@ -1,14 +1,14 @@
 @use './_colors.module' as *;
 
-@mixin code-block-shadow-outside() {
+@mixin shadow-border() {
   box-shadow: 0px 4px 7px 5px $color-neutral-200;
 }
 
-@mixin chat-shadow() {
+@mixin left-shadow() {
   box-shadow: -3px 5px 10px $color-neutral-200;
 }
 
-@mixin chat-shadow-2() {
+@mixin right-shadow() {
   box-shadow: 3px 5px 10px $color-neutral-200;
 }
 
