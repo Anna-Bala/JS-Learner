@@ -355,7 +355,7 @@ const L5DataTypesAndFunctions: TLevel = {
   ],
   challangeQuestions: [
     {
-      chat: 'What kind of data types can I return from function?',
+      chat: 'What kind of data types can I return from the functions?',
       prompt: 'Explain in short and simple what kind of data types can JavaScript function return',
     },
     {
