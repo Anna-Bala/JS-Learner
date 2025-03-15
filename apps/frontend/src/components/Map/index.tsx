@@ -4,7 +4,6 @@ import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { CodeBlocksSection, MenuSection, ResultSection, ScriptSection, TaskSection } from '../MapSections';
 import { HTMLModal, InstructionsModal, LevelSummaryModal, TaskModal } from '../Modals';
 import ChatAI from '../ChatAI';
-import DebuggingTools from '../DebuggingTools';
 import type { TLevel } from '../../levels';
 
 import './index.scss';
@@ -198,7 +197,6 @@ const Map = ({ level }: TProps) => {
             />
             {level.resultIFrameSrcDoc && <ResultSection resultIFrameSrcDoc={level.resultIFrameSrcDoc} />}
           </div>
-          <DebuggingTools level={level} />
           <ChatAI challangeQuestions={level.challangeQuestions} handleScoreChange={handleScoreChange} />
         </div>
         <HTMLModal

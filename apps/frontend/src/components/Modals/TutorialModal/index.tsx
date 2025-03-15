@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { BookIcon, HomeIcon, InfoIcon, PlayIcon, TrophyIcon } from '../../../components/Icons';
+import { HomeIcon, InfoIcon, PlayIcon, PodiumIcon, QuestionmarkIcon } from '../../../components/Icons';
 import colors from '../../../styling/_colors.module.scss';
 import ModalWrapper from '../ModalWrapper';
 import Typography from '../../Typography';
@@ -92,7 +92,7 @@ const TutorialModal = ({ closeModal, isOpen }: TProps) => {
           <Typography color="green-800" variant="body1">
             You can compare your score with others by checking the leaderboard
           </Typography>
-          <TrophyIcon fill={colors['color-green-600']} size={32} />
+          <PodiumIcon fill={colors['color-green-600']} size={32} />
         </div>
       </>
     ),
@@ -211,7 +211,7 @@ const TutorialModal = ({ closeModal, isOpen }: TProps) => {
           <Typography color="green-800" variant="body1">
             You've finished the tutorial. To open it again press the book icon
           </Typography>
-          <BookIcon fill={colors['color-green-600']} size={32} />
+          <QuestionmarkIcon fill={colors['color-green-600']} size={32} />
         </div>
         <Typography color="green-800" variant="body1">
           Good luck and have fun!
